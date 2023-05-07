@@ -1,6 +1,9 @@
 import styles from './page.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
+import Horario from './components/Horario'
+import Ubicacion from './components/Ubicacion'
+import Contacto from './components/Contacto'
 
 export default function Home () {
   return (
@@ -22,6 +25,10 @@ export default function Home () {
           height={300}
         />
       </Link>
+
+      <Horario />
+      <Ubicacion />
+      <Contacto />
     </div>
   )
 }

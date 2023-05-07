@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+  }
+  
+  .container div {
+    min-width: 50%;
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+    }
+  }
+  

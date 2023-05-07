@@ -1,7 +1,7 @@
 
-const Map = () => {
+const Mapa = () => {
   return (
-    <div className='row m-2'>
+    <>
       <iframe
         title='Google Maps'
         id='iframeMapa'
@@ -10,8 +10,8 @@ const Map = () => {
         loading='lazy'
         referrerpolicy='no-referrer-when-downgrade'
       />
-    </div>
+    </>
   )
 }
 
-export default Map
+export default Mapa

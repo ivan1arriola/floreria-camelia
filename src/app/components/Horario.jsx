@@ -1,24 +1,28 @@
 import React from 'react'
 
 const Horario = () => {
-  const hora = new Date().getHours()
-  const estado = hora >= 8 && hora <= 17 ? 'Abierto' : 'Cerrado'
-  const mensaje = hora >= 8 && hora <= 17 ? 'Hasta las 17hs' : 'Le atenderemos mañana a partir de las 8am'
-  const dias = ['Lunes a Viernes: 8am - 17pm', 'Sábados: 8am - 13pm']
+  const horaApertura = 8
+  const horaCierre = 17
+
+  const ahora = new Date()
+  const horaActual = ahora.getHours()
+  const minutosRestantes = ahora.getMinutes() ? 60 - ahora.getMinutes() : 0
+
+  let mensaje = ''
+  if (horaActual >= horaCierre) {
+    mensaje = `El establecimiento está cerrado. Abre en ${horaApertura - horaActual - 1} horas y ${minutosRestantes} minutos.`
+  } else if (horaActual < horaApertura) {
+    mensaje = `El establecimiento está cerrado. Abre en ${horaApertura - horaActual - 1} horas y ${minutosRestantes} minutos.`
+  } else {
+    mensaje = `El establecimiento está abierto. Cierra en ${horaCierre - horaActual - 1} horas y ${minutosRestantes} minutos.`
+  }
 
   return (
-    <div style={{ backgroundColor: '#f8f9fa', border: '1px solid rgba(0,0,0,.125)', borderRadius: '.25rem' }}>
-      <div>
-        <h5>Horario</h5>
-        {dias.map((dia, index) => (
-          <div key={index}>{dia}</div>
-        ))}
-        <div className={`text-estado ${hora >= 8 && hora <= 17 ? 'text-abierto' : 'text-cerrado'}`}>
-          {estado}
-        </div>
-        <div>{mensaje}</div>
-      </div>
-    </div>
+    <article>
+      <h2>Horario</h2>
+      <h3>Abrimos todos los dias de 8:00 am hasta 05:00 pm </h3>
+      <p>{mensaje}</p>
+    </article>
   )
 }
 

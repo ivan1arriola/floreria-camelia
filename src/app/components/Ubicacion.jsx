@@ -1,15 +1,17 @@
 import React from 'react'
 import Mapa from './Mapa'
+import styles from './styles/Ubicacion.module.css'
 
 const Ubicacion = () => {
   return (
-    <div style={{ backgroundColor: '#f8f9fa', border: '1px solid rgba(0,0,0,.125)', borderRadius: '.25rem' }}>
-      <div>
-        <h5>Ubicación</h5>
-        <h6>Av. Burgues 4298, Montevideo, Uruguay</h6>
+    <article>
+      <h2>Ubicación</h2>
+      <h3>Av. Burgues 4298, Montevideo, Uruguay</h3>
+      <div className={styles.mapa}>
         <Mapa />
       </div>
-    </div>
+
+    </article>
   )
 }
 
