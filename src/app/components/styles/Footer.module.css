@@ -1,6 +1,22 @@
-.container{
+.container {
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 20px;
     text-align: center;
+  }
+  
+  .social-icons {
     display: flex;
-    flex-direction: row-reverse;
-    
-}
+    flex-direction: row;
+    margin: 0 0 10px 0;
+  }
+  
+  .social-icon {
+    margin: 10px 0;
+  }
+  
+  .copyright {
+    font-size: 12px;
+    margin-top: 10px;
+  }
+  
