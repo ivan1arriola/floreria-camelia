@@ -1,3 +1,18 @@
 .container{
     text-align: center;
 }
+
+.div_background {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: rgba(255, 0, 0, 0.6);
+    background-blend-mode: multiply;
+    background-image: url("/image.png");
+    padding: 1rem;
+    background-attachment: fixed;
+}
+
+
+.div_background img {
+    align-self: center;
+}
