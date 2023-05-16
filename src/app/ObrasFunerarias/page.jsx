@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import styles from './ObrasFunerarias.module.css'
 import Carrusel from '../components/Carrusel'
+import Link from 'next/link'
 
 const fetchFotos = (tipo) => {
   const url = 'https://admin.floreriacamelia.com/imagenes/' + tipo
@@ -23,8 +24,12 @@ const ObrasFunerarias = async ({ fondo }) => {
       <p>
         Somos una empresa dedicada a la elaboración de obras funerarias, con más
         de 30 años de experiencia en el mercado.
-        Grabados Laser en Mármol y Acrilico. Placas de acrilico sublimadas.
+        Grabados Laser en Mármol y Acrílico. Placas de acrílico sublimadas.
       </p>
+
+      <Link href='/#contacto'>
+        <button>Contactar</button>
+      </Link>
 
       <Carrusel title='Placas' fotos={placas} />
       <Carrusel title='Plaquitas' fotos={plaquitas} />

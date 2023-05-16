@@ -3,7 +3,7 @@ import styles from './styles/Contacto.module.css'
 
 const Contacto = () => {
   return (
-    <article>
+    <article id='contacto'>
       <h2>Contacto</h2>
       <div className={styles.container}>
 

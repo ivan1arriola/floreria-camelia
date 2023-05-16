@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Carrusel from '../components/Carrusel'
 import styles from './Floreria.module.css'
+import Link from 'next/link'
 
 const fetchFotos = () => {
   const url = 'https://admin.floreriacamelia.com/imagenes/floreria'
@@ -25,6 +26,10 @@ const Floreria = async () => {
         30 años de experiencia. <br />
         Tambien nos dedicamos a la venta de obras funerarias.
       </p>
+
+      <Link href='/#contacto'>
+        <button>Contactar</button>
+      </Link>
 
       <Carrusel title='Fotos de Camelia' fotos={fotos} />
 
