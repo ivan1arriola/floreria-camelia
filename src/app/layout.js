@@ -1,4 +1,3 @@
-import './pico.fluid.classless.css'
 import './globals.css'
 import { Inter } from 'next/font/google'
 import Navigation from './components/Navigation'

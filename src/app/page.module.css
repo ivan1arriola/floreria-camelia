@@ -1,13 +1,22 @@
 .container {
-  display: inherit;
-  justify-content: inherit;
   align-items: inherit;
   text-align: center;
   font-size: 0.85rem;
-  max-width: var(--max-width);
-  width: 100%;
-  z-index: 2;
-  font-family: var(--font-mono);
   min-height: 60vh;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr 1fr;
+  margin: 0 auto;
+  grid-gap: 10px;
 }
 
+@media screen and (max-width: 600px) {
+  .container {
+    display: block;
+    grid-template-columns: 1fr;
+  }
+
+  .container > article {
+    width: auto;
+  }
+}
