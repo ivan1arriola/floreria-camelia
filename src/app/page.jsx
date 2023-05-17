@@ -10,27 +10,31 @@ export default function Home () {
     <div className={styles.container}>
       <article>
         <h1>Floreria Camelia - Obras Funerarias</h1>
-        <Link href='/Floreria'>
-          <Image
-            src='/floreriaCamelia.svg'
-            alt='Floreria Camelia Logo'
-            width={300}
-            height={300}
-          />
-        </Link>
-        <Link href='/ObrasFunerarias'>
-          <Image
-            src='/obras-funerarias-logo.png'
-            alt='Floreria Camelia Logo'
-            width={300}
-            height={300}
-          />
-        </Link>
-      </article>
+        <div>
+          <Link href='/Floreria'>
+            <Image
+              src='/floreriaCamelia.svg'
+              alt='Floreria Camelia Logo'
+              width={300}
+              height={300}
+            />
+          </Link>
+          <Link href='/ObrasFunerarias'>
+            <Image
+              src='/obras-funerarias-logo.png'
+              alt='Floreria Camelia Logo'
+              width={300}
+              height={300}
+            />
+          </Link>
+        </div>
 
-      <Horario />
-      <Ubicacion />
-      <Contacto />
+      </article>
+      <div className={styles.subcontainer}>
+        <Horario />
+        <Ubicacion />
+        <Contacto />
+      </div>
     </div>
   )
 }

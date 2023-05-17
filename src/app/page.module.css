@@ -1,22 +1,26 @@
-.container {
+.container > article > div{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.container > article > h1 {
+  width: 100%;
+  font-size: 3rem;
+  text-align: center;
+}
+
+
+
+.subcontainer {
   align-items: inherit;
   text-align: center;
   font-size: 0.85rem;
   min-height: 60vh;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 1fr 1fr;
-  margin: 0 auto;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 10px;
+  margin: 0 auto;
 }
 
-@media screen and (max-width: 600px) {
-  .container {
-    display: block;
-    grid-template-columns: 1fr;
-  }
-
-  .container > article {
-    width: auto;
-  }
-}
