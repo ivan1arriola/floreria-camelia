@@ -15,6 +15,12 @@
   margin-left: 10px;
 }
 
+.container a {
+  font-size: 1.3rem;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
 .container a:hover {
   color: #b8476d;
 }

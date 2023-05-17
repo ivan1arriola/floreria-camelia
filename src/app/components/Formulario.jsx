@@ -1,10 +1,10 @@
 import React from 'react'
-import style from './styles/EmailFormCard.module.css'
+import style from './styles/Formulario.module.css'
 
-const EmailFormCard = ({ email }) => {
+const Formulario = ({ email }) => {
   return (
-    <div className={style.form_card}>
-      <h3>Formulario de contacto</h3>
+    <article className={style.form_card}>
+      <h2>Formulario de contacto</h2>
       <div>
         <form target='_blank' action={'https://formsubmit.co/' + email} method='POST'>
           <div>
@@ -39,8 +39,8 @@ const EmailFormCard = ({ email }) => {
           </button>
         </form>
       </div>
-    </div>
+    </article>
   )
 }
 
-export default EmailFormCard
+export default Formulario

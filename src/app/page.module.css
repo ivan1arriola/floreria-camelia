@@ -11,7 +11,15 @@
   text-align: center;
 }
 
+.container > :first-child {
+  margin-bottom: 1rem;
+  border: none;
+}
 
+.container > :first-child h1{
+  font-family: Lobster, sans-serif;
+  font-weight: 400;
+}
 
 .subcontainer {
   align-items: inherit;

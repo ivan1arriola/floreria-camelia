@@ -3,13 +3,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Horario from './components/Horario'
 import Ubicacion from './components/Ubicacion'
-import Contacto from './components/Contacto'
+import Telefono from './components/Telefono'
+import Formulario from './components/Formulario'
 
 export default function Home () {
   return (
     <div className={styles.container}>
       <article>
-        <h1>Floreria Camelia - Obras Funerarias</h1>
         <div>
           <Link href='/Floreria'>
             <Image
@@ -28,12 +28,13 @@ export default function Home () {
             />
           </Link>
         </div>
-
+        <h1>Florería Camelia</h1>
       </article>
       <div className={styles.subcontainer}>
+        <Telefono />
         <Horario />
         <Ubicacion />
-        <Contacto />
+        <Formulario />
       </div>
     </div>
   )
