@@ -17,7 +17,7 @@ const ObrasFunerarias = async ({ fondo }) => {
   return (
     <div className={styles.container}>
 
-      <Image src='/obras-funerarias-logo.png' alt='logo-obras-funerarias' width={200} height={200} />
+      <Image src='/obras-funerarias-logo.png' alt='logo-obras-funerarias' width={300} height={300} />
 
       <h1>Obras Funerarias</h1>
 

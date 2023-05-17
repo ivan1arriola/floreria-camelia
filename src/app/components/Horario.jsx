@@ -4,7 +4,7 @@ const Horario = () => {
   return (
     <article>
       <h2>Horario</h2>
-      <h3>Abrimos todos los días de 8:00 am hasta 05:00 pm </h3>
+      <h3>Abrimos todos los días de 08:00 hasta 17:00 </h3>
     </article>
   )
 }

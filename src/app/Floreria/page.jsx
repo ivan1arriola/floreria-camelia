@@ -16,7 +16,7 @@ const Floreria = async () => {
     <div className={styles.container}>
 
       <div className={styles.div_background}>
-        <Image src='floreriaCamelia.svg' alt='logo-camelia' width={200} height={200} />
+        <Image src='floreriaCamelia.svg' alt='logo-camelia' width={300} height={300} />
       </div>
 
       <h1>Bienvenidos a Florería Camelia</h1>
