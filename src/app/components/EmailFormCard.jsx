@@ -1,8 +1,9 @@
 import React from 'react'
+import style from './styles/EmailFormCard.module.css'
 
 const EmailFormCard = ({ email }) => {
   return (
-    <div>
+    <div className={style.form_card}>
       <h3>Formulario de contacto</h3>
       <div>
         <form target='_blank' action={'https://formsubmit.co/' + email} method='POST'>

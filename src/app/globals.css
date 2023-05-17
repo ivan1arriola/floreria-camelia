@@ -42,3 +42,20 @@ h1{
 }
 
 
+button {
+  background-color: #fce4ec;
+  border-radius: 20px;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background-color: #e9b9b9;
+}
+
