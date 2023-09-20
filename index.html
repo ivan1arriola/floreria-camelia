@@ -14,6 +14,8 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <!-- Iconos de Google-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
 
 
@@ -29,7 +31,11 @@
                     <span class="text-camelia">Camelia </span>
                 </a>
                 <div class="d-flex">
-                    <a class="nav-link text-white" href="index.html">Inicio</a>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a href="#galeria" class="nav-link link-light btn btn-link">Galeria</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -38,7 +44,7 @@
     <main>
 
         <div class="container">
-            <div class="row ">
+            <div class="row">
 
                 <div class="col-md-12">
                     <article>
@@ -67,7 +73,7 @@
                 </div>
 
             </div>
-            <div class="row ">
+            <div class="row">
                 <div class="col-md-6">
                     <article>
                         <div class="text-center">
@@ -116,29 +122,29 @@
 
 
             </div>
-            <div class="row  ">
+            <div class="row">
 
                 <div class="col-md-6">
                     <article>
                         <div class="text-center">
                             <h2 class="mb-4">Redes Sociales</h2>
                         </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <ul class="list-group ">
+                            <li class="list-group-item d-flex justify-content-between align-items-center list-facebook">
                                 <div>
-                                    <span>Facebook</span>
+                                    <span class="fa fa-facebook"></span>
                                 </div>
                                 <div>
                                     <a href="https://www.facebook.com/floreriacamelia.uy" target="_blank">Ir a
                                         Facebook</a>
                                 </div>
                             </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <li class="list-group-item d-flex justify-content-between align-items-center list-instagram">
                                 <div>
-                                    <span>Instagram</span>
+                                    <span class="fa fa-instagram"></span>
                                 </div>
                                 <div>
-                                    <a href="https://www.instagram.com/floreriacamelia.uy/" target="_blank">Ir a
+                                    <a href="https://www.instagram.com/floreriacameliauy/" target="_blank">Ir a
                                         Instagram</a>
                                 </div>
                             </li>
@@ -159,6 +165,110 @@
                 </div>
 
 
+
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <article id="galeria">
+                        <div class="text-center">
+                            <h2 class="mb-4">Galeria</h2>
+                        </div>
+                        <div class="carrusel-container">
+                            <div id="carousel" class="carousel slide">
+                                <div class="carousel-indicators">
+                                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active"
+                                        aria-current="true" aria-label="Slide 1"></button>
+                                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="1"
+                                        aria-label="Slide 2"></button>
+                                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="2"
+                                        aria-label="Slide 3"></button>
+                                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="3"
+                                        aria-label="Slide 4"></button>
+                                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="4"
+                                        aria-label="Slide 5"></button>
+                                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="5"
+                                        aria-label="Slide 6"></button>
+                                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="6"
+                                        aria-label="Slide 7"></button>
+                                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="7"
+                                        aria-label="Slide 8"></button>
+                                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="8"
+                                        aria-label="Slide 9"></button>
+                                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="9"
+                                        aria-label="Slide 10"></button>
+                                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="10"
+                                        aria-label="Slide 11"></button>
+                                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="11"
+                                        aria-label="Slide 12"></button>
+                                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="12"
+                                        aria-label="Slide 13"></button>
+                                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="13"
+                                        aria-label="Slide 14"></button>
+                                </div>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img src="./img/1.jpg" class="d-block w-100" alt="Imagen 1">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="./img/2.jpg" class="d-block w-100" alt="Imagen 2">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="./img/3.jpg" class="d-block w-100" alt="Imagen 3">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="./img/4.jpg" class="d-block w-100" alt="Imagen 4">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="./img/5.jpg" class="d-block w-100" alt="Imagen 5">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="./img/6.jpg" class="d-block w-100" alt="Imagen 6">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="./img/7.jpg" class="d-block w-100" alt="Imagen 7">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="./img/8.jpg" class="d-block w-100" alt="Imagen 8">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="./img/9.jpg" class="d-block w-100" alt="Imagen 9">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="./img/10.jpg" class="d-block w-100" alt="Imagen 10">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="./img/11.jpg" class="d-block w-100" alt="Imagen 11">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="./img/12.jpg" class="d-block w-100" alt="Imagen 12">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="./img/13.jpg" class="d-block w-100" alt="Imagen 13">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="./img/14.jpg" class="d-block w-100" alt="Imagen 14">
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carousel"
+                                    data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carousel"
+                                    data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+
+                        </div>
+
+
+
+
+                    </article>
+
+                </div>
 
             </div>
 
