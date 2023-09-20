@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+.text-floreria, .text-camelia{
+    font-family: 'Lobster', cursive;
+    font-size: 2.5rem;
+}
+
+.text-floreria{
+    color: #fff !important;
+}
+
+.text-camelia{
+    color: red !important;
+}
+
+#mapa{
+    width: 100%;
+    height: 400px;
+}
+
+.lobster{
+    font-family: 'Lobster', cursive;
+}
+
+article{
+    border-radius: 5px;
+    color: #fff;
+    background-color: #212529;
+    border : 2px solid #000000;
+    padding: 20px;
+    margin: 10px 0;
+}
+
+main{
+    background-color: #123e;
+}
+
+footer{
+    background-color: #000;
+    color: #fff;
+    padding: 10px 0;
+}
