@@ -1,295 +1,405 @@
-<!doctype html>
-<html lang="en">
-
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Florería Camelia</title>
-    <meta name="description" content="Florería Camelia">
+    <title>Florería Camelia - Flores y Obras Funerarias</title>
+    <meta name="description" content="Florería Camelia - Más de 30 años de experiencia en flores y obras funerarias">
     <meta name="author" content="Florería Camelia">
 
-    <link rel="icon" href="./floreriaCamelia.svg" type="image/png" sizes="16x16">
+    <!-- Favicon -->
+    <link rel="icon" href="floreriacamelia.png" type="image/png">
+    
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <!-- Iconos de Google-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- Add icon library -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="style.css">
-
-
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Playfair+Display:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS Personalizado -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+    <!-- Header -->
     <header>
-        <nav class="navbar bg-black">
-            <div class="container-fluid">
-                <a class="navbar-brand p-2" href="index.html">
-                    <span class="text-floreria">Florería</span>
-                    <span class="text-camelia">Camelia </span>
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="#inicio">
+                    <img src="floreriacamelia.png" alt="Florería Camelia" class="navbar-logo">
+                    <span class="text-floreria">Florería</span> <span class="text-camelia">Camelia</span>
                 </a>
-                <div class="d-flex">
-                    <ul class="navbar-nav">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a href="#galeria" class="nav-link link-light btn btn-link">Galeria</a>
+                            <a class="nav-link" href="#inicio">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#servicios">Servicios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#nosotros">Nosotros</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#galeria">Galería</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#instagram">Instagram</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contacto">Contacto</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
-
     </header>
-    <main>
 
+    <!-- Hero Section -->
+    <section id="inicio" class="hero-section">
+        <div class="flores-background">
+            <div class="flor-decorativa flor-margarita flor-1"></div>
+            <div class="flor-decorativa flor-rosa flor-2"></div>
+            <div class="flor-decorativa flor-tulipan flor-3"></div>
+            <div class="flor-decorativa flor-lirio flor-4"></div>
+            <div class="flor-decorativa flor-girasol flor-5"></div>
+            <div class="flor-decorativa flor-orquidea flor-6"></div>
+        </div>
         <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4">Florería Camelia</h1>
+                    <p class="lead mb-4">Más de 30 años acompañando en los momentos más importantes de la vida con flores de calidad y servicios funerarios completos.</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#contacto" class="btn btn-primary btn-lg">Contáctanos</a>
+                        <a href="#servicios" class="btn btn-outline-primary btn-lg">Nuestros Servicios</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center mt-5 mt-lg-0">
+                    <div class="logo-container">
+                        <img src="floreriacamelia.png" alt="Logo Florería Camelia" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="py-5">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Nuestros Servicios</h2>
             <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 text-center">
+                        <div class="card-body p-4">
+                            <i class="bi bi-flower1 service-icon"></i>
+                            <h5 class="card-title">Arreglos Florales</h5>
+                            <p class="card-text">Creaciones únicas para expresar sentimientos y acompañar en momentos especiales. Diseños personalizados para cada ocasión.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 text-center">
+                        <div class="card-body p-4">
+                            <i class="bi bi-gear service-icon"></i>
+                            <h5 class="card-title">Obras Funerarias</h5>
+                            <p class="card-text">Servicio completo y personalizado para honrar a sus seres queridos con respeto, dignidad y profesionalismo.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 text-center">
+                        <div class="card-body p-4">
+                            <i class="bi bi-tools service-icon"></i>
+                            <h5 class="card-title">Grabados Láser</h5>
+                            <p class="card-text">Grabados en mármol y acrílico, placas de acrílico sublimadas de alta calidad para recordatorios y homenajes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                <div class="col-md-12">
-                    <article>
-                        <div class="row">
-                            <div class="col-md-8 order-last order-md-first">
-                                <div class="text-center">
-                                    <h1 class="mb-4">Bienvenidos a Florería Camelia</h1>
+    <!-- About Section -->
+    <section id="nosotros" class="py-5 about-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h2 class="section-title text-start">Nuestra Historia</h2>
+                    <p class="mb-4">Desde hace más de 30 años, Florería Camelia se ha consolidado como un referente en el sector floral y funerario de la comunidad. Ubicados estratégicamente frente al Cementerio del Norte, hemos acompañado a miles de familias en sus momentos más significativos.</p>
+                    <p class="mb-4">Nuestra trayectoria nos ha permitido entender las necesidades de nuestros clientes, ofreciendo siempre calidad, respeto y calidez humana en cada uno de nuestros servicios.</p>
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-award-fill text-primary me-3" style="font-size: 2rem;"></i>
+                        <div>
+                            <h5>Más de 30 años de experiencia</h5>
+                            <p class="mb-0">Acompañando a la comunidad con profesionalismo y sensibilidad</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body p-4">
+                            <h4 class="card-title mb-4">¿Por qué elegirnos?</h4>
+                            <div class="d-flex mb-3">
+                                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                                <div>
+                                    <h6>Atención personalizada</h6>
+                                    <p class="mb-0">Nos adaptamos a sus necesidades específicas con soluciones a medida</p>
                                 </div>
+                            </div>
+                            <div class="d-flex mb-3">
+                                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                                <div>
+                                    <h6>Calidad garantizada</h6>
+                                    <p class="mb-0">Materiales de primera calidad en todos nuestros productos y servicios</p>
+                                </div>
+                            </div>
+                            <div class="d-flex mb-3">
+                                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                                <div>
+                                    <h6>Experiencia y tradición</h6>
+                                    <p class="mb-0">Más de tres décadas de servicio continuo a la comunidad</p>
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <i class="bi bi-check-circle-fill text-success me-3"></i>
+                                <div>
+                                    <h6>Servicio integral</h6>
+                                    <p class="mb-0">Desde arreglos florales hasta obras funerarias completas</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                                <p class="text-justify">
-                                    Somos una florería ubicada enfrente al Cementerio del Norte con más de 30 años de
-                                    experiencia.
-                                    También nos dedicamos a la venta de obras funerarias.
-                                    Grabados Laser en Mármol y Acrílico. Placas de acrílico sublimadas.
+    <!-- Gallery Section -->
+    <section id="galeria" class="gallery-section">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Galería</h2>
+            <div id="galleryCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="4000">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#galleryCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#galleryCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#galleryCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#galleryCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                    <button type="button" data-bs-target="#galleryCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                </div>
+                <div class="carousel-container">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="carousel-background" style="background-image: url('./img/1.jpg')"></div>
+                            <img src="./img/1.jpg" class="carousel-image" alt="Arreglo floral 1">
+                        </div>
+                        <div class="carousel-item">
+                            <div class="carousel-background" style="background-image: url('./img/2.jpg')"></div>
+                            <img src="./img/2.jpg" class="carousel-image" alt="Arreglo floral 2">
+                        </div>
+                        <div class="carousel-item">
+                            <div class="carousel-background" style="background-image: url('./img/3.jpg')"></div>
+                            <img src="./img/3.jpg" class="carousel-image" alt="Obra funeraria 1">
+                        </div>
+                        <div class="carousel-item">
+                            <div class="carousel-background" style="background-image: url('./img/4.jpg')"></div>
+                            <img src="./img/4.jpg" class="carousel-image" alt="Obra funeraria 2">
+                        </div>
+                        <div class="carousel-item">
+                            <div class="carousel-background" style="background-image: url('./img/5.jpg')"></div>
+                            <img src="./img/5.jpg" class="carousel-image" alt="Grabado láser 1">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#galleryCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#galleryCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Siguiente</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instagram Section -->
+    <section id="instagram" class="instagram-section">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Síguenos en Instagram</h2>
+            <p class="text-center lead mb-5">Descubre nuestras últimas creaciones y mantente conectado con nosotros</p>
+            
+            <div class="instagram-feed">
+                <div class="instagram-post">
+                    <img src="./img/6.jpg" alt="Publicación de Instagram 1">
+                </div>
+                <div class="instagram-post">
+                    <img src="./img/7.jpg" alt="Publicación de Instagram 2">
+                </div>
+                <div class="instagram-post">
+                    <img src="./img/8.jpg" alt="Publicación de Instagram 3">
+                </div>
+                <div class="instagram-post">
+                    <img src="./img/9.jpg" alt="Publicación de Instagram 4">
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <a href="https://www.instagram.com/floreriacameliauy/" target="_blank" class="instagram-link">
+                    <i class="bi bi-instagram me-2"></i>Seguir en Instagram
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Info Section -->
+    <section id="contacto" class="py-5">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Contacto</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header text-center">
+                            <i class="bi bi-telephone-fill me-2"></i> Información de Contacto
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-4">
+                                <h5 class="mb-3">Florería</h5>
+                                <div class="contact-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <i class="bi bi-telephone me-2"></i>
+                                        <span>Teléfono</span>
+                                    </div>
+                                    <div>
+                                        <a href="https://wa.me/59899084029" target="_blank" class="whatsapp-link">
+                                            <img src="./public/WhatsApp.svg.png" alt="WhatsApp" class="whatsapp-icon">
+                                            <span class="phone-number">099 084 029</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <h5 class="mb-3">Obras Funerarias</h5>
+                                <div class="contact-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <i class="bi bi-telephone me-2"></i>
+                                        <span>Teléfono</span>
+                                    </div>
+                                    <div>
+                                        <a href="https://wa.me/59898863473" target="_blank" class="whatsapp-link">
+                                            <img src="./public/WhatsApp.svg.png" alt="WhatsApp" class="whatsapp-icon">
+                                            <span class="phone-number">098 863 473</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <h5 class="mb-3">Horario de Atención</h5>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span>Todos los días</span>
+                                    <span class="hours-badge">08:00 - 17:00</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h5 class="mb-3">Ubicación</h5>
+                                <p class="mb-0">
+                                    <i class="bi bi-geo-alt-fill me-2"></i> Avenida Burgues 4298, frente al Cementerio del Norte
                                 </p>
-
                             </div>
-
-                            <div class="col-md-4">
-                                <img src="./floreriaCamelia.svg" alt="Floreria Camelia" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header text-center">
+                            <i class="bi bi-share me-2"></i> Síguenos en Redes
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-4">
+                                <a href="https://www.facebook.com/floreriacamelia.uy" target="_blank" class="social-item social-facebook d-block text-decoration-none mb-3 p-3 rounded text-white">
+                                    <div class="d-flex align-items-center">
+                                        <div class="social-icon me-3">
+                                            <i class="bi bi-facebook"></i>
+                                        </div>
+                                        <div class="social-text flex-grow-1">
+                                            <h5 class="mb-1">Facebook</h5>
+                                            <span class="small">@floreriacamelia.uy</span>
+                                        </div>
+                                        <div class="social-arrow">
+                                            <i class="bi bi-arrow-right"></i>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="https://www.instagram.com/floreriacameliauy/" target="_blank" class="social-item social-instagram d-block text-decoration-none p-3 rounded text-white">
+                                    <div class="d-flex align-items-center">
+                                        <div class="social-icon me-3">
+                                            <i class="bi bi-instagram"></i>
+                                        </div>
+                                        <div class="social-text flex-grow-1">
+                                            <h5 class="mb-1">Instagram</h5>
+                                            <span class="small">@floreriacameliauy</span>
+                                        </div>
+                                        <div class="social-arrow">
+                                            <i class="bi bi-arrow-right"></i>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
-
-                        </div>
-
-                    </article>
-                </div>
-
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <article>
-                        <div class="text-center">
-                            <h2>Contactanos</h2>
-                        </div>
-
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <div>
-                                    <i class="material-icons">phone</i>
-                                    <span>Floreria Camelia</span>
+                            <div>
+                                <h5 class="mb-3">Encuéntranos</h5>
+                                <div class="ratio ratio-16x9">
+                                    <iframe id="mapa"
+                                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13097.681867956966!2d-56.1744353!3d-34.8456609!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95a02b506f68a979%3A0x41059e1945a0d49a!2sFlorer%C3%ADa%20Camelia!5e0!3m2!1ses-419!2suy!4v1695229532745!5m2!1ses-419!2suy"
+                                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                                 </div>
-                                <div>
-                                    <a href="tel:+598099084029">099 084 029</a>
-                                </div>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <div>
-                                    <i class="material-icons">phone</i>
-                                    <span>Obras Funerarias</span>
-                                </div>
-                                <div>
-                                    <a href="tel:+598098863473">098 863 473</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </article>
-                </div>
-                <div class="col-md-6">
-                    <article>
-                        <div class="row p-2">
-                            <div class="text-center">
-                                <h2 class="mb-4">Horario</h2>
                             </div>
-                            <ul class="list-group">
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Todos los días
-                                    <span class="badge bg-primary rounded-pill"> 08:00 - 17:00 </span>
-                                </li>
-
-                            </ul>
                         </div>
-                    </article>
+                    </div>
                 </div>
-
-
-
             </div>
-            <div class="row">
-
-                <div class="col-md-6">
-                    <article>
-                        <div class="text-center">
-                            <h2 class="mb-4">Redes Sociales</h2>
-                        </div>
-                        <ul class="list-group ">
-                            <li class="list-group-item d-flex justify-content-between align-items-center list-facebook">
-                                <div>
-                                    <span class="fa fa-facebook"></span>
-                                </div>
-                                <div>
-                                    <a href="https://www.facebook.com/floreriacamelia.uy" target="_blank">Ir a
-                                        Facebook</a>
-                                </div>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center list-instagram">
-                                <div>
-                                    <span class="fa fa-instagram"></span>
-                                </div>
-                                <div>
-                                    <a href="https://www.instagram.com/floreriacameliauy/" target="_blank">Ir a
-                                        Instagram</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </article>
-                </div>
-
-                <div class="col-md-6">
-                    <article>
-                        <h2>Ubicacion</h2>
-                        <p>
-                            Avenida Burgues 4298
-                        </p>
-                        <iframe id="mapa"
-                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13097.681867956966!2d-56.1744353!3d-34.8456609!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95a02b506f68a979%3A0x41059e1945a0d49a!2sFlorer%C3%ADa%20Camelia!5e0!3m2!1ses-419!2suy!4v1695229532745!5m2!1ses-419!2suy"
-                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </article>
-                </div>
-
-
-
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <article id="galeria">
-                        <div class="text-center">
-                            <h2 class="mb-4">Galeria</h2>
-                        </div>
-                        <div class="carrusel-container">
-                            <div id="carousel" class="carousel slide">
-                                <div class="carousel-indicators">
-                                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active"
-                                        aria-current="true" aria-label="Slide 1"></button>
-                                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="1"
-                                        aria-label="Slide 2"></button>
-                                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="2"
-                                        aria-label="Slide 3"></button>
-                                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="3"
-                                        aria-label="Slide 4"></button>
-                                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="4"
-                                        aria-label="Slide 5"></button>
-                                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="5"
-                                        aria-label="Slide 6"></button>
-                                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="6"
-                                        aria-label="Slide 7"></button>
-                                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="7"
-                                        aria-label="Slide 8"></button>
-                                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="8"
-                                        aria-label="Slide 9"></button>
-                                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="9"
-                                        aria-label="Slide 10"></button>
-                                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="10"
-                                        aria-label="Slide 11"></button>
-                                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="11"
-                                        aria-label="Slide 12"></button>
-                                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="12"
-                                        aria-label="Slide 13"></button>
-                                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="13"
-                                        aria-label="Slide 14"></button>
-                                </div>
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <img src="./img/1.jpg" class="d-block w-100" alt="Imagen 1">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="./img/2.jpg" class="d-block w-100" alt="Imagen 2">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="./img/3.jpg" class="d-block w-100" alt="Imagen 3">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="./img/4.jpg" class="d-block w-100" alt="Imagen 4">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="./img/5.jpg" class="d-block w-100" alt="Imagen 5">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="./img/6.jpg" class="d-block w-100" alt="Imagen 6">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="./img/7.jpg" class="d-block w-100" alt="Imagen 7">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="./img/8.jpg" class="d-block w-100" alt="Imagen 8">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="./img/9.jpg" class="d-block w-100" alt="Imagen 9">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="./img/10.jpg" class="d-block w-100" alt="Imagen 10">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="./img/11.jpg" class="d-block w-100" alt="Imagen 11">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="./img/12.jpg" class="d-block w-100" alt="Imagen 12">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="./img/13.jpg" class="d-block w-100" alt="Imagen 13">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="./img/14.jpg" class="d-block w-100" alt="Imagen 14">
-                                    </div>
-                                </div>
-                                <button class="carousel-control-prev" type="button" data-bs-target="#carousel"
-                                    data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Previous</span>
-                                </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#carousel"
-                                    data-bs-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Next</span>
-                                </button>
-                            </div>
-
-                        </div>
-
-
-
-
-                    </article>
-
-                </div>
-
-            </div>
-
         </div>
+    </section>
 
-
-
-
-    </main>
-    <footer class="container-fluid bg-black">
-        <div class="col-md-12">
-            <p class="text-center">
-                Floreria Camelia - Todos los derechos reservados
-            </p>
+    <!-- Footer -->
+    <footer class="py-4">
+        <div class="container">
+            <div class="footer-contact">
+                <div class="footer-phone">
+                    <i class="bi bi-telephone-fill"></i>
+                    <span>Florería: 
+                        <a href="https://wa.me/59899084029" target="_blank" class="whatsapp-link">
+                            099 084 029
+                        </a>
+                    </span>
+                </div>
+                <div class="footer-phone">
+                    <i class="bi bi-telephone-fill"></i>
+                    <span>Obras Funerarias: 
+                        <a href="https://wa.me/59898863473" target="_blank" class="whatsapp-link">
+                            098 863 473
+                        </a>
+                    </span>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">© 2025 Florería Camelia - Todos los derechos reservados</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-0">Más de 30 años de experiencia</p>
+                </div>
+            </div>
         </div>
-        </div>
-
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
-</body>
 
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- JavaScript Personalizado -->
+    <script src="script.js"></script>
+</body>
 </html>
