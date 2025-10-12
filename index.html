@@ -8,7 +8,7 @@
     <meta name="author" content="Florería Camelia">
 
     <!-- Favicon -->
-    <link rel="icon" href="./public/floreriacamelia.png" type="image/png">
+    <link rel="icon" href="/floreriacamelia.png" type="image/png">
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -18,7 +18,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Playfair+Display:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- CSS Personalizado -->
-    <link rel="stylesheet" href="./styles/styles.css">
+    <link rel="stylesheet" href="/styles/styles.css">
 </head>
 
 <body>
@@ -27,7 +27,7 @@
         <nav class="navbar navbar-expand-lg navbar-light fixed-top">
             <div class="container">
                 <a class="navbar-brand" href="#inicio">
-                    <img src="./public/floreriacamelia.png" alt="Florería Camelia" class="navbar-logo">
+                    <img src="/floreriacamelia.png" alt="Florería Camelia" class="navbar-logo">
                     <span class="text-floreria">Florería</span> <span class="text-camelia">Camelia</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,10 +45,7 @@
                             <a class="nav-link" href="#nosotros">Nosotros</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#galeria">Galería</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#instagram">Instagram</a>
+                            <a class="nav-link" href="#instagram">Galería & Instagram</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#contacto">Contacto</a>
@@ -81,7 +78,7 @@
                 </div>
                 <div class="col-lg-6 text-center mt-5 mt-lg-0">
                     <div class="logo-container">
-                        <img src="./public/floreriacamelia.png" alt="Logo Florería Camelia" class="img-fluid">
+                        <img src="/floreriacamelia.png" alt="Logo Florería Camelia" class="img-fluid">
                     </div>
                 </div>
             </div>
@@ -179,73 +176,14 @@
         </div>
     </section>
 
-    <!-- Gallery Section -->
-    <section id="galeria" class="gallery-section">
-        <div class="container">
-            <h2 class="section-title text-center mb-5">Galería</h2>
-            <div id="galleryCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="4000">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#galleryCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#galleryCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#galleryCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    <button type="button" data-bs-target="#galleryCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
-                    <button type="button" data-bs-target="#galleryCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
-                </div>
-                <div class="carousel-container">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="carousel-background" style="background-image: url('./public/img/1.jpg')"></div>
-                            <img src="./public/img/1.jpg" class="carousel-image" alt="Arreglo floral 1">
-                        </div>
-                        <div class="carousel-item">
-                            <div class="carousel-background" style="background-image: url('./public/img/2.jpg')"></div>
-                            <img src="./public/img/2.jpg" class="carousel-image" alt="Arreglo floral 2">
-                        </div>
-                        <div class="carousel-item">
-                            <div class="carousel-background" style="background-image: url('./public/img/3.jpg')"></div>
-                            <img src="./public/img/3.jpg" class="carousel-image" alt="Obra funeraria 1">
-                        </div>
-                        <div class="carousel-item">
-                            <div class="carousel-background" style="background-image: url('./public/img/4.jpg')"></div>
-                            <img src="./public/img/4.jpg" class="carousel-image" alt="Obra funeraria 2">
-                        </div>
-                        <div class="carousel-item">
-                            <div class="carousel-background" style="background-image: url('./public/img/5.jpg')"></div>
-                            <img src="./public/img/5.jpg" class="carousel-image" alt="Grabado láser 1">
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#galleryCarousel" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Anterior</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#galleryCarousel" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Siguiente</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Instagram Section -->
     <section id="instagram" class="instagram-section">
         <div class="container">
-            <h2 class="section-title text-center mb-5">Síguenos en Instagram</h2>
+            <h2 class="section-title text-center mb-5">Galería & Instagram</h2>
             <p class="text-center lead mb-5">Descubre nuestras últimas creaciones y mantente conectado con nosotros</p>
             
-            <div class="instagram-feed">
-                <div class="instagram-post">
-                    <img src="./public/img/6.jpg" alt="Publicación de Instagram 1">
-                </div>
-                <div class="instagram-post">
-                    <img src="./public/img/7.jpg" alt="Publicación de Instagram 2">
-                </div>
-                <div class="instagram-post">
-                    <img src="./public/img/8.jpg" alt="Publicación de Instagram 3">
-                </div>
-                <div class="instagram-post">
-                    <img src="./public/img/9.jpg" alt="Publicación de Instagram 4">
-                </div>
+            <div class="instagram-feed" id="instagramFeed">
+                <!-- Las imágenes se generarán dinámicamente aquí -->
             </div>
             
             <div class="text-center mt-5">
@@ -276,7 +214,7 @@
                                     </div>
                                     <div>
                                         <a href="https://wa.me/59899084029" target="_blank" class="whatsapp-link">
-                                            <img src="./public/WhatsApp.svg.png" alt="WhatsApp" class="whatsapp-icon">
+                                            <img src="/WhatsApp.svg.png" alt="WhatsApp" class="whatsapp-icon">
                                             <span class="phone-number">099 084 029</span>
                                         </a>
                                     </div>
@@ -291,7 +229,7 @@
                                     </div>
                                     <div>
                                         <a href="https://wa.me/59898863473" target="_blank" class="whatsapp-link">
-                                            <img src="./public/WhatsApp.svg.png" alt="WhatsApp" class="whatsapp-icon">
+                                            <img src="/WhatsApp.svg.png" alt="WhatsApp" class="whatsapp-icon">
                                             <span class="phone-number">098 863 473</span>
                                         </a>
                                     </div>
@@ -301,7 +239,7 @@
                                 <h5 class="mb-3">Horario de Atención</h5>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <span>Todos los días</span>
-                                    <span class="hours-badge">08:00 - 17:00</span>
+                                    <span class="hours-text">08:00 - 17:00</span>
                                 </div>
                             </div>
                             <div>
@@ -400,6 +338,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     
     <!-- JavaScript Personalizado -->
-    <script src="./js/script.js"></script>
+    <script type="module" src="/js/script.js"></script>
 </body>
 </html>

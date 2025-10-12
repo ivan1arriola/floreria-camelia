@@ -70,6 +70,7 @@ h1, h2, h3, h4, h5 {
 .text-camelia {
     color: var(--rojo) !important;
     text-shadow: 0 2px 4px rgba(211, 47, 47, 0.2);
+    margin-left: 8px;
 }
 
 .navbar-nav .nav-link {
@@ -611,98 +612,10 @@ h1, h2, h3, h4, h5 {
     overflow: hidden;
 }
 
-/* Galería mejorada */
-.gallery-section {
-    padding: 100px 0;
-    background: linear-gradient(135deg, var(--gris-claro) 0%, var(--blanco) 100%);
-}
-
-.carousel-container {
-    position: relative;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: var(--sombra-intensa);
-    transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
-    transition: var(--transicion);
-}
-
-.carousel-container:hover {
-    transform: perspective(1000px) rotateX(1deg) rotateY(1deg);
-}
-
-.carousel-item {
-    height: 500px;
-    position: relative;
-}
-
-.carousel-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    filter: blur(10px) brightness(0.7);
-    transform: scale(1.1);
-    z-index: 1;
-}
-
-.carousel-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 2;
-}
-
-.carousel-control-prev,
-.carousel-control-next {
-    width: 50px;
-    height: 50px;
-    background: rgba(0, 0, 0, 0.6);
-    border-radius: 50%;
-    top: 50%;
-    transform: translateY(-50%);
-    opacity: 0.8;
-    z-index: 3;
-    backdrop-filter: blur(10px);
-    transition: var(--transicion);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-}
-
-.carousel-control-prev:hover,
-.carousel-control-next:hover {
-    opacity: 1;
-    background: rgba(0, 0, 0, 0.8);
-    transform: translateY(-50%) scale(1.1);
-}
-
-.carousel-indicators {
-    z-index: 3;
-    bottom: 20px;
-}
-
-.carousel-indicators button {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    margin: 0 8px;
-    background-color: rgba(255, 255, 255, 0.5);
-    transition: var(--transicion);
-}
-
-.carousel-indicators button.active {
-    background-color: var(--rojo);
-    transform: scale(1.3);
-}
-
 /* Sección Instagram */
 .instagram-section {
     padding: 100px 0;
-    background: linear-gradient(135deg, var(--beige) 0%, var(--blanco) 100%);
+    background: linear-gradient(135deg, var(--gris-claro) 0%, var(--blanco) 100%);
 }
 
 .instagram-feed {
@@ -723,10 +636,12 @@ h1, h2, h3, h4, h5 {
     animation: fadeInUp 0.8s ease-out both;
 }
 
-.instagram-post:nth-child(1) { animation-delay: 0.3s; }
-.instagram-post:nth-child(2) { animation-delay: 0.5s; }
-.instagram-post:nth-child(3) { animation-delay: 0.7s; }
-.instagram-post:nth-child(4) { animation-delay: 0.9s; }
+.instagram-post:nth-child(1) { animation-delay: 0.2s; }
+.instagram-post:nth-child(2) { animation-delay: 0.4s; }
+.instagram-post:nth-child(3) { animation-delay: 0.6s; }
+.instagram-post:nth-child(4) { animation-delay: 0.8s; }
+.instagram-post:nth-child(5) { animation-delay: 1.0s; }
+.instagram-post:nth-child(6) { animation-delay: 1.2s; }
 
 .instagram-post:hover {
     transform: translateY(-10px);
@@ -836,19 +751,18 @@ h1, h2, h3, h4, h5 {
     color: var(--rojo);
 }
 
-.hours-badge {
-    background: linear-gradient(135deg, var(--rojo) 0%, var(--verde) 100%);
-    color: white;
-    padding: 10px 20px;
-    border-radius: 25px;
+.hours-text {
     font-weight: 600;
-    box-shadow: 0 4px 15px rgba(211, 47, 47, 0.3);
+    color: var(--rojo);
+    padding: 8px 16px;
+    border-radius: 8px;
+    background: rgba(211, 47, 47, 0.1);
     transition: var(--transicion);
 }
 
-.hours-badge:hover {
+.hours-text:hover {
+    background: rgba(211, 47, 47, 0.2);
     transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(211, 47, 47, 0.4);
 }
 
 /* Footer mejorado */
@@ -908,6 +822,27 @@ footer::before {
 }
 
 /* Estilos para redes sociales */
+.social-item {
+    transition: var(--transicion);
+    position: relative;
+    overflow: hidden;
+}
+
+.social-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.social-item:hover::before {
+    left: 100%;
+}
+
 .social-facebook {
     background: linear-gradient(135deg, #3b5998, #4c70ba) !important;
 }
@@ -924,6 +859,19 @@ footer::before {
     align-items: center;
     justify-content: center;
     background-color: rgba(255, 255, 255, 0.2);
+    transition: var(--transicion);
+}
+
+.social-item:hover .social-icon {
+    transform: scale(1.1) rotate(10deg);
+}
+
+.social-arrow {
+    transition: var(--transicion);
+}
+
+.social-item:hover .social-arrow {
+    transform: translateX(5px);
 }
 
 /* Animaciones de scroll */
@@ -975,10 +923,6 @@ footer::before {
     
     .flor-lirio {
         height: 80px;
-    }
-    
-    .carousel-item {
-        height: 300px;
     }
     
     .footer-contact {
