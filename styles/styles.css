@@ -70,7 +70,6 @@ h1, h2, h3, h4, h5 {
 .text-camelia {
     color: var(--rojo) !important;
     text-shadow: 0 2px 4px rgba(211, 47, 47, 0.2);
-    margin-left: 5px;
 }
 
 .navbar-nav .nav-link {

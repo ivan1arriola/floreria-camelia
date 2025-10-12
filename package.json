@@ -1,0 +1,17 @@
+{
+  "name": "floreria-camelia",
+  "version": "1.0.0",
+  "description": "Sitio web estático para Florería Camelia",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": ["floreria", "uruguay", "static"],
+  "author": "Florería Camelia",
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^4.4.0"
+  }
+}

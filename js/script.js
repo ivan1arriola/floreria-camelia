@@ -79,9 +79,9 @@ document.addEventListener('DOMContentLoaded', function() {
         flores.forEach((flor, index) => {
             const speed = 0.5 + (index * 0.1);
             const yPos = -(scrolled * speed);
-            flor.style.transform = `translateY(${yPos}px)`;
+            flor.style.transform = `translateY(${yPos}px) rotate(${flor.style.transform ? flor.style.transform.split('rotate(')[1] : '0deg'})`;
         });
     });
     
-    console.log('Florería Camelia - Página cargada con diseño mejorado');
+    console.log('Florería Camelia - Página cargada correctamente');
 });

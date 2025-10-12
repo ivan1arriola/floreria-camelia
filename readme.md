@@ -1,46 +1,22 @@
-# Florería Camelia - Sitio Web
 
-Sitio web oficial de Florería Camelia, especializada en arreglos florales y obras funerarias.
+## Instrucciones para desplegar en Vercel:
 
-## Estructura de archivos
-- `index.html`: Página principal del sitio web.
-- `styles.css`: Archivo de estilos CSS para el diseño del sitio.
-- `script.js`: Archivo de JavaScript para la interactividad del sitio.
-- `floreriacamelia.png`: Logo de la florería.
+1. **Crear un repositorio en GitHub** con todos estos archivos
+2. **Conectar Vercel con GitHub**:
+   - Ve a [vercel.com](https://vercel.com)
+   - Inicia sesión con tu cuenta de GitHub
+   - Haz clic en "New Project"
+   - Importa el repositorio de GitHub
+   - Vercel detectará automáticamente la configuración
 
+3. **Despliegue automático**: Cada vez que hagas un push a GitHub, Vercel desplegará automáticamente los cambios.
 
-## Características
+El proyecto está completamente listo para Vercel con:
+- ✅ Configuración de Vercel (`vercel.json`)
+- ✅ Package.json con scripts de build
+- ✅ Estructura de archivos organizada
+- ✅ Rutas relativas corregidas
+- ✅ Archivos estáticos en carpeta `public/`
+- ✅ Documentación completa
 
-- Diseño responsive y moderno
-- Hero section con flores decorativas CSS
-- Galería con carrusel mejorado
-- Enlaces directos a WhatsApp
-- Integración con redes sociales
-- Mapa de ubicación integrado
-- Optimizado para SEO
-
-## Tecnologías utilizadas
-
-- HTML5
-- CSS3 (con variables CSS)
-- JavaScript (ES6+)
-- Bootstrap 5.3.2
-- Bootstrap Icons
-- Google Fonts
-
-## Personalización
-
-Para personalizar la información de contacto, modificar:
-- Números de teléfono en `index.html`
-- Enlaces de redes sociales
-- Texto descriptivo en las secciones
-- Imágenes en la carpeta `img/`
-
-## Instalación
-
-1. Descargar todos los archivos
-2. Colocar en el servidor web
-3. Asegurar que las rutas de imágenes sean correctas
-4. Personalizar la información según necesidades
-
-© 2025 Florería Camelia - Todos los derechos reservados
+¡Tu sitio estará en línea en minutos! 🚀
