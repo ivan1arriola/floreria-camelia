@@ -1,0 +1,77 @@
+:root {
+    /* Colores principales */
+    --rojo: #d32f2f;
+    --rojo-oscuro: #b71c1c;
+    --verde: #2e7d32;
+    --verde-claro: #4caf50;
+    
+    /* Modo claro (default) */
+    --negro: #1a1a1a;
+    --blanco: #ffffff;
+    --beige: #f9f5f0;
+    --beige-oscuro: #f0e6d6;
+    --gris-oscuro: #424242;
+    --gris-claro: #f5f5f5;
+    
+    /* Variables de tema claro */
+    --fondo: var(--blanco);
+    --fondo-secundario: var(--beige);
+    --fondo-terciario: var(--gris-claro);
+    --texto: var(--negro);
+    --texto-secundario: var(--gris-oscuro);
+    --borde: #e0e0e0;
+    --sombra: 0 5px 15px rgba(0, 0, 0, 0.08);
+    --sombra-intensa: 0 10px 30px rgba(0, 0, 0, 0.15);
+    
+    /* Transiciones */
+    --transicion: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    
+    /* Gradientes */
+    --gradiente-hero: linear-gradient(135deg, var(--beige) 0%, var(--blanco) 100%);
+    --gradiente-about: linear-gradient(135deg, var(--beige) 0%, var(--beige-oscuro) 100%);
+    --gradiente-galeria: linear-gradient(135deg, var(--gris-claro) 0%, var(--blanco) 100%);
+    --gradiente-footer: linear-gradient(135deg, var(--negro) 0%, var(--gris-oscuro) 100%);
+    --gradiente-boton: linear-gradient(135deg, var(--rojo) 0%, var(--rojo-oscuro) 100%);
+
+    /* Colores específicos para navbar */
+    --navbar-bg-light: rgba(255, 255, 255, 0.95);
+    --navbar-bg-dark: rgba(30, 30, 30, 0.95);
+    --navbar-scrolled-bg-light: rgba(255, 255, 255, 0.98);
+    --navbar-scrolled-bg-dark: rgba(30, 30, 30, 0.98);
+    
+    /* Sombras */
+    --navbar-shadow-light: 0 2px 20px rgba(0, 0, 0, 0.1);
+    --navbar-shadow-dark: 0 2px 20px rgba(0, 0, 0, 0.4);
+    --navbar-scrolled-shadow-light: 0 5px 25px rgba(0, 0, 0, 0.1);
+
+}
+
+/* Modo oscuro */
+[data-theme="dark"] {
+    --negro: #ffffff;
+    --blanco: #121212;
+    --beige: #1e1e1e;
+    --beige-oscuro: #2d2d2d;
+    --gris-oscuro: #b0b0b0;
+    --gris-claro: #2a2a2a;
+    
+    /* Variables de tema oscuro */
+    --fondo: #121212;
+    --fondo-secundario: #1e1e1e;
+    --fondo-terciario: #2a2a2a;
+    --texto: #ffffff;
+    --texto-secundario: #b0b0b0;
+    --borde: #404040;
+    --sombra: 0 5px 15px rgba(0, 0, 0, 0.3);
+    --sombra-intensa: 0 10px 30px rgba(0, 0, 0, 0.5);
+    
+    /* Gradientes modo oscuro */
+    --gradiente-hero: linear-gradient(135deg, var(--fondo-secundario) 0%, var(--fondo) 100%);
+    --gradiente-about: linear-gradient(135deg, var(--fondo-secundario) 0%, var(--fondo-terciario) 100%);
+    --gradiente-galeria: linear-gradient(135deg, var(--fondo-terciario) 0%, var(--fondo) 100%);
+    --gradiente-footer: linear-gradient(135deg, var(--fondo-terciario) 0%, var(--fondo-secundario) 100%);
+
+    --navbar-bg-light: var(--navbar-bg-dark);
+    --navbar-scrolled-bg-light: var(--navbar-scrolled-bg-dark);
+    --navbar-shadow-light: var(--navbar-shadow-dark);
+}

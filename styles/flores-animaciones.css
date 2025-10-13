@@ -1,0 +1,423 @@
+/* =========================================================
+   FLORES DECORATIVAS ARTÍSTICAS (SVG + ANIMACIÓN)
+   ========================================================= */
+
+   @import 'variables.css';
+
+   /* Animación de flotación natural mejorada */
+   @keyframes flotar {
+     0%, 100% { 
+       transform: translateY(0) scale(1) rotate(0deg); 
+       filter: drop-shadow(0 0 8px rgba(0,0,0,0.15));
+     }
+     25% { 
+       transform: translateY(-8px) scale(1.05) rotate(2deg); 
+       filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2));
+     }
+     50% { 
+       transform: translateY(6px) scale(0.98) rotate(-1deg); 
+       filter: drop-shadow(0 2px 8px rgba(0,0,0,0.18));
+     }
+     75% { 
+       transform: translateY(-4px) scale(1.03) rotate(1deg); 
+       filter: drop-shadow(0 3px 10px rgba(0,0,0,0.22));
+     }
+   }
+   
+   /* Animación de respiración sutil */
+   @keyframes respirar {
+     0%, 100% { opacity: 0.6; }
+     50% { opacity: 0.8; }
+   }
+   
+   /* Base mejorada */
+   .flor-decorativa {
+     position: absolute;
+     opacity: 0.6;
+     animation: 
+       flotar 9s ease-in-out infinite,
+       respirar 6s ease-in-out infinite;
+     transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+     z-index: -1;
+     filter: drop-shadow(0 0 12px rgba(0,0,0,0.15));
+     transform-origin: center;
+     pointer-events: none;
+   }
+   
+   /* Hover más suave */
+   .flor-decorativa:hover {
+     opacity: 0.9;
+     transform: scale(1.12);
+     filter: drop-shadow(0 0 20px rgba(0,0,0,0.25));
+     animation-play-state: paused;
+     pointer-events: auto;
+   }
+   
+   /* =========================================================
+      FLORES — versión SVG artística mejorada
+      ========================================================= */
+   
+   /* --- Margarita mejorada --- */
+   .flor-margarita {
+     width: 130px; 
+     height: 130px;
+     background: url('data:image/svg+xml;utf8,\
+     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">\
+       <defs>\
+         <radialGradient id="petaloM" cx="0.5" cy="0.5" r="0.5">\
+           <stop offset="0%" stop-color="%23fff9c4"/>\
+           <stop offset="60%" stop-color="%23fff59d"/>\
+           <stop offset="100%" stop-color="%23fff176"/>\
+         </radialGradient>\
+         <radialGradient id="centroM" cx="0.5" cy="0.5" r="0.5">\
+           <stop offset="0%" stop-color="%23ffd54f"/>\
+           <stop offset="100%" stop-color="%23ffb300"/>\
+         </radialGradient>\
+       </defs>\
+       <g transform="translate(100,100)">\
+         <circle r="22" fill="url(%23centroM)" stroke="%23f57f17" stroke-width="2"/>\
+         <g fill="url(%23petaloM)" stroke="%23fff9c4" stroke-width="1">\
+           <ellipse ry="48" rx="14" transform="rotate(0) translate(0,-62)"/>\
+           <ellipse ry="48" rx="14" transform="rotate(30) translate(0,-62)"/>\
+           <ellipse ry="48" rx="14" transform="rotate(60) translate(0,-62)"/>\
+           <ellipse ry="48" rx="14" transform="rotate(90) translate(0,-62)"/>\
+           <ellipse ry="48" rx="14" transform="rotate(120) translate(0,-62)"/>\
+           <ellipse ry="48" rx="14" transform="rotate(150) translate(0,-62)"/>\
+           <ellipse ry="48" rx="14" transform="rotate(180) translate(0,-62)"/>\
+           <ellipse ry="48" rx="14" transform="rotate(210) translate(0,-62)"/>\
+           <ellipse ry="48" rx="14" transform="rotate(240) translate(0,-62)"/>\
+           <ellipse ry="48" rx="14" transform="rotate(270) translate(0,-62)"/>\
+           <ellipse ry="48" rx="14" transform="rotate(300) translate(0,-62)"/>\
+           <ellipse ry="48" rx="14" transform="rotate(330) translate(0,-62)"/>\
+         </g>\
+       </g>\
+     </svg>') center/contain no-repeat;
+   }
+   
+   /* --- Rosa mejorada --- */
+   .flor-rosa {
+     width: 110px; 
+     height: 110px;
+     background: url('data:image/svg+xml;utf8,\
+     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">\
+       <defs>\
+         <radialGradient id="rosaGrad" cx="0.5" cy="0.5" r="0.5">\
+           <stop offset="0%" stop-color="%23f8bbd0"/>\
+           <stop offset="60%" stop-color="%23f48fb1"/>\
+           <stop offset="100%" stop-color="%23ec407a"/>\
+         </radialGradient>\
+         <linearGradient id="rosaShadow" x1="0%" y1="0%" x2="100%" y2="100%">\
+           <stop offset="0%" stop-color="%23ad1457" stop-opacity="0.8"/>\
+           <stop offset="100%" stop-color="%23880e4f" stop-opacity="0.6"/>\
+         </linearGradient>\
+       </defs>\
+       <g transform="translate(100,100)">\
+         <circle r="55" fill="url(%23rosaGrad)" stroke="%23c2185b" stroke-width="2"/>\
+         <path d="M0,0 C35,-25,55,15,0,55 C-55,15,-35,-25,0,0Z" fill="url(%23rosaShadow)"/>\
+         <path d="M0,0 C25,-35,45,5,0,45 C-45,5,-25,-35,0,0Z" fill="%23ec407a" opacity="0.7"/>\
+       </g>\
+     </svg>') center/contain no-repeat;
+   }
+   
+   /* --- Tulipán mejorado --- */
+   .flor-tulipan {
+     width: 85px; 
+     height: 110px;
+     background: url('data:image/svg+xml;utf8,\
+     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120">\
+       <defs>\
+         <linearGradient id="tulipanGrad" x1="0%" y1="0%" x2="0%" y2="100%">\
+           <stop offset="0%" stop-color="%23ff5252"/>\
+           <stop offset="60%" stop-color="%23e53935"/>\
+           <stop offset="100%" stop-color="%23c62828"/>\
+         </linearGradient>\
+         <linearGradient id="talloGrad" x1="0%" y1="0%" x2="0%" y2="100%">\
+           <stop offset="0%" stop-color="%234caf50"/>\
+           <stop offset="100%" stop-color="%232e7d32"/>\
+         </linearGradient>\
+       </defs>\
+       <path d="M50 15 C65 35,85 50,50 105 C15 50,35 35,50 15Z" fill="url(%23tulipanGrad)" stroke="%23b71c1c" stroke-width="1"/>\
+       <path d="M48 105 L52 105 L52 120 L48 120Z" fill="url(%23talloGrad)"/>\
+       <path d="M50 105 L55 115 L45 115Z" fill="%234caf50"/>\
+     </svg>') center/contain no-repeat;
+   }
+   
+   /* --- Girasol mejorado --- */
+   .flor-girasol {
+     width: 140px; 
+     height: 140px;
+     background: url('data:image/svg+xml;utf8,\
+     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">\
+       <defs>\
+         <radialGradient id="petaloG" cx="0.5" cy="0.5" r="0.5">\
+           <stop offset="0%" stop-color="%23ffeb3b"/>\
+           <stop offset="60%" stop-color="%23ffd54f"/>\
+           <stop offset="100%" stop-color="%23ffb300"/>\
+         </radialGradient>\
+         <radialGradient id="centroG" cx="0.5" cy="0.5" r="0.5">\
+           <stop offset="0%" stop-color="%235d4037"/>\
+           <stop offset="60%" stop-color="%234e342e"/>\
+           <stop offset="100%" stop-color="%233e2723"/>\
+         </radialGradient>\
+         <pattern id="semillas" patternUnits="userSpaceOnUse" width="10" height="10">\
+           <circle cx="5" cy="5" r="2" fill="%233e2723"/>\
+         </pattern>\
+       </defs>\
+       <g transform="translate(100,100)">\
+         <circle r="28" fill="url(%23centroG)" stroke="%235d4037" stroke-width="2">\
+           <animate attributeName="r" values="28;30;28" dur="4s" repeatCount="indefinite"/>\
+         </circle>\
+         <circle r="24" fill="url(%23semillas)"/>\
+         <g fill="url(%23petaloG)" stroke="%23ff9800" stroke-width="1">\
+           <ellipse ry="52" rx="18" transform="rotate(0) translate(0,-68)"/>\
+           <ellipse ry="52" rx="18" transform="rotate(30) translate(0,-68)"/>\
+           <ellipse ry="52" rx="18" transform="rotate(60) translate(0,-68)"/>\
+           <ellipse ry="52" rx="18" transform="rotate(90) translate(0,-68)"/>\
+           <ellipse ry="52" rx="18" transform="rotate(120) translate(0,-68)"/>\
+           <ellipse ry="52" rx="18" transform="rotate(150) translate(0,-68)"/>\
+           <ellipse ry="52" rx="18" transform="rotate(180) translate(0,-68)"/>\
+           <ellipse ry="52" rx="18" transform="rotate(210) translate(0,-68)"/>\
+           <ellipse ry="52" rx="18" transform="rotate(240) translate(0,-68)"/>\
+           <ellipse ry="52" rx="18" transform="rotate(270) translate(0,-68)"/>\
+           <ellipse ry="52" rx="18" transform="rotate(300) translate(0,-68)"/>\
+           <ellipse ry="52" rx="18" transform="rotate(330) translate(0,-68)"/>\
+         </g>\
+       </g>\
+     </svg>') center/contain no-repeat;
+   }
+   
+   /* --- Lavanda mejorada --- */
+   .flor-lavanda {
+     width: 75px; 
+     height: 130px;
+     background: url('data:image/svg+xml;utf8,\
+     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 150">\
+       <defs>\
+         <linearGradient id="talloL" x1="0%" y1="0%" x2="0%" y2="100%">\
+           <stop offset="0%" stop-color="%2366bb6a"/>\
+           <stop offset="100%" stop-color="%232e7d32"/>\
+         </linearGradient>\
+         <radialGradient id="florL" cx="0.5" cy="0.5" r="0.5">\
+           <stop offset="0%" stop-color="%23ce93d8"/>\
+           <stop offset="60%" stop-color="%23ab47bc"/>\
+           <stop offset="100%" stop-color="%238e24aa"/>\
+         </radialGradient>\
+       </defs>\
+       <rect x="48" y="50" width="4" height="100" fill="url(%23talloL)" rx="2"/>\
+       <g fill="url(%23florL)">\
+         <circle cx="50" cy="25" r="9"/>\
+         <circle cx="50" cy="40" r="8"/>\
+         <circle cx="50" cy="55" r="7"/>\
+         <circle cx="50" cy="70" r="6"/>\
+         <circle cx="50" cy="85" r="5"/>\
+         <ellipse cx="42" cy="32" rx="6" ry="8"/>\
+         <ellipse cx="58" cy="32" rx="6" ry="8"/>\
+         <ellipse cx="42" cy="47" rx="5" ry="7"/>\
+         <ellipse cx="58" cy="47" rx="5" ry="7"/>\
+         <ellipse cx="42" cy="62" rx="4" ry="6"/>\
+         <ellipse cx="58" cy="62" rx="4" ry="6"/>\
+       </g>\
+     </svg>') center/contain no-repeat;
+   }
+   
+   /* --- Orquídea --- */
+   .flor-orquidea {
+     width: 95px; 
+     height: 95px;
+     background: url('data:image/svg+xml;utf8,\
+     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">\
+       <defs>\
+         <radialGradient id="orquideaGrad" cx="0.5" cy="0.5" r="0.5">\
+           <stop offset="0%" stop-color="%23e1bee7"/>\
+           <stop offset="60%" stop-color="%23ba68c8"/>\
+           <stop offset="100%" stop-color="%239c27b0"/>\
+         </radialGradient>\
+       </defs>\
+       <g transform="translate(100,100)">\
+         <path d="M0,-40 C20,-60,40,-50,0,-10 C-40,-50,-20,-60,0,-40Z" fill="url(%23orquideaGrad)" stroke="%237b1fa2" stroke-width="1.5"/>\
+         <ellipse rx="25" ry="15" transform="rotate(45)" fill="%23ba68c8" opacity="0.8"/>\
+         <ellipse rx="25" ry="15" transform="rotate(-45)" fill="%23ab47bc" opacity="0.8"/>\
+         <circle r="8" fill="%23f3e5f5" stroke="%239c27b0" stroke-width="1"/>\
+       </g>\
+     </svg>') center/contain no-repeat;
+   }
+   
+   /* --- Lirio --- */
+   .flor-lirio {
+     width: 90px; 
+     height: 115px;
+     background: url('data:image/svg+xml;utf8,\
+     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 130">\
+       <defs>\
+         <linearGradient id="lirioGrad" x1="0%" y1="0%" x2="0%" y2="100%">\
+           <stop offset="0%" stop-color="%23f3e5f5"/>\
+           <stop offset="60%" stop-color="%23e1bee7"/>\
+           <stop offset="100%" stop-color="%23ce93d8"/>\
+         </linearGradient>\
+       </defs>\
+       <path d="M50 10 L60 50 L50 90 L40 50 Z" fill="url(%23lirioGrad)" stroke="%23ab47bc" stroke-width="1.5"/>\
+       <path d="M30 30 L50 50 L30 70 Z" fill="%23e1bee7" opacity="0.8"/>\
+       <path d="M70 30 L50 50 L70 70 Z" fill="%23e1bee7" opacity="0.8"/>\
+       <rect x="48" y="90" width="4" height="40" fill="%234caf50" rx="2"/>\
+     </svg>') center/contain no-repeat;
+   }
+   
+   /* =========================================================
+      POSICIONAMIENTO MEJORADO Y ESTRATÉGICO
+      ========================================================= */
+   
+   /* Posiciones más naturales y distribuidas */
+   .flor-1 { 
+     top: 12%; 
+     left: 7%; 
+     animation-delay: 0s; 
+     transform: rotate(5deg);
+   }
+   
+   .flor-2 { 
+     top: 65%; 
+     left: 78%; 
+     animation-delay: 1.2s; 
+     transform: rotate(-8deg);
+   }
+   
+   .flor-3 { 
+     top: 22%; 
+     left: 82%; 
+     animation-delay: 2.5s; 
+     transform: rotate(12deg);
+   }
+   
+   .flor-4 { 
+     top: 75%; 
+     left: 12%; 
+     animation-delay: 0.7s; 
+     transform: rotate(-15deg);
+   }
+   
+   .flor-5 { 
+     top: 52%; 
+     left: 68%; 
+     animation-delay: 1.8s; 
+     transform: rotate(3deg);
+   }
+   
+   .flor-6 { 
+     top: 8%; 
+     left: 72%; 
+     animation-delay: 3.1s; 
+     transform: rotate(-5deg);
+   }
+   
+   .flor-7 { 
+     top: 18%; 
+     left: 28%; 
+     animation-delay: 2.2s; 
+     transform: rotate(10deg);
+   }
+   
+   /* =========================================================
+      MODO OSCURO - FLORES MÁS SUTILES
+      ========================================================= */
+   
+   [data-theme="dark"] .flor-decorativa {
+     opacity: 0.4;
+     filter: 
+       drop-shadow(0 0 8px rgba(0,0,0,0.3))
+       brightness(0.8)
+       contrast(1.1);
+   }
+   
+   [data-theme="dark"] .flor-decorativa:hover {
+     opacity: 0.7;
+     filter: 
+       drop-shadow(0 0 15px rgba(255,255,255,0.1))
+       brightness(1.1)
+       contrast(1.2);
+   }
+   
+   /* =========================================================
+      RESPONSIVE MEJORADO
+      ========================================================= */
+   
+   @media (max-width: 1200px) {
+     .flor-decorativa {
+       transform: scale(0.9);
+     }
+   }
+   
+   @media (max-width: 992px) {
+     .flor-decorativa {
+       transform: scale(0.8);
+       opacity: 0.5;
+     }
+     
+     .flor-margarita { width: 110px; height: 110px; }
+     .flor-rosa { width: 95px; height: 95px; }
+     .flor-tulipan { width: 70px; height: 95px; }
+     .flor-girasol { width: 120px; height: 120px; }
+     .flor-lavanda { width: 65px; height: 115px; }
+     .flor-orquidea { width: 80px; height: 80px; }
+     .flor-lirio { width: 75px; height: 100px; }
+   }
+   
+   @media (max-width: 768px) {
+     .flor-decorativa {
+       transform: scale(0.7);
+       opacity: 0.4;
+       animation-duration: 12s;
+     }
+     
+     /* Reorganización para móviles */
+     .flor-1 { top: 8%; left: 5%; }
+     .flor-2 { top: 70%; left: 80%; }
+     .flor-3 { top: 15%; left: 85%; }
+     .flor-4 { top: 80%; left: 8%; }
+     .flor-5 { top: 60%; left: 75%; }
+     .flor-6 { top: 5%; left: 75%; }
+     .flor-7 { top: 25%; left: 20%; }
+     
+     .flor-margarita { width: 90px; height: 90px; }
+     .flor-rosa { width: 80px; height: 80px; }
+     .flor-tulipan { width: 60px; height: 80px; }
+     .flor-girasol { width: 100px; height: 100px; }
+     .flor-lavanda { width: 55px; height: 95px; }
+     .flor-orquidea { width: 70px; height: 70px; }
+     .flor-lirio { width: 65px; height: 85px; }
+   }
+   
+   @media (max-width: 576px) {
+     .flor-decorativa {
+       transform: scale(0.6);
+       opacity: 0.35;
+     }
+     
+     /* Ocultar algunas flores en móviles muy pequeños */
+     .flor-3, .flor-6 {
+       display: none;
+     }
+   }
+   
+   /* =========================================================
+      ANIMACIONES ADICIONALES PARA MEJORAR LA EXPERIENCIA
+      ========================================================= */
+   
+   /* Efecto de viento suave en algunas flores */
+   @keyframes viento {
+     0%, 100% { transform: translateX(0) rotate(0deg); }
+     25% { transform: translateX(2px) rotate(0.5deg); }
+     75% { transform: translateX(-2px) rotate(-0.5deg); }
+   }
+   
+   .flor-1, .flor-3, .flor-5 {
+     animation: 
+       flotar 9s ease-in-out infinite,
+       respirar 6s ease-in-out infinite,
+       viento 15s ease-in-out infinite;
+   }
+   
+   /* Retrasos escalonados para movimiento más natural */
+   .flor-2 { animation-delay: 0s, 1s, 2s; }
+   .flor-4 { animation-delay: 1.5s, 0.5s, 3s; }
+   .flor-6 { animation-delay: 2s, 1.5s, 1s; }
+   .flor-7 { animation-delay: 0.5s, 2s, 4s; }

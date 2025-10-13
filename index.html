@@ -19,50 +19,186 @@
     
     <!-- CSS Personalizado -->
     <link rel="stylesheet" href="/styles/styles.css">
+    <style>
+        /* Estilos para la navbar corregida */
+        .navbar-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .language-selector .btn {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+        }
+        
+        .theme-toggle-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        /* Toggle de modo oscuro mejorado */
+        .theme-toggle {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        
+        .theme-toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .theme-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        
+        .theme-slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .theme-slider {
+            background-color: #2196F3;
+        }
+        
+        input:checked + .theme-slider:before {
+            transform: translateX(26px);
+        }
+        
+        /* Botones de navegación en el modal */
+        .btn-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0.7;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        
+        .btn-nav:hover {
+            opacity: 1;
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .btn-nav-prev {
+            left: 20px;
+        }
+        
+        .btn-nav-next {
+            right: 20px;
+        }
+        
+        /* Para dispositivos móviles */
+        @media (max-width: 768px) {
+            .btn-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+            
+            .btn-nav-prev {
+                left: 10px;
+            }
+            
+            .btn-nav-next {
+                right: 10px;
+            }
+            
+            .navbar-controls {
+                gap: 8px;
+            }
+        }
+        
+        /* Transición suave para cambio de imágenes */
+        #fullscreenImage {
+            transition: opacity 0.3s ease-in-out;
+            max-height: 80vh;
+            object-fit: contain;
+        }
+    </style>
 </head>
 
 <body>
     <!-- Header -->
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <header role="banner">
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" role="navigation" aria-label="Navegación principal">
             <div class="container">
-                <a class="navbar-brand" href="#inicio">
+                <a class="navbar-brand" href="#inicio" aria-label="Ir al inicio">
                     <img src="/floreriacamelia.png" alt="Florería Camelia" class="navbar-logo">
                     <span class="text-floreria" data-i18n="floreria">Florería</span> <span class="text-camelia">Camelia</span>
                 </a>
                 
-                <!-- Selector de Idioma -->
-                <div class="language-selector me-3">
-                    <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="language-flag">🇪🇸</span> <span data-i18n="language">ES</span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item language-option" href="#" data-lang="es"><span class="language-flag">🇪🇸</span> Español</a></li>
-                        <li><a class="dropdown-item language-option" href="#" data-lang="en"><span class="language-flag">🇺🇸</span> English</a></li>
-                    </ul>
+                <!-- Controles de la navbar (idioma y modo oscuro) -->
+                <div class="navbar-controls">
+                    <!-- Toggle de Modo Oscuro -->
+                    <div class="theme-toggle-container">
+                        <label class="theme-toggle" for="themeToggle" aria-label="Cambiar modo oscuro/claro">
+                            <input type="checkbox" id="themeToggle" aria-checked="false">
+                            <span class="theme-slider"></span>
+                        </label>
+                    </div>
+
+                    <!-- Selector de Idioma -->
+                    <div class="language-selector">
+                        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Seleccionar idioma">
+                            <span class="language-flag">🇪🇸</span> <span data-i18n="language">ES</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" role="list">
+                            <li role="listitem"><a class="dropdown-item language-option" href="#" data-lang="es" role="option"><span class="language-flag">🇪🇸</span> Español</a></li>
+                            <li role="listitem"><a class="dropdown-item language-option" href="#" data-lang="en" role="option"><span class="language-flag">🇺🇸</span> English</a></li>
+                        </ul>
+                    </div>
                 </div>
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegación">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
+                    <ul class="navbar-nav ms-auto" role="list">
+                        <li class="nav-item" role="listitem">
                             <a class="nav-link" href="#inicio" data-i18n="inicio">Inicio</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" role="listitem">
                             <a class="nav-link" href="#servicios" data-i18n="servicios">Servicios</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" role="listitem">
                             <a class="nav-link" href="#nosotros" data-i18n="nosotros">Nosotros</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" role="listitem">
                             <a class="nav-link" href="#galeria" data-i18n="galeria">Galería</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" role="listitem">
                             <a class="nav-link" href="#consulta" data-i18n="consulta">Consulta</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" role="listitem">
                             <a class="nav-link" href="#contacto" data-i18n="contacto">Contacto</a>
                         </li>
                     </ul>
@@ -71,336 +207,343 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section id="inicio" class="hero-section">
-        <div class="flores-background">
-            <div class="flor-decorativa flor-margarita flor-1"></div>
-            <div class="flor-decorativa flor-rosa flor-2"></div>
-            <div class="flor-decorativa flor-tulipan flor-3"></div>
-            <div class="flor-decorativa flor-lirio flor-4"></div>
-            <div class="flor-decorativa flor-girasol flor-5"></div>
-            <div class="flor-decorativa flor-orquidea flor-6"></div>
-        </div>
-        <div class="container">
-            <div class="row align-items-center">
-                <!-- Logo - Primero en móvil -->
-                <div class="col-lg-6 text-center order-2 order-lg-2 mt-4 mt-lg-0">
-                    <div class="logo-container">
-                        <img src="/floreriacamelia.png" alt="Florería Camelia" class="img-fluid">
+    <!-- Contenido Principal -->
+    <main role="main">
+        <!-- Hero Section -->
+        <section id="inicio" class="hero-section" aria-labelledby="hero-title">
+            <div class="flores-background" aria-hidden="true">
+                <div class="flor-decorativa flor-margarita flor-1"></div>
+                <div class="flor-decorativa flor-rosa flor-2"></div>
+                <div class="flor-decorativa flor-tulipan flor-3"></div>
+                <div class="flor-decorativa flor-lirio flor-4"></div>
+                <div class="flor-decorativa flor-girasol flor-5"></div>
+                <div class="flor-decorativa flor-orquidea flor-6"></div>
+                <div class="flor-decorativa flor-lavanda flor-7"></div>
+            </div>
+            <div class="container">
+                <div class="row align-items-center">
+                    <!-- Logo - Primero en móvil -->
+                    <div class="col-lg-6 text-center order-2 order-lg-2 mt-4 mt-lg-0">
+                        <div class="logo-container">
+                            <img src="/floreriacamelia.png" alt="Florería Camelia - Logo" class="img-fluid">
+                        </div>
                     </div>
-                </div>
-                <!-- Texto - Segundo en móvil -->
-                <div class="col-lg-6 order-1 order-lg-1">
-                    <h1 class="display-4 fw-bold mb-4" data-i18n="hero_title">Florería Camelia</h1>
-                    <p class="lead mb-4" data-i18n="hero_description">Más de 30 años acompañando en los momentos más importantes de la vida con flores de calidad y servicios funerarios completos.</p>
-                    <div class="d-flex flex-wrap gap-3">
-                        <a href="#contacto" class="btn btn-primary btn-lg" data-i18n="contactanos">Contáctanos</a>
-                        <a href="#servicios" class="btn btn-outline-primary btn-lg" data-i18n="nuestros_servicios">Nuestros Servicios</a>
+                    <!-- Texto - Segundo en móvil -->
+                    <div class="col-lg-6 order-1 order-lg-1">
+                        <h1 id="hero-title" class="display-4 fw-bold mb-4" data-i18n="hero_title">Florería Camelia</h1>
+                        <p class="lead mb-4" data-i18n="hero_description">Más de 30 años acompañando en los momentos más importantes de la vida con flores de calidad y servicios funerarios completos.</p>
+                        <div class="d-flex flex-wrap gap-3">
+                            <a href="#contacto" class="btn btn-primary btn-lg" data-i18n="contactanos">Contáctanos</a>
+                            <a href="#servicios" class="btn btn-outline-primary btn-lg" data-i18n="nuestros_servicios">Nuestros Servicios</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Services Section -->
-    <section id="servicios" class="py-5">
-        <div class="container">
-            <h2 class="section-title text-center mb-5" data-i18n="nuestros_servicios">Nuestros Servicios</h2>
-            <div class="row">
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 text-center">
-                        <div class="card-body p-4">
-                            <i class="bi bi-flower1 service-icon"></i>
-                            <h5 class="card-title" data-i18n="servicio1_titulo">Arreglos Florales</h5>
-                            <p class="card-text" data-i18n="servicio1_descripcion">Creaciones únicas para expresar sentimientos y acompañar en momentos especiales. Diseños personalizados para cada ocasión.</p>
+        <!-- Services Section -->
+        <section id="servicios" class="py-5" aria-labelledby="servicios-title">
+            <div class="container">
+                <h2 id="servicios-title" class="section-title text-center mb-5" data-i18n="nuestros_servicios">Nuestros Servicios</h2>
+                <div class="row" role="list">
+                    <article class="col-md-4 mb-4" role="listitem">
+                        <div class="card h-100 text-center">
+                            <div class="card-body p-4">
+                                <i class="bi bi-flower1 service-icon" aria-hidden="true"></i>
+                                <h3 class="card-title h5" data-i18n="servicio1_titulo">Arreglos Florales</h3>
+                                <p class="card-text" data-i18n="servicio1_descripcion">Creaciones únicas para expresar sentimientos y acompañar en momentos especiales. Diseños personalizados para cada ocasión.</p>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 text-center">
-                        <div class="card-body p-4">
-                            <i class="bi bi-gear service-icon"></i>
-                            <h5 class="card-title" data-i18n="servicio2_titulo">Obras Funerarias</h5>
-                            <p class="card-text" data-i18n="servicio2_descripcion">Servicio completo y personalizado para honrar a sus seres queridos con respeto, dignidad y profesionalismo.</p>
+                    </article>
+                    <article class="col-md-4 mb-4" role="listitem">
+                        <div class="card h-100 text-center">
+                            <div class="card-body p-4">
+                                <i class="bi bi-gear service-icon" aria-hidden="true"></i>
+                                <h3 class="card-title h5" data-i18n="servicio2_titulo">Obras Funerarias</h3>
+                                <p class="card-text" data-i18n="servicio2_descripcion">Servicio completo y personalizado para honrar a sus seres queridos con respeto, dignidad y profesionalismo.</p>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 text-center">
-                        <div class="card-body p-4">
-                            <i class="bi bi-tools service-icon"></i>
-                            <h5 class="card-title" data-i18n="servicio3_titulo">Grabados Láser</h5>
-                            <p class="card-text" data-i18n="servicio3_descripcion">Grabados en mármol y acrílico, placas de acrílico sublimadas de alta calidad para recordatorios y homenajes.</p>
+                    </article>
+                    <article class="col-md-4 mb-4" role="listitem">
+                        <div class="card h-100 text-center">
+                            <div class="card-body p-4">
+                                <i class="bi bi-tools service-icon" aria-hidden="true"></i>
+                                <h3 class="card-title h5" data-i18n="servicio3_titulo">Grabados Láser</h3>
+                                <p class="card-text" data-i18n="servicio3_descripcion">Grabados en mármol y acrílico, placas de acrílico sublimadas de alta calidad para recordatorios y homenajes.</p>
+                            </div>
                         </div>
-                    </div>
+                    </article>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- About Section -->
-    <section id="nosotros" class="py-5 about-section">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 mb-4 mb-lg-0">
-                    <h2 class="section-title text-start" data-i18n="nuestra_historia">Nuestra Historia</h2>
-                    <p class="mb-4" data-i18n="historia_texto1">Desde hace más de 30 años, Florería Camelia se ha consolidado como un referente en el sector floral y funerario de la comunidad. Ubicados estratégicamente frente al Cementerio del Norte, hemos acompañado a miles de familias en sus momentos más significativos.</p>
-                    <p class="mb-4" data-i18n="historia_texto2">Nuestra trayectoria nos ha permitido entender las necesidades de nuestros clientes, ofreciendo siempre calidad, respeto y calidez humana en cada uno de nuestros servicios.</p>
-                    <div class="d-flex align-items-center">
-                        <i class="bi bi-award-fill text-primary me-3" style="font-size: 2rem;"></i>
-                        <div>
-                            <h5 data-i18n="experiencia_titulo">Más de 30 años de experiencia</h5>
-                            <p class="mb-0" data-i18n="experiencia_descripcion">Acompañando a la comunidad con profesionalismo y sensibilidad</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body p-4">
-                            <h4 class="card-title mb-4" data-i18n="porque_elegirnos">¿Por qué elegirnos?</h4>
-                            <div class="d-flex mb-3">
-                                <i class="bi bi-check-circle-fill text-success me-3"></i>
-                                <div>
-                                    <h6 data-i18n="ventaja1_titulo">Atención personalizada</h6>
-                                    <p class="mb-0" data-i18n="ventaja1_descripcion">Nos adaptamos a sus necesidades específicas con soluciones a medida</p>
-                                </div>
-                            </div>
-                            <div class="d-flex mb-3">
-                                <i class="bi bi-check-circle-fill text-success me-3"></i>
-                                <div>
-                                    <h6 data-i18n="ventaja2_titulo">Calidad garantizada</h6>
-                                    <p class="mb-0" data-i18n="ventaja2_descripcion">Materiales de primera calidad en todos nuestros productos y servicios</p>
-                                </div>
-                            </div>
-                            <div class="d-flex mb-3">
-                                <i class="bi bi-check-circle-fill text-success me-3"></i>
-                                <div>
-                                    <h6 data-i18n="ventaja3_titulo">Experiencia y tradición</h6>
-                                    <p class="mb-0" data-i18n="ventaja3_descripcion">Más de tres décadas de servicio continuo a la comunidad</p>
-                                </div>
-                            </div>
-                            <div class="d-flex">
-                                <i class="bi bi-check-circle-fill text-success me-3"></i>
-                                <div>
-                                    <h6 data-i18n="ventaja4_titulo">Servicio integral</h6>
-                                    <p class="mb-0" data-i18n="ventaja4_descripcion">Desde arreglos florales hasta obras funerarias completas</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Galería Section -->
-    <section id="galeria" class="galeria-section">
-        <div class="container">
-            <h2 class="section-title text-center mb-5" data-i18n="galeria">Galería</h2>
-            <p class="text-center lead mb-5" data-i18n="galeria_descripcion">Descubre nuestras últimas creaciones y mantente conectado con nosotros</p>
-            
-            <div class="galeria-grid" id="galeriaGrid">
-                <!-- Las imágenes se generarán dinámicamente aquí -->
-            </div>
-            
-            <div class="text-center mt-5">
-                <a href="https://www.instagram.com/floreriacameliauy/" target="_blank" class="instagram-link">
-                    <i class="bi bi-instagram me-2"></i><span data-i18n="seguir_instagram">Seguir en Instagram</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Formulario de Consulta Section -->
-    <section id="consulta" class="consulta-section py-5">
-        <div class="container">
-            <h2 class="section-title text-center mb-5" data-i18n="consulta_rapida">Consulta Rápida</h2>
-            <p class="text-center lead mb-5" data-i18n="consulta_descripcion">¿Tienes alguna pregunta? Escríbenos y te responderemos a la brevedad</p>
-            
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="card">
-                        <div class="card-body p-4">
-                            <form id="formConsulta" class="needs-validation" novalidate>
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label for="nombre" class="form-label" data-i18n="nombre_completo">Nombre completo *</label>
-                                        <input type="text" class="form-control" id="nombre" name="nombre" required data-i18n-placeholder="nombre_placeholder" placeholder="Ingresa tu nombre completo">
-                                        <div class="invalid-feedback" data-i18n="nombre_error">
-                                            Por favor ingresa tu nombre completo.
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="telefono" class="form-label" data-i18n="telefono">Teléfono *</label>
-                                        <input type="tel" class="form-control" id="telefono" name="telefono" required data-i18n-placeholder="telefono_placeholder" placeholder="Ingresa tu teléfono">
-                                        <div class="invalid-feedback" data-i18n="telefono_error">
-                                            Por favor ingresa tu teléfono.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="email" class="form-label" data-i18n="email">Email</label>
-                                    <input type="email" class="form-control" id="email" name="email" data-i18n-placeholder="email_placeholder" placeholder="Ingresa tu email">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="servicio" class="form-label" data-i18n="servicio_interes">Servicio de interés *</label>
-                                    <select class="form-select" id="servicio" name="servicio" required>
-                                        <option value="" data-i18n="selecciona_servicio">Selecciona un servicio</option>
-                                        <option value="arreglos-florales" data-i18n="servicio_opcion1">Arreglos Florales</option>
-                                        <option value="obras-funerarias" data-i18n="servicio_opcion2">Obras Funerarias</option>
-                                        <option value="grabados-laser" data-i18n="servicio_opcion3">Grabados Láser</option>
-                                        <option value="otros" data-i18n="servicio_opcion4">Otros</option>
-                                    </select>
-                                    <div class="invalid-feedback" data-i18n="servicio_error">
-                                        Por favor selecciona un servicio.
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="mensaje" class="form-label" data-i18n="mensaje">Mensaje *</label>
-                                    <textarea class="form-control" id="mensaje" name="mensaje" rows="5" required data-i18n-placeholder="mensaje_placeholder" placeholder="Cuéntanos en qué podemos ayudarte..."></textarea>
-                                    <div class="invalid-feedback" data-i18n="mensaje_error">
-                                        Por favor escribe tu mensaje.
-                                    </div>
-                                </div>
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary btn-lg">
-                                        <span class="spinner-border spinner-border-sm d-none me-2" role="status" aria-hidden="true"></span>
-                                        <span data-i18n="enviar_consulta">Enviar Consulta</span>
-                                    </button>
-                                </div>
-                            </form>
-                            <div id="mensajeExito" class="alert alert-success mt-3 d-none" role="alert">
-                                <i class="bi bi-check-circle-fill me-2"></i>
-                                <span data-i18n="mensaje_exito">¡Gracias por tu consulta! Te contactaremos a la brevedad.</span>
-                            </div>
-                            <div id="mensajeError" class="alert alert-danger mt-3 d-none" role="alert">
-                                <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                                <span data-i18n="mensaje_error">Ha ocurrido un error al enviar el formulario. Por favor, intenta nuevamente.</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact & Info Section -->
-    <section id="contacto" class="py-5">
-        <div class="container">
-            <h2 class="section-title text-center mb-5" data-i18n="contacto">Contacto</h2>
-            <div class="row">
-                <div class="col-md-6 mb-4">
-                    <div class="card h-100">
-                        <div class="card-header text-center">
-                            <i class="bi bi-telephone-fill me-2"></i> <span data-i18n="informacion_contacto">Información de Contacto</span>
-                        </div>
-                        <div class="card-body">
-                            <div class="mb-4">
-                                <h5 class="mb-3" data-i18n="floreria">Florería</h5>
-                                <div class="contact-item d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <i class="bi bi-telephone me-2"></i>
-                                        <span data-i18n="telefono">Teléfono</span>
-                                    </div>
-                                    <div>
-                                        <a href="https://wa.me/59899084029" target="_blank" class="whatsapp-link">
-                                            <img src="/WhatsApp.svg.png" alt="WhatsApp" class="whatsapp-icon">
-                                            <span class="phone-number">099 084 029</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-4">
-                                <h5 class="mb-3" data-i18n="obras_funerarias">Obras Funerarias</h5>
-                                <div class="contact-item d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <i class="bi bi-telephone me-2"></i>
-                                        <span data-i18n="telefono">Teléfono</span>
-                                    </div>
-                                    <div>
-                                        <a href="https://wa.me/59898863473" target="_blank" class="whatsapp-link">
-                                            <img src="/WhatsApp.svg.png" alt="WhatsApp" class="whatsapp-icon">
-                                            <span class="phone-number">098 863 473</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-4">
-                                <h5 class="mb-3" data-i18n="horario_atencion">Horario de Atención</h5>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span data-i18n="todos_los_dias">Todos los días</span>
-                                    <span class="hours-text">08:00 - 17:00</span>
-                                </div>
-                            </div>
+        <!-- About Section -->
+        <section id="nosotros" class="py-5 about-section" aria-labelledby="nosotros-title">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 mb-4 mb-lg-0">
+                        <h2 id="nosotros-title" class="section-title text-start" data-i18n="nuestra_historia">Nuestra Historia</h2>
+                        <p class="mb-4" data-i18n="historia_texto1">Desde hace más de 30 años, Florería Camelia se ha consolidado como un referente en el sector floral y funerario de la comunidad. Ubicados estratégicamente frente al Cementerio del Norte, hemos acompañado a miles de familias en sus momentos más significativos.</p>
+                        <p class="mb-4" data-i18n="historia_texto2">Nuestra trayectoria nos ha permitido entender las necesidades de nuestros clientes, ofreciendo siempre calidad, respeto y calidez humana en cada uno de nuestros servicios.</p>
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-award-fill text-primary me-3" style="font-size: 2rem;" aria-hidden="true"></i>
                             <div>
-                                <h5 class="mb-3" data-i18n="ubicacion">Ubicación</h5>
-                                <p class="mb-0">
-                                    <i class="bi bi-geo-alt-fill me-2"></i> <span data-i18n="direccion">Avenida Burgues 4298, frente al Cementerio del Norte</span>
-                                </p>
+                                <h3 class="h5" data-i18n="experiencia_titulo">Más de 30 años de experiencia</h3>
+                                <p class="mb-0" data-i18n="experiencia_descripcion">Acompañando a la comunidad con profesionalismo y sensibilidad</p>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 mb-4">
-                    <div class="card h-100">
-                        <div class="card-header text-center">
-                            <i class="bi bi-share me-2"></i> <span data-i18n="siguenos_redes">Síguenos en Redes</span>
-                        </div>
-                        <div class="card-body">
-                            <div class="mb-4">
-                                <a href="https://www.facebook.com/floreriacamelia.uy" target="_blank" class="social-item social-facebook d-block text-decoration-none mb-3 p-3 rounded text-white">
-                                    <div class="d-flex align-items-center">
-                                        <div class="social-icon me-3">
-                                            <i class="bi bi-facebook"></i>
-                                        </div>
-                                        <div class="social-text flex-grow-1">
-                                            <h5 class="mb-1">Facebook</h5>
-                                            <span class="small">@floreriacamelia.uy</span>
-                                        </div>
-                                        <div class="social-arrow">
-                                            <i class="bi bi-arrow-right"></i>
-                                        </div>
+                    <div class="col-lg-6">
+                        <article class="card">
+                            <div class="card-body p-4">
+                                <h3 class="card-title h4 mb-4" data-i18n="porque_elegirnos">¿Por qué elegirnos?</h3>
+                                <div class="d-flex mb-3">
+                                    <i class="bi bi-check-circle-fill text-success me-3" aria-hidden="true"></i>
+                                    <div>
+                                        <h4 class="h6" data-i18n="ventaja1_titulo">Atención personalizada</h4>
+                                        <p class="mb-0" data-i18n="ventaja1_descripcion">Nos adaptamos a sus necesidades específicas con soluciones a medida</p>
                                     </div>
-                                </a>
-                                <a href="https://www.instagram.com/floreriacameliauy/" target="_blank" class="social-item social-instagram d-block text-decoration-none p-3 rounded text-white">
-                                    <div class="d-flex align-items-center">
-                                        <div class="social-icon me-3">
-                                            <i class="bi bi-instagram"></i>
-                                        </div>
-                                        <div class="social-text flex-grow-1">
-                                            <h5 class="mb-1">Instagram</h5>
-                                            <span class="small">@floreriacameliauy</span>
-                                        </div>
-                                        <div class="social-arrow">
-                                            <i class="bi bi-arrow-right"></i>
-                                        </div>
+                                </div>
+                                <div class="d-flex mb-3">
+                                    <i class="bi bi-check-circle-fill text-success me-3" aria-hidden="true"></i>
+                                    <div>
+                                        <h4 class="h6" data-i18n="ventaja2_titulo">Calidad garantizada</h4>
+                                        <p class="mb-0" data-i18n="ventaja2_descripcion">Materiales de primera calidad en todos nuestros productos y servicios</p>
                                     </div>
-                                </a>
-                            </div>
-                            <div>
-                                <h5 class="mb-3" data-i18n="encuentranos">Encuéntranos</h5>
-                                <div class="ratio ratio-16x9">
-                                    <iframe id="mapa"
-                                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13097.681867956966!2d-56.1744353!3d-34.8456609!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95a02b506f68a979%3A0x41059e1945a0d49a!2sFlorer%C3%ADa%20Camelia!5e0!3m2!1ses-419!2suy!4v1695229532745!5m2!1ses-419!2suy"
-                                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                </div>
+                                <div class="d-flex mb-3">
+                                    <i class="bi bi-check-circle-fill text-success me-3" aria-hidden="true"></i>
+                                    <div>
+                                        <h4 class="h6" data-i18n="ventaja3_titulo">Experiencia y tradición</h4>
+                                        <p class="mb-0" data-i18n="ventaja3_descripcion">Más de tres décadas de servicio continuo a la comunidad</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <i class="bi bi-check-circle-fill text-success me-3" aria-hidden="true"></i>
+                                    <div>
+                                        <h4 class="h6" data-i18n="ventaja4_titulo">Servicio integral</h4>
+                                        <p class="mb-0" data-i18n="ventaja4_descripcion">Desde arreglos florales hasta obras funerarias completas</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </article>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- Galería Section -->
+        <section id="galeria" class="galeria-section" aria-labelledby="galeria-title">
+            <div class="container">
+                <h2 id="galeria-title" class="section-title text-center mb-5" data-i18n="galeria">Galería</h2>
+                <p class="text-center lead mb-5" data-i18n="galeria_descripcion">Descubre nuestras últimas creaciones y mantente conectado con nosotros</p>
+                
+                <div class="galeria-grid" id="galeriaGrid" role="list" aria-label="Galería de trabajos">
+                    <!-- Las imágenes se generarán dinámicamente aquí -->
+                </div>
+                
+                <div class="text-center mt-5">
+                    <a href="https://www.instagram.com/floreriacameliauy/" target="_blank" class="instagram-link" rel="noopener noreferrer">
+                        <i class="bi bi-instagram me-2" aria-hidden="true"></i><span data-i18n="seguir_instagram">Seguir en Instagram</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formulario de Consulta Section -->
+        <section id="consulta" class="consulta-section py-5" aria-labelledby="consulta-title">
+            <div class="container">
+                <h2 id="consulta-title" class="section-title text-center mb-5" data-i18n="consulta_rapida">Consulta Rápida</h2>
+                <p class="text-center lead mb-5" data-i18n="consulta_descripcion">¿Tienes alguna pregunta? Escríbenos y te responderemos a la brevedad</p>
+                
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <article class="card">
+                            <div class="card-body p-4">
+                                <form id="formConsulta" class="needs-validation" novalidate>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="nombre" class="form-label" data-i18n="nombre_completo">Nombre completo *</label>
+                                            <input type="text" class="form-control" id="nombre" name="nombre" required data-i18n-placeholder="nombre_placeholder" placeholder="Ingresa tu nombre completo">
+                                            <div class="invalid-feedback" data-i18n="nombre_error">
+                                                Por favor ingresa tu nombre completo.
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="telefono" class="form-label" data-i18n="telefono">Teléfono *</label>
+                                            <input type="tel" class="form-control" id="telefono" name="telefono" required data-i18n-placeholder="telefono_placeholder" placeholder="Ingresa tu teléfono">
+                                            <div class="invalid-feedback" data-i18n="telefono_error">
+                                                Por favor ingresa tu teléfono.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label" data-i18n="email">Email</label>
+                                        <input type="email" class="form-control" id="email" name="email" data-i18n-placeholder="email_placeholder" placeholder="Ingresa tu email">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="servicio" class="form-label" data-i18n="servicio_interes">Servicio de interés *</label>
+                                        <select class="form-select" id="servicio" name="servicio" required>
+                                            <option value="" data-i18n="selecciona_servicio">Selecciona un servicio</option>
+                                            <option value="arreglos-florales" data-i18n="servicio_opcion1">Arreglos Florales</option>
+                                            <option value="obras-funerarias" data-i18n="servicio_opcion2">Obras Funerarias</option>
+                                            <option value="grabados-laser" data-i18n="servicio_opcion3">Grabados Láser</option>
+                                            <option value="otros" data-i18n="servicio_opcion4">Otros</option>
+                                        </select>
+                                        <div class="invalid-feedback" data-i18n="servicio_error">
+                                            Por favor selecciona un servicio.
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="mensaje" class="form-label" data-i18n="mensaje">Mensaje *</label>
+                                        <textarea class="form-control" id="mensaje" name="mensaje" rows="5" required data-i18n-placeholder="mensaje_placeholder" placeholder="Cuéntanos en qué podemos ayudarte..."></textarea>
+                                        <div class="invalid-feedback" data-i18n="mensaje_error">
+                                            Por favor escribe tu mensaje.
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary btn-lg">
+                                            <span class="spinner-border spinner-border-sm d-none me-2" role="status" aria-hidden="true"></span>
+                                            <span data-i18n="enviar_consulta">Enviar Consulta</span>
+                                        </button>
+                                    </div>
+                                </form>
+                                <div id="mensajeExito" class="alert alert-success mt-3 d-none" role="alert">
+                                    <i class="bi bi-check-circle-fill me-2" aria-hidden="true"></i>
+                                    <span data-i18n="mensaje_exito">¡Gracias por tu consulta! Te contactaremos a la brevedad.</span>
+                                </div>
+                                <div id="mensajeError" class="alert alert-danger mt-3 d-none" role="alert">
+                                    <i class="bi bi-exclamation-triangle-fill me-2" aria-hidden="true"></i>
+                                    <span data-i18n="mensaje_error">Ha ocurrido un error al enviar el formulario. Por favor, intenta nuevamente.</span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact & Info Section -->
+        <section id="contacto" class="py-5" aria-labelledby="contacto-title">
+            <div class="container">
+                <h2 id="contacto-title" class="section-title text-center mb-5" data-i18n="contacto">Contacto</h2>
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <article class="card h-100">
+                            <div class="card-header text-center">
+                                <i class="bi bi-telephone-fill me-2" aria-hidden="true"></i> <span data-i18n="informacion_contacto">Información de Contacto</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-4">
+                                    <h3 class="h5 mb-3" data-i18n="floreria">Florería</h3>
+                                    <div class="contact-item d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <i class="bi bi-telephone me-2" aria-hidden="true"></i>
+                                            <span data-i18n="telefono">Teléfono</span>
+                                        </div>
+                                        <div>
+                                            <a href="https://wa.me/59899084029" target="_blank" class="whatsapp-link" rel="noopener noreferrer">
+                                                <img src="/WhatsApp.svg.png" alt="Contactar por WhatsApp" class="whatsapp-icon">
+                                                <span class="phone-number">099 084 029</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <h3 class="h5 mb-3" data-i18n="obras_funerarias">Obras Funerarias</h3>
+                                    <div class="contact-item d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <i class="bi bi-telephone me-2" aria-hidden="true"></i>
+                                            <span data-i18n="telefono">Teléfono</span>
+                                        </div>
+                                        <div>
+                                            <a href="https://wa.me/59898863473" target="_blank" class="whatsapp-link" rel="noopener noreferrer">
+                                                <img src="/WhatsApp.svg.png" alt="Contactar por WhatsApp" class="whatsapp-icon">
+                                                <span class="phone-number">098 863 473</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <h3 class="h5 mb-3" data-i18n="horario_atencion">Horario de Atención</h3>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span data-i18n="todos_los_dias">Todos los días</span>
+                                        <span class="hours-text">08:00 - 17:00</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="h5 mb-3" data-i18n="ubicacion">Ubicación</h3>
+                                    <p class="mb-0">
+                                        <i class="bi bi-geo-alt-fill me-2" aria-hidden="true"></i> <span data-i18n="direccion">Avenida Burgues 4298, frente al Cementerio del Norte</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <article class="card h-100">
+                            <div class="card-header text-center">
+                                <i class="bi bi-share me-2" aria-hidden="true"></i> <span data-i18n="siguenos_redes">Síguenos en Redes</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-4">
+                                    <a href="https://www.facebook.com/floreriacamelia.uy" target="_blank" class="social-item social-facebook d-block text-decoration-none mb-3 p-3 rounded text-white" rel="noopener noreferrer">
+                                        <div class="d-flex align-items-center">
+                                            <div class="social-icon me-3">
+                                                <i class="bi bi-facebook" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="social-text flex-grow-1">
+                                                <h4 class="h5 mb-1">Facebook</h4>
+                                                <span class="small">@floreriacamelia.uy</span>
+                                            </div>
+                                            <div class="social-arrow">
+                                                <i class="bi bi-arrow-right" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a href="https://www.instagram.com/floreriacameliauy/" target="_blank" class="social-item social-instagram d-block text-decoration-none p-3 rounded text-white" rel="noopener noreferrer">
+                                        <div class="d-flex align-items-center">
+                                            <div class="social-icon me-3">
+                                                <i class="bi bi-instagram" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="social-text flex-grow-1">
+                                                <h4 class="h5 mb-1">Instagram</h4>
+                                                <span class="small">@floreriacameliauy</span>
+                                            </div>
+                                            <div class="social-arrow">
+                                                <i class="bi bi-arrow-right" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <h3 class="h5 mb-3" data-i18n="encuentranos">Encuéntranos</h3>
+                                    <div class="ratio ratio-16x9">
+                                        <iframe id="mapa"
+                                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13097.681867956966!2d-56.1744353!3d-34.8456609!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95a02b506f68a979%3A0x41059e1945a0d49a!2sFlorer%C3%ADa%20Camelia!5e0!3m2!1ses-419!2suy!4v1695229532745!5m2!1ses-419!2suy"
+                                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Ubicación de Florería Camelia en Google Maps"></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Modal para pantalla completa -->
     <div class="modal fade" id="modalFullscreen" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                 </div>
                 <div class="modal-body d-flex justify-content-center align-items-center">
                     <img id="fullscreenImage" src="" alt="" class="img-fluid">
+                    <!-- Botones de navegación para el modal -->
+                    <button class="btn-nav btn-nav-prev" aria-label="Imagen anterior">‹</button>
+                    <button class="btn-nav btn-nav-next" aria-label="Imagen siguiente">›</button>
                 </div>
                 <div class="modal-footer justify-content-center">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-i18n="cerrar">Cerrar</button>
@@ -410,21 +553,21 @@
     </div>
 
     <!-- Footer -->
-    <footer class="py-4">
+    <footer class="py-4" role="contentinfo">
         <div class="container">
             <div class="footer-contact">
                 <div class="footer-phone">
-                    <i class="bi bi-telephone-fill"></i>
+                    <i class="bi bi-telephone-fill" aria-hidden="true"></i>
                     <span data-i18n="floreria">Florería: 
-                        <a href="https://wa.me/59899084029" target="_blank" class="whatsapp-link">
+                        <a href="https://wa.me/59899084029" target="_blank" class="whatsapp-link" rel="noopener noreferrer">
                             099 084 029
                         </a>
                     </span>
                 </div>
                 <div class="footer-phone">
-                    <i class="bi bi-telephone-fill"></i>
+                    <i class="bi bi-telephone-fill" aria-hidden="true"></i>
                     <span data-i18n="obras_funerarias">Obras Funerarias: 
-                        <a href="https://wa.me/59898863473" target="_blank" class="whatsapp-link">
+                        <a href="https://wa.me/59898863473" target="_blank" class="whatsapp-link" rel="noopener noreferrer">
                             098 863 473
                         </a>
                     </span>
@@ -447,5 +590,6 @@
     <!-- JavaScript Personalizado -->
     <script src="/js/script.js"></script>
     <script src="/js/translations.js"></script>
+    <script src="/js/dark-mode.js"></script>
 </body>
 </html>

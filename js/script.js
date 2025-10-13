@@ -1,5 +1,14 @@
 // JavaScript para Florería Camelia
 document.addEventListener('DOMContentLoaded', function() {
+    // Variables globales para gestión de imágenes
+    let imagenesList = [];
+    let currentImageIndex = 0;
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let lastTap = 0;
+    let touchStartTime = 0;
+    let isSwiping = false;
+
     // Smooth scrolling para enlaces de navegación
     const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
     
@@ -40,6 +49,10 @@ document.addEventListener('DOMContentLoaded', function() {
     function generarImagenes() {
         // Array de imágenes disponibles
         const imagenes = [
+            { numero: 20, formato: 'jpg' },
+            { numero: 19, formato: 'jpg' },
+            { numero: 18, formato: 'jpg' },
+            { numero: 17, formato: 'jpg' },
             { numero: 16, formato: 'jpeg' },
             { numero: 15, formato: 'jpeg' },
             { numero: 14, formato: 'jpg' },
@@ -58,6 +71,9 @@ document.addEventListener('DOMContentLoaded', function() {
             { numero: 1, formato: 'jpg' }
         ];
 
+        // Guardar lista globalmente
+        imagenesList = imagenes;
+
         // Contenedor de galería
         const galeriaGrid = document.getElementById('galeriaGrid');
 
@@ -74,6 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
             galeriaItem.setAttribute('tabindex', '0');
             galeriaItem.setAttribute('role', 'button');
             galeriaItem.setAttribute('aria-label', `Ver imagen ${imagen.numero} en pantalla completa`);
+            galeriaItem.setAttribute('data-index', index);
             galeriaItem.innerHTML = `
                 <img src="${imgPath}" 
                      alt="Trabajo ${imagen.numero} - Florería Camelia" 
@@ -81,18 +98,21 @@ document.addEventListener('DOMContentLoaded', function() {
                      onerror="this.src='/img/placeholder.jpg'">
             `;
             
-            // Agregar evento para pantalla completa
+            // Agregar evento para pantalla completa (click simple)
             galeriaItem.addEventListener('click', function() {
-                abrirImagenFullscreen(imgPath, `Trabajo ${imagen.numero} - Florería Camelia`);
+                abrirImagenFullscreen(index);
             });
             
             // Agregar evento para teclado (Enter/Space)
             galeriaItem.addEventListener('keydown', function(e) {
                 if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
-                    abrirImagenFullscreen(imgPath, `Trabajo ${imagen.numero} - Florería Camelia`);
+                    abrirImagenFullscreen(index);
                 }
             });
+
+            // Agregar eventos táctiles para doble tap
+            setupDoubleTap(galeriaItem, index);
             
             if (galeriaGrid) {
                 galeriaGrid.appendChild(galeriaItem);
@@ -102,17 +122,171 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Imágenes generadas dinámicamente:', imagenes.length);
     }
 
+    // Configurar doble tap para elementos de imagen
+    function setupDoubleTap(element, index) {
+        let tapCount = 0;
+        let tapTimer;
+
+        element.addEventListener('touchstart', function(e) {
+            // Guardar posición inicial del toque
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+            touchStartTime = Date.now();
+
+            // Detectar doble tap
+            tapCount++;
+            
+            if (tapCount === 1) {
+                tapTimer = setTimeout(function() {
+                    tapCount = 0;
+                }, 300); // Tiempo máximo entre taps para considerarlo doble tap
+            } else if (tapCount === 2) {
+                clearTimeout(tapTimer);
+                tapCount = 0;
+                
+                // Prevenir el comportamiento por defecto (zoom)
+                e.preventDefault();
+                
+                // Abrir imagen en pantalla completa
+                abrirImagenFullscreen(index);
+            }
+        }, { passive: false });
+
+        // Prevenir zoom en doble tap
+        element.addEventListener('touchend', function(e) {
+            // No hacemos nada aquí, solo prevenimos el zoom
+        }, { passive: false });
+    }
+
     // Función para abrir imagen en pantalla completa
-    function abrirImagenFullscreen(src, alt) {
+    function abrirImagenFullscreen(index) {
+        if (index < 0 || index >= imagenesList.length) return;
+        
+        currentImageIndex = index;
+        const imagen = imagenesList[currentImageIndex];
+        const src = `/img/${imagen.numero}.${imagen.formato}`;
+        const alt = `Trabajo ${imagen.numero} - Florería Camelia`;
+        
         const fullscreenImage = document.getElementById('fullscreenImage');
         const modalFullscreen = new bootstrap.Modal(document.getElementById('modalFullscreen'));
         
         if (fullscreenImage) {
             fullscreenImage.src = src;
             fullscreenImage.alt = alt;
+            
+            // Configurar eventos de deslizamiento para la imagen en modal
+            setupSwipeGestures(fullscreenImage);
+            
             modalFullscreen.show();
         }
     }
+
+    // Configurar gestos de deslizamiento para cambiar imágenes
+    function setupSwipeGestures(element) {
+        let startX = 0;
+        let startY = 0;
+        let distX = 0;
+        let distY = 0;
+        const threshold = 50; // Distancia mínima para considerar un swipe
+        const restraint = 100; // Máxima distancia permitida en dirección perpendicular
+        const allowedTime = 500; // Tiempo máximo para considerar un swipe
+
+        let startTime = 0;
+        let isSwiping = false;
+
+        element.addEventListener('touchstart', function(e) {
+            const touch = e.touches[0];
+            startX = touch.clientX;
+            startY = touch.clientY;
+            startTime = Date.now();
+            isSwiping = true;
+            e.preventDefault();
+        }, { passive: false });
+
+        element.addEventListener('touchmove', function(e) {
+            if (!isSwiping) return;
+            
+            const touch = e.touches[0];
+            distX = touch.clientX - startX;
+            distY = touch.clientY - startY;
+            
+            // Si el movimiento es principalmente horizontal, prevenir scroll vertical
+            if (Math.abs(distX) > Math.abs(distY)) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        element.addEventListener('touchend', function(e) {
+            if (!isSwiping) return;
+            
+            const elapsedTime = Date.now() - startTime;
+            isSwiping = false;
+            
+            // Verificar si es un swipe válido
+            if (elapsedTime <= allowedTime) {
+                // Verificar si cumple con la distancia mínima
+                if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint) {
+                    // Es un swipe horizontal válido
+                    if (distX > 0) {
+                        // Swipe hacia la derecha - imagen anterior
+                        cambiarImagen(-1);
+                    } else {
+                        // Swipe hacia la izquierda - imagen siguiente
+                        cambiarImagen(1);
+                    }
+                }
+            }
+        });
+    }
+
+    // Función para cambiar de imagen en el modal
+    function cambiarImagen(direction) {
+        currentImageIndex += direction;
+        
+        // Navegación circular
+        if (currentImageIndex >= imagenesList.length) {
+            currentImageIndex = 0;
+        } else if (currentImageIndex < 0) {
+            currentImageIndex = imagenesList.length - 1;
+        }
+        
+        const imagen = imagenesList[currentImageIndex];
+        const src = `/img/${imagen.numero}.${imagen.formato}`;
+        const alt = `Trabajo ${imagen.numero} - Florería Camelia`;
+        
+        const fullscreenImage = document.getElementById('fullscreenImage');
+        if (fullscreenImage) {
+            // Añadir animación de transición
+            fullscreenImage.style.opacity = '0';
+            
+            setTimeout(() => {
+                fullscreenImage.src = src;
+                fullscreenImage.alt = alt;
+                fullscreenImage.style.opacity = '1';
+            }, 200);
+        }
+    }
+
+    // Configurar navegación con teclado en el modal
+    document.addEventListener('keydown', function(e) {
+        const modal = document.getElementById('modalFullscreen');
+        if (modal && modal.classList.contains('show')) {
+            switch(e.key) {
+                case 'ArrowLeft':
+                    cambiarImagen(-1);
+                    break;
+                case 'ArrowRight':
+                    cambiarImagen(1);
+                    break;
+                case 'Escape':
+                    const modalInstance = bootstrap.Modal.getInstance(modal);
+                    if (modalInstance) {
+                        modalInstance.hide();
+                    }
+                    break;
+            }
+        }
+    });
 
     // Scroll animations
     const fadeElements = document.querySelectorAll('.card, .section-title, .galeria-item');
@@ -204,6 +378,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 closeButton.focus();
             }
         });
+
+        // Añadir botones de navegación al modal para mejor accesibilidad
+        const modalBody = this.querySelector('.modal-body');
+        if (modalBody) {
+            const prevButton = document.createElement('button');
+            prevButton.className = 'btn btn-nav btn-nav-prev';
+            prevButton.innerHTML = '‹';
+            prevButton.setAttribute('aria-label', 'Imagen anterior');
+            prevButton.addEventListener('click', () => cambiarImagen(-1));
+
+            const nextButton = document.createElement('button');
+            nextButton.className = 'btn btn-nav btn-nav-next';
+            nextButton.innerHTML = '›';
+            nextButton.setAttribute('aria-label', 'Imagen siguiente');
+            nextButton.addEventListener('click', () => cambiarImagen(1));
+
+            modalBody.appendChild(prevButton);
+            modalBody.appendChild(nextButton);
+        }
     }
 
     // ===== FORMULARIO DE CONSULTA CON WEBHOOK Y MULTIDIOMA =====
@@ -238,6 +431,10 @@ function initializeForm() {
     const formConsulta = document.getElementById('formConsulta');
     const mensajeExito = document.getElementById('mensajeExito');
     const mensajeError = document.getElementById('mensajeError');
+    // Inicializar modo oscuro
+    if (typeof DarkModeManager !== 'undefined') {
+        window.darkModeManager = new DarkModeManager();
+    }
 
     if (!formConsulta) return;
 
@@ -434,7 +631,3 @@ async function detectLanguageByGeoIP() {
     }
 }
 
-// Inicialización cuando el DOM esté listo (redundante para seguridad)
-document.addEventListener('DOMContentLoaded', function() {
-    // Ya inicializado en el código principal
-});
