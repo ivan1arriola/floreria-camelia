@@ -17,6 +17,12 @@ class TranslationManager {
                 // Hero Section
                 "hero_title": "Florería Camelia",
                 "hero_description": "Más de 30 años acompañando en los momentos más importantes de la vida con flores de calidad y servicios funerarios completos.",
+                "hero_location": "Frente al Cementerio del Norte",
+                "hero_whatsapp": "WhatsApp Florería",
+                "hero_hours": "Abierto todos los días, 08:00 - 17:00",
+                "hero_services_short": "Arreglos florales, obras funerarias y grabados",
+                "hero_experience_badge": "Más de 30 años",
+                "hero_companion_text": "Atención cercana y respetuosa",
                 "contactanos": "Contáctanos",
                 "nuestros_servicios": "Nuestros Servicios",
                 
@@ -27,6 +33,7 @@ class TranslationManager {
                 "servicio2_descripcion": "Servicio completo y personalizado para honrar a sus seres queridos con respeto, dignidad y profesionalismo.",
                 "servicio3_titulo": "Grabados Láser",
                 "servicio3_descripcion": "Grabados en mármol y acrílico, placas de acrílico sublimadas de alta calidad para recordatorios y homenajes.",
+                "servicios_intro": "Soluciones florales y recordatorios hechos con cuidado, claridad y respeto.",
                 
                 // Nosotros
                 "nuestra_historia": "Nuestra Historia",
@@ -46,6 +53,11 @@ class TranslationManager {
                 
                 // Galería
                 "galeria_descripcion": "Descubre nuestras últimas creaciones y mantente conectado con nosotros",
+                "instagram_feed_title": "Últimos trabajos en Instagram",
+                "ver_perfil_instagram": "Ver perfil",
+                "instagram_cargando": "Cargando publicaciones de Instagram...",
+                "instagram_no_disponible": "El feed de Instagram no está disponible por ahora. Puedes ver nuestras publicaciones desde el perfil.",
+                "instagram_sin_publicaciones": "No hay publicaciones recientes para mostrar.",
                 "seguir_instagram": "Seguir en Instagram",
                 
                 // Formulario de Consulta
@@ -74,12 +86,16 @@ class TranslationManager {
                 "mensaje_error": "Ha ocurrido un error al enviar el formulario. Por favor, intenta nuevamente.",
                 
                 // Contacto
+                "contacto_kicker": "Estamos para ayudarte",
+                "contacto_directo": "Comunicación directa",
                 "informacion_contacto": "Información de Contacto",
                 "obras_funerarias": "Obras Funerarias",
                 "horario_atencion": "Horario de Atención",
                 "todos_los_dias": "Todos los días",
                 "ubicacion": "Ubicación",
                 "direccion": "Avenida Burgues 4298, frente al Cementerio del Norte",
+                "direccion_corta": "Avenida Burgues 4298",
+                "direccion_referencia": "Frente al Cementerio del Norte",
                 "siguenos_redes": "Síguenos en Redes",
                 "encuentranos": "Encuéntranos",
                 
@@ -104,6 +120,12 @@ class TranslationManager {
                 // Hero Section
                 "hero_title": "Camelia Florist",
                 "hero_description": "Over 30 years accompanying in the most important moments of life with quality flowers and complete funeral services.",
+                "hero_location": "Across from the Northern Cemetery",
+                "hero_whatsapp": "Florist WhatsApp",
+                "hero_hours": "Open every day, 08:00 - 17:00",
+                "hero_services_short": "Floral arrangements, funeral services and engravings",
+                "hero_experience_badge": "Over 30 years",
+                "hero_companion_text": "Close and respectful attention",
                 "contactanos": "Contact Us",
                 "nuestros_servicios": "Our Services",
                 
@@ -114,6 +136,7 @@ class TranslationManager {
                 "servicio2_descripcion": "Complete and personalized service to honor your loved ones with respect, dignity and professionalism.",
                 "servicio3_titulo": "Laser Engravings",
                 "servicio3_descripcion": "Engravings on marble and acrylic, high-quality sublimated acrylic plates for memorials and tributes.",
+                "servicios_intro": "Floral solutions and memorial pieces made with care, clarity and respect.",
                 
                 // About Us
                 "nuestra_historia": "Our History",
@@ -133,6 +156,11 @@ class TranslationManager {
                 
                 // Gallery
                 "galeria_descripcion": "Discover our latest creations and stay connected with us",
+                "instagram_feed_title": "Latest work on Instagram",
+                "ver_perfil_instagram": "View profile",
+                "instagram_cargando": "Loading Instagram posts...",
+                "instagram_no_disponible": "The Instagram feed is not available right now. You can view our posts from the profile.",
+                "instagram_sin_publicaciones": "There are no recent posts to show.",
                 "seguir_instagram": "Follow on Instagram",
                 
                 // Consultation Form
@@ -161,12 +189,16 @@ class TranslationManager {
                 "mensaje_error": "An error occurred while sending the form. Please try again.",
                 
                 // Contact
+                "contacto_kicker": "We are here to help",
+                "contacto_directo": "Direct communication",
                 "informacion_contacto": "Contact Information",
                 "obras_funerarias": "Funeral Services",
                 "horario_atencion": "Business Hours",
                 "todos_los_dias": "Every day",
                 "ubicacion": "Location",
                 "direccion": "Avenida Burgues 4298, in front of the Northern Cemetery",
+                "direccion_corta": "Avenida Burgues 4298",
+                "direccion_referencia": "Across from the Northern Cemetery",
                 "siguenos_redes": "Follow us on Social Media",
                 "encuentranos": "Find Us",
                 
