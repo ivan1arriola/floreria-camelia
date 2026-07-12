@@ -53,9 +53,9 @@ class TranslationManager {
                 
                 // Galería
                 "galeria_descripcion": "Descubre nuestras últimas creaciones y mantente conectado con nosotros",
-                "instagram_feed_title": "Últimos trabajos en Instagram",
+                "instagram_feed_title": "Historias destacadas",
                 "ver_perfil_instagram": "Ver perfil",
-                "instagram_cargando": "Cargando publicaciones de Instagram...",
+                "instagram_cargando": "Cargando Instagram...",
                 "instagram_no_disponible": "El feed de Instagram no está disponible por ahora. Puedes ver nuestras publicaciones desde el perfil.",
                 "instagram_sin_publicaciones": "No hay publicaciones recientes para mostrar.",
                 "seguir_instagram": "Seguir en Instagram",
@@ -156,9 +156,9 @@ class TranslationManager {
                 
                 // Gallery
                 "galeria_descripcion": "Discover our latest creations and stay connected with us",
-                "instagram_feed_title": "Latest work on Instagram",
+                "instagram_feed_title": "Story highlights",
                 "ver_perfil_instagram": "View profile",
-                "instagram_cargando": "Loading Instagram posts...",
+                "instagram_cargando": "Loading Instagram...",
                 "instagram_no_disponible": "The Instagram feed is not available right now. You can view our posts from the profile.",
                 "instagram_sin_publicaciones": "There are no recent posts to show.",
                 "seguir_instagram": "Follow on Instagram",

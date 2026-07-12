@@ -1,0 +1,21 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/admin",
+      "destination": "/admin.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/admin-instagram",
+      "destination": "/admin",
+      "permanent": false
+    },
+    {
+      "source": "/admin-instagram.html",
+      "destination": "/admin",
+      "permanent": false
+    }
+  ]
+}

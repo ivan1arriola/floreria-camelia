@@ -45,65 +45,55 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Función para generar imágenes dinámicamente
+    const imagenesLocales = [
+        { numero: 20, formato: 'jpg' },
+        { numero: 19, formato: 'jpg' },
+        { numero: 18, formato: 'jpg' },
+        { numero: 17, formato: 'jpg' },
+        { numero: 16, formato: 'jpeg' },
+        { numero: 15, formato: 'jpeg' },
+        { numero: 14, formato: 'jpg' },
+        { numero: 13, formato: 'jpg' },
+        { numero: 12, formato: 'jpg' },
+        { numero: 11, formato: 'jpg' },
+        { numero: 10, formato: 'jpg' },
+        { numero: 9, formato: 'jpg' }
+    ];
+
     function generarImagenes() {
-        // Array de imágenes disponibles
-        const imagenes = [
-            { numero: 20, formato: 'jpg' },
-            { numero: 19, formato: 'jpg' },
-            { numero: 18, formato: 'jpg' },
-            { numero: 17, formato: 'jpg' },
-            { numero: 16, formato: 'jpeg' },
-            { numero: 15, formato: 'jpeg' },
-            { numero: 14, formato: 'jpg' },
-            { numero: 13, formato: 'jpg' },
-            { numero: 12, formato: 'jpg' },
-            { numero: 11, formato: 'jpg' },
-            { numero: 10, formato: 'jpg' },
-            { numero: 9, formato: 'jpg' },
-            { numero: 8, formato: 'jpg' },
-            { numero: 7, formato: 'jpg' },
-            { numero: 6, formato: 'jpg' },
-            { numero: 5, formato: 'jpg' },
-            { numero: 4, formato: 'jpg' },
-            { numero: 3, formato: 'jpg' },
-            { numero: 2, formato: 'jpg' },
-            { numero: 1, formato: 'jpg' }
-        ];
+        renderGalleryImages(imagenesLocales);
+        console.log('Imágenes locales cargadas como respaldo:', imagenesLocales.length);
+    }
 
-        // Guardar lista globalmente
-        imagenesList = imagenes;
-
-        // Contenedor de galería
+    function renderGalleryImages(imagenes) {
+        const galleryImages = Array.isArray(imagenes) ? imagenes.filter(Boolean).slice(0, 12) : [];
         const galeriaGrid = document.getElementById('galeriaGrid');
 
-        // Limpiar contenedor existente
         if (galeriaGrid) galeriaGrid.innerHTML = '';
 
-        // Generar imágenes para galería (todas las imágenes)
-        imagenes.forEach((imagen, index) => {
-            const imgPath = `/img/${imagen.numero}.${imagen.formato}`;
-            
-            // Crear elemento para galería
+        imagenesList = galleryImages;
+
+        galleryImages.forEach((imagen, index) => {
+            const imgPath = getGalleryImageSrc(imagen);
+            const alt = getGalleryImageAlt(imagen, index);
             const galeriaItem = document.createElement('div');
-            galeriaItem.className = 'galeria-item';
+            galeriaItem.className = imagen.media_type === 'VIDEO' ? 'galeria-item galeria-item-video' : 'galeria-item';
             galeriaItem.setAttribute('tabindex', '0');
             galeriaItem.setAttribute('role', 'button');
-            galeriaItem.setAttribute('aria-label', `Ver imagen ${imagen.numero} en pantalla completa`);
+            galeriaItem.setAttribute('aria-label', alt);
             galeriaItem.setAttribute('data-index', index);
             galeriaItem.innerHTML = `
-                <img src="${imgPath}" 
-                     alt="Trabajo ${imagen.numero} - Florería Camelia" 
+                <img src="${escapeAttribute(imgPath)}" 
+                     alt="${escapeAttribute(alt)}" 
                      loading="lazy"
                      onerror="this.src='/img/placeholder.jpg'">
+                ${imagen.media_type === 'VIDEO' ? '<span class="galeria-media-badge"><i class="bi bi-play-fill" aria-hidden="true"></i></span>' : ''}
             `;
             
-            // Agregar evento para pantalla completa (click simple)
             galeriaItem.addEventListener('click', function() {
                 abrirImagenFullscreen(index);
             });
             
-            // Agregar evento para teclado (Enter/Space)
             galeriaItem.addEventListener('keydown', function(e) {
                 if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
@@ -118,8 +108,43 @@ document.addEventListener('DOMContentLoaded', function() {
                 galeriaGrid.appendChild(galeriaItem);
             }
         });
+    }
 
-        console.log('Imágenes generadas dinámicamente:', imagenes.length);
+    window.setGalleryImages = function(imagenes) {
+        if (!Array.isArray(imagenes) || !imagenes.length) return;
+        renderGalleryImages(imagenes);
+        fadeInOnScroll();
+    };
+
+    function getGalleryImageSrc(imagen) {
+        if (imagen.src) return imagen.src;
+        if (imagen.display_url) return imagen.display_url;
+        if (imagen.thumbnail_url) return imagen.thumbnail_url;
+        if (imagen.media_url) return imagen.media_url;
+        if (imagen.numero && imagen.formato) return `/img/${imagen.numero}.${imagen.formato}`;
+        return '/img/placeholder.jpg';
+    }
+
+    function getGalleryImageAlt(imagen, index) {
+        if (imagen.alt) return imagen.alt;
+        if (imagen.caption) return truncateText(imagen.caption, 110);
+        if (imagen.numero) return `Trabajo ${imagen.numero} - Florería Camelia`;
+        return `Trabajo ${index + 1} - Florería Camelia`;
+    }
+
+    function truncateText(text, maxLength) {
+        const value = String(text || '').trim();
+        if (value.length <= maxLength) return value;
+        return `${value.slice(0, maxLength).trim()}...`;
+    }
+
+    function escapeAttribute(value) {
+        return String(value)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
     }
 
     // Configurar doble tap para elementos de imagen
@@ -164,8 +189,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         currentImageIndex = index;
         const imagen = imagenesList[currentImageIndex];
-        const src = `/img/${imagen.numero}.${imagen.formato}`;
-        const alt = `Trabajo ${imagen.numero} - Florería Camelia`;
+        const src = getGalleryImageSrc(imagen);
+        const alt = getGalleryImageAlt(imagen, currentImageIndex);
         
         const fullscreenImage = document.getElementById('fullscreenImage');
         const modalFullscreen = new bootstrap.Modal(document.getElementById('modalFullscreen'));
@@ -251,8 +276,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         const imagen = imagenesList[currentImageIndex];
-        const src = `/img/${imagen.numero}.${imagen.formato}`;
-        const alt = `Trabajo ${imagen.numero} - Florería Camelia`;
+        const src = getGalleryImageSrc(imagen);
+        const alt = getGalleryImageAlt(imagen, currentImageIndex);
         
         const fullscreenImage = document.getElementById('fullscreenImage');
         if (fullscreenImage) {
@@ -289,9 +314,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Scroll animations
-    const fadeElements = document.querySelectorAll('.card, .section-title, .galeria-item');
-    
     const fadeInOnScroll = function() {
+        const fadeElements = document.querySelectorAll('.card, .section-title, .galeria-item');
+
         fadeElements.forEach(element => {
             const elementTop = element.getBoundingClientRect().top;
             const elementVisible = 150;
@@ -630,4 +655,3 @@ async function detectLanguageByGeoIP() {
         return detectBrowserLanguage();
     }
 }
-

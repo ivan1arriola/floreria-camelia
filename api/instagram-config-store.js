@@ -6,7 +6,9 @@ function getEnvConfig() {
         userId: process.env.INSTAGRAM_USER_ID || 'me',
         graphVersion: process.env.INSTAGRAM_GRAPH_VERSION || 'v25.0',
         graphBaseUrl: process.env.INSTAGRAM_API_BASE_URL || 'https://graph.instagram.com',
-        mediaLimit: process.env.INSTAGRAM_MEDIA_LIMIT || '6'
+        mediaLimit: process.env.INSTAGRAM_MEDIA_LIMIT || '12',
+        featuredMediaIds: process.env.INSTAGRAM_FEATURED_MEDIA_IDS || '',
+        highlightStories: parseHighlightStories(process.env.INSTAGRAM_HIGHLIGHT_STORIES || '')
     };
 }
 
@@ -33,6 +35,8 @@ async function getInstagramConfigStatus() {
         graphVersion: activeConfig.graphVersion,
         graphBaseUrl: activeConfig.graphBaseUrl,
         mediaLimit: activeConfig.mediaLimit,
+        featuredMediaIds: activeConfig.featuredMediaIds,
+        highlightStories: activeConfig.highlightStories,
         updatedAt: savedConfig.updatedAt || null
     };
 }
@@ -44,7 +48,13 @@ async function saveInstagramConfig(input) {
         throw error;
     }
 
-    const config = normalizeConfig(input);
+    const activeConfig = await getInstagramConfig();
+    const accessToken = String(input.accessToken || '').trim() || activeConfig.accessToken;
+    const config = normalizeConfig({
+        ...activeConfig,
+        ...input,
+        accessToken
+    });
 
     if (!config.accessToken) {
         const error = new Error('Instagram access token is required');
@@ -71,6 +81,8 @@ async function saveInstagramConfig(input) {
         graphVersion: savedConfig.graphVersion,
         graphBaseUrl: savedConfig.graphBaseUrl,
         mediaLimit: savedConfig.mediaLimit,
+        featuredMediaIds: savedConfig.featuredMediaIds,
+        highlightStories: savedConfig.highlightStories,
         updatedAt: savedConfig.updatedAt
     };
 }
@@ -100,13 +112,19 @@ function normalizeConfig(input) {
     const envConfig = getEnvConfig();
     const mediaLimit = clampLimit(input.mediaLimit || envConfig.mediaLimit);
     const graphBaseUrl = normalizeBaseUrl(input.graphBaseUrl || envConfig.graphBaseUrl);
+    const featuredMediaIds = normalizeFeaturedMediaIds(input.featuredMediaIds || envConfig.featuredMediaIds);
+    const highlightStories = parseHighlightStories(
+        input.highlightStories && input.highlightStories.length ? input.highlightStories : envConfig.highlightStories
+    );
 
     return {
         accessToken: String(input.accessToken || '').trim(),
         userId: String(input.userId || envConfig.userId || 'me').trim() || 'me',
         graphVersion: String(input.graphVersion || envConfig.graphVersion || 'v25.0').trim() || 'v25.0',
         graphBaseUrl,
-        mediaLimit: String(mediaLimit)
+        mediaLimit: String(mediaLimit),
+        featuredMediaIds,
+        highlightStories
     };
 }
 
@@ -123,8 +141,69 @@ function normalizeBaseUrl(value) {
 function clampLimit(value) {
     const parsedValue = Number.parseInt(value, 10);
 
-    if (Number.isNaN(parsedValue)) return 6;
+    if (Number.isNaN(parsedValue)) return 12;
     return Math.min(Math.max(parsedValue, 1), 12);
+}
+
+function normalizeFeaturedMediaIds(value) {
+    if (Array.isArray(value)) {
+        return value
+            .map((item) => String(item || '').trim())
+            .filter(Boolean)
+            .join('\n');
+    }
+
+    return String(value || '')
+        .split(/[\n,]+/)
+        .map((item) => item.trim())
+        .filter(Boolean)
+        .join('\n');
+}
+
+function parseHighlightStories(value) {
+    if (Array.isArray(value)) {
+        return value.map(normalizeHighlightStory).filter(Boolean).slice(0, 12);
+    }
+
+    const rawValue = String(value || '').trim();
+
+    if (!rawValue) return [];
+
+    if (rawValue.startsWith('[')) {
+        try {
+            const parsedValue = JSON.parse(rawValue);
+            if (Array.isArray(parsedValue)) {
+                return parsedValue.map(normalizeHighlightStory).filter(Boolean).slice(0, 12);
+            }
+        } catch (error) {
+            return [];
+        }
+    }
+
+    return rawValue
+        .split('\n')
+        .map((line) => {
+            const [title, imageUrl, permalink] = line.split('|').map((part) => String(part || '').trim());
+            return normalizeHighlightStory({ title, imageUrl, permalink });
+        })
+        .filter(Boolean)
+        .slice(0, 12);
+}
+
+function normalizeHighlightStory(story) {
+    if (!story || typeof story !== 'object') return null;
+
+    const title = String(story.title || '').trim();
+    const imageUrl = String(story.imageUrl || story.image_url || '').trim();
+    const permalink = String(story.permalink || story.url || '').trim();
+
+    if (!title || !imageUrl) return null;
+
+    return {
+        title,
+        imageUrl,
+        permalink
+    };
 }
 
 module.exports = {

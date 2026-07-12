@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
 async function initializeInstagramFeed() {
     const feedContainer = document.getElementById('instagramFeed');
     const statusElement = document.getElementById('instagramStatus');
+    const panel = feedContainer ? feedContainer.closest('.instagram-feed-panel') : null;
 
     if (!feedContainer || !statusElement) return;
 
@@ -28,15 +29,22 @@ async function initializeInstagramFeed() {
 
         const payload = await response.json();
         const posts = Array.isArray(payload.posts) ? payload.posts : [];
+        const highlights = Array.isArray(payload.highlights) ? payload.highlights : [];
 
-        if (!posts.length) {
-            showInstagramStatus(statusElement, 'instagram_sin_publicaciones', 'No hay publicaciones recientes para mostrar.', 'empty');
+        if (posts.length && typeof window.setGalleryImages === 'function') {
+            window.setGalleryImages(posts.map(createGalleryImage));
+        }
+
+        if (!highlights.length) {
+            if (panel) panel.classList.add('d-none');
             return;
         }
 
-        feedContainer.innerHTML = posts.map(createInstagramPostCard).join('');
+        if (panel) panel.classList.remove('d-none');
+        feedContainer.innerHTML = highlights.map(createHighlightCard).join('');
         statusElement.classList.add('d-none');
     } catch (error) {
+        if (panel) panel.classList.remove('d-none');
         showInstagramStatus(
             statusElement,
             'instagram_no_disponible',
@@ -46,8 +54,38 @@ async function initializeInstagramFeed() {
     }
 }
 
+function createGalleryImage(post) {
+    const caption = post.caption || 'Trabajo de Florería Camelia';
+
+    return {
+        src: post.display_url || post.thumbnail_url || post.media_url || '/img/placeholder.jpg',
+        alt: truncateText(caption, 110),
+        caption,
+        permalink: post.permalink || '',
+        media_type: post.media_type || '',
+        timestamp: post.timestamp || ''
+    };
+}
+
+function createHighlightCard(story) {
+    const imageUrl = story.imageUrl || '/img/placeholder.jpg';
+    const title = story.title || 'Historia destacada';
+    const permalink = story.permalink || 'https://www.instagram.com/floreriacameliauy/';
+
+    return `
+        <article class="instagram-highlight">
+            <a href="${escapeAttribute(permalink)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeAttribute(title)}">
+                <span class="instagram-highlight-ring">
+                    <img src="${escapeAttribute(imageUrl)}" alt="${escapeAttribute(title)}" loading="lazy">
+                </span>
+                <span>${escapeHtml(title)}</span>
+            </a>
+        </article>
+    `;
+}
+
 function createInstagramPostCard(post) {
-    const mediaUrl = post.thumbnail_url || post.media_url || '/img/placeholder.jpg';
+    const mediaUrl = post.display_url || post.thumbnail_url || post.media_url || '/img/placeholder.jpg';
     const caption = truncateText(post.caption || 'Trabajo de Florería Camelia', 120);
     const date = post.timestamp ? formatInstagramDate(post.timestamp) : '';
     const isVideo = post.media_type === 'VIDEO';

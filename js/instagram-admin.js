@@ -1,61 +1,117 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('instagramSettingsForm');
+    const loginForm = document.getElementById('adminLoginForm');
+    const settingsForm = document.getElementById('instagramSettingsForm');
     const statusButton = document.getElementById('checkInstagramSettings');
+    const logoutButton = document.getElementById('logoutAdminSession');
     const message = document.getElementById('adminMessage');
+    const sessionStatus = document.getElementById('adminSessionStatus');
 
-    if (!form || !statusButton || !message) return;
+    if (!loginForm || !settingsForm || !statusButton || !logoutButton || !message) return;
 
-    statusButton.addEventListener('click', async function() {
-        const adminPassword = form.adminPassword.value.trim();
+    initializeAdminSession(loginForm, settingsForm, message, sessionStatus);
 
-        if (!adminPassword) {
-            showAdminMessage(message, 'Ingresá la contraseña de administración para consultar el estado.', 'warning');
-            return;
-        }
-
-        await runAdminRequest(message, statusButton, async function() {
-            const status = await requestInstagramSettings('GET', adminPassword);
-            showAdminMessage(message, formatStatus(status), status.hasToken ? 'success' : 'warning');
-            fillFormFromStatus(form, status);
-        });
-    });
-
-    form.addEventListener('submit', async function(event) {
+    loginForm.addEventListener('submit', async function(event) {
         event.preventDefault();
 
-        const submitButton = form.querySelector('button[type="submit"]');
-        const adminPassword = form.adminPassword.value.trim();
-        const accessToken = form.accessToken.value.trim();
+        const submitButton = loginForm.querySelector('button[type="submit"]');
+        const password = loginForm.adminPassword.value.trim();
+        const remember = loginForm.rememberAdminSession.checked;
 
-        if (!adminPassword || !accessToken) {
-            showAdminMessage(message, 'Completá la contraseña y el access token antes de guardar.', 'warning');
+        if (!password) {
+            showAdminMessage(message, 'Ingresá la contraseña de administración.', 'warning');
             return;
         }
 
         await runAdminRequest(message, submitButton, async function() {
-            const status = await requestInstagramSettings('POST', adminPassword, {
+            const session = await requestAdminSession('POST', { password, remember });
+            loginForm.adminPassword.value = '';
+            setAuthenticatedState(loginForm, settingsForm, message, sessionStatus, session);
+            await loadInstagramStatus(message, statusButton, settingsForm);
+        });
+    });
+
+    logoutButton.addEventListener('click', async function() {
+        await runAdminRequest(message, logoutButton, async function() {
+            await requestAdminSession('DELETE');
+            setLoggedOutState(loginForm, settingsForm, message);
+            showAdminMessage(message, 'Sesión cerrada.', 'success');
+        });
+    });
+
+    statusButton.addEventListener('click', async function() {
+        await loadInstagramStatus(message, statusButton, settingsForm);
+    });
+
+    settingsForm.addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        const submitButton = settingsForm.querySelector('button[type="submit"]');
+        const accessToken = settingsForm.accessToken.value.trim();
+
+        await runAdminRequest(message, submitButton, async function() {
+            const status = await requestInstagramSettings('POST', {
                 accessToken,
-                userId: form.userId.value,
-                graphVersion: form.graphVersion.value,
-                graphBaseUrl: form.graphBaseUrl.value,
-                mediaLimit: form.mediaLimit.value
+                userId: settingsForm.userId.value,
+                graphVersion: settingsForm.graphVersion.value,
+                graphBaseUrl: settingsForm.graphBaseUrl.value,
+                mediaLimit: settingsForm.mediaLimit.value,
+                featuredMediaIds: settingsForm.featuredMediaIds.value,
+                highlightStories: settingsForm.highlightStories.value
             });
 
-            form.accessToken.value = '';
+            settingsForm.accessToken.value = '';
             showAdminMessage(message, `Configuración guardada. ${formatStatus(status)}`, 'success');
         });
     });
 });
 
-async function requestInstagramSettings(method, adminPassword, body) {
-    const response = await fetch('/api/instagram-settings', {
+async function initializeAdminSession(loginForm, settingsForm, message, sessionStatus) {
+    try {
+        const session = await requestAdminSession('GET');
+
+        if (session.authenticated) {
+            setAuthenticatedState(loginForm, settingsForm, message, sessionStatus, session);
+            return;
+        }
+
+        setLoggedOutState(loginForm, settingsForm, message);
+    } catch (error) {
+        setLoggedOutState(loginForm, settingsForm, message);
+        showAdminMessage(message, getFriendlyError(error.message), 'danger');
+    }
+}
+
+async function loadInstagramStatus(message, button, form) {
+    await runAdminRequest(message, button, async function() {
+        const status = await requestInstagramSettings('GET');
+        showAdminMessage(message, formatStatus(status), status.hasToken ? 'success' : 'warning');
+        fillFormFromStatus(form, status);
+    });
+}
+
+async function requestAdminSession(method, body) {
+    return requestJson('/api/admin-session', {
         method,
+        body: body ? JSON.stringify(body) : undefined
+    });
+}
+
+async function requestInstagramSettings(method, body) {
+    return requestJson('/api/instagram-settings', {
+        method,
+        body: body ? JSON.stringify(body) : undefined
+    });
+}
+
+async function requestJson(url, options) {
+    const response = await fetch(url, {
+        method: options.method,
+        credentials: 'same-origin',
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'X-Admin-Password': adminPassword
+            'Content-Type': 'application/json'
         },
-        body: body ? JSON.stringify(body) : undefined
+        body: options.body
     });
     const contentType = response.headers.get('content-type') || '';
 
@@ -68,7 +124,7 @@ async function requestInstagramSettings(method, adminPassword, body) {
     });
 
     if (!response.ok) {
-        throw new Error(payload.error || 'No se pudo guardar la configuración.');
+        throw new Error(payload.error || 'No se pudo completar la acción.');
     }
 
     return payload;
@@ -91,11 +147,32 @@ async function runAdminRequest(message, button, action) {
     }
 }
 
+function setAuthenticatedState(loginForm, settingsForm, message, sessionStatus, session) {
+    loginForm.classList.add('d-none');
+    settingsForm.classList.remove('d-none');
+    message.classList.add('d-none');
+
+    if (sessionStatus && session.expiresAt) {
+        const expiresAt = new Date(session.expiresAt);
+        sessionStatus.textContent = session.remember
+            ? `Sesión recordada hasta ${formatDateTime(expiresAt)}`
+            : `Sesión activa hasta ${formatDateTime(expiresAt)}`;
+    }
+}
+
+function setLoggedOutState(loginForm, settingsForm, message) {
+    settingsForm.classList.add('d-none');
+    loginForm.classList.remove('d-none');
+    message.classList.add('d-none');
+}
+
 function fillFormFromStatus(form, status) {
     if (status.userId) form.userId.value = status.userId;
     if (status.graphVersion) form.graphVersion.value = status.graphVersion;
     if (status.graphBaseUrl) form.graphBaseUrl.value = status.graphBaseUrl;
     if (status.mediaLimit) form.mediaLimit.value = status.mediaLimit;
+    form.featuredMediaIds.value = status.featuredMediaIds || '';
+    form.highlightStories.value = formatHighlightStories(status.highlightStories);
 }
 
 function formatStatus(status) {
@@ -105,7 +182,30 @@ function formatStatus(status) {
         none: 'sin configurar'
     }[status.source] || status.source;
 
-    return `Token: ${status.hasToken ? 'configurado' : 'pendiente'}. Origen: ${sourceLabel}. Publicaciones: ${status.mediaLimit || 6}.`;
+    const highlightsCount = Array.isArray(status.highlightStories) ? status.highlightStories.length : 0;
+    return `Token: ${status.hasToken ? 'configurado' : 'pendiente'}. Origen: ${sourceLabel}. Publicaciones: ${status.mediaLimit || 12}. Historias destacadas: ${highlightsCount}.`;
+}
+
+function formatHighlightStories(highlights) {
+    if (!Array.isArray(highlights)) return '';
+
+    return highlights
+        .map((story) => {
+            return [
+                story.title || '',
+                story.imageUrl || '',
+                story.permalink || ''
+            ].join(' | ').trim();
+        })
+        .filter(Boolean)
+        .join('\n');
+}
+
+function formatDateTime(date) {
+    return new Intl.DateTimeFormat('es-UY', {
+        dateStyle: 'short',
+        timeStyle: 'short'
+    }).format(date);
 }
 
 function getFriendlyError(message) {
@@ -122,7 +222,7 @@ function getFriendlyError(message) {
     }
 
     if (message === 'Unauthorized') {
-        return 'La contraseña de administración no es correcta.';
+        return 'La sesión no está activa o la contraseña no es correcta.';
     }
 
     return message;

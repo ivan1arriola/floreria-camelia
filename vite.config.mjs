@@ -7,7 +7,7 @@ export default defineConfig({
         rollupOptions: {
             input: {
                 main: resolve(__dirname, 'index.html'),
-                adminInstagram: resolve(__dirname, 'admin-instagram.html')
+                admin: resolve(__dirname, 'admin.html')
             }
         }
     },

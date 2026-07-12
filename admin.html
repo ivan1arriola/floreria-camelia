@@ -22,15 +22,36 @@
                 </div>
             </div>
 
-            <form id="instagramSettingsForm" class="admin-form">
+            <form id="adminLoginForm" class="admin-form">
                 <div class="mb-3">
                     <label for="adminPassword" class="form-label">Contraseña de administración</label>
                     <input type="password" class="form-control" id="adminPassword" name="adminPassword" autocomplete="current-password" required>
                 </div>
 
+                <label class="admin-remember">
+                    <input type="checkbox" id="rememberAdminSession" name="rememberAdminSession">
+                    <span>Recordarme en este dispositivo</span>
+                </label>
+
+                <div class="admin-actions">
+                    <button type="submit" class="btn btn-primary">
+                        <span class="spinner-border spinner-border-sm d-none me-2" role="status" aria-hidden="true"></span>
+                        <i class="bi bi-unlock me-2" aria-hidden="true"></i>Ingresar
+                    </button>
+                </div>
+            </form>
+
+            <form id="instagramSettingsForm" class="admin-form d-none">
+                <div class="admin-session-bar">
+                    <span id="adminSessionStatus">Sesión iniciada</span>
+                    <button type="button" id="logoutAdminSession" class="btn btn-outline-primary">
+                        <i class="bi bi-box-arrow-right me-2" aria-hidden="true"></i>Salir
+                    </button>
+                </div>
+
                 <div class="mb-3">
                     <label for="accessToken" class="form-label">Access token de Instagram</label>
-                    <textarea class="form-control" id="accessToken" name="accessToken" rows="4" autocomplete="off" required placeholder="Pegá acá el access token"></textarea>
+                    <textarea class="form-control" id="accessToken" name="accessToken" rows="4" autocomplete="off" placeholder="Pegá acá el access token"></textarea>
                 </div>
 
                 <div class="row">
@@ -40,8 +61,18 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="mediaLimit" class="form-label">Cantidad de publicaciones</label>
-                        <input type="number" class="form-control" id="mediaLimit" name="mediaLimit" min="1" max="12" value="6">
+                        <input type="number" class="form-control" id="mediaLimit" name="mediaLimit" min="1" max="12" value="12">
                     </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="featuredMediaIds" class="form-label">Publicaciones destacadas primero</label>
+                    <textarea class="form-control" id="featuredMediaIds" name="featuredMediaIds" rows="3" autocomplete="off" placeholder="Pegá IDs o enlaces de Instagram, uno por línea"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="highlightStories" class="form-label">Historias destacadas</label>
+                    <textarea class="form-control" id="highlightStories" name="highlightStories" rows="5" autocomplete="off" placeholder="Nombre | URL de imagen | enlace de Instagram"></textarea>
                 </div>
 
                 <div class="row">

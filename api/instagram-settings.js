@@ -2,6 +2,7 @@ const {
     getInstagramConfigStatus,
     saveInstagramConfig
 } = require('./instagram-config-store');
+const { requireAdminSession } = require('./admin-auth');
 
 module.exports = async function handler(req, res) {
     if (req.method !== 'GET' && req.method !== 'POST') {
@@ -9,11 +10,7 @@ module.exports = async function handler(req, res) {
         return res.status(405).json({ error: 'Method not allowed' });
     }
 
-    if (!isAuthorized(req)) {
-        return res.status(process.env.ADMIN_PASSWORD ? 401 : 503).json({
-            error: process.env.ADMIN_PASSWORD ? 'Unauthorized' : 'Admin password is not configured'
-        });
-    }
+    if (!requireAdminSession(req, res)) return;
 
     try {
         if (req.method === 'GET') {
@@ -46,11 +43,4 @@ async function getBody(req) {
 
     const rawBody = Buffer.concat(chunks).toString('utf8');
     return rawBody ? JSON.parse(rawBody) : {};
-}
-
-function isAuthorized(req) {
-    const adminPassword = process.env.ADMIN_PASSWORD;
-    const providedPassword = req.headers['x-admin-password'];
-
-    return Boolean(adminPassword && providedPassword && providedPassword === adminPassword);
 }

@@ -261,10 +261,18 @@ h5,
 }
 
 [data-theme="dark"] .card,
-[data-theme="dark"] .instagram-feed-panel,
 [data-theme="dark"] .admin-panel {
     background: #171717;
     border-color: rgba(255, 255, 255, 0.18);
+}
+
+[data-theme="dark"] .instagram-feed-panel {
+    background: transparent;
+    border-color: transparent;
+}
+
+[data-theme="dark"] .instagram-highlight a {
+    color: rgba(255, 255, 255, 0.9);
 }
 
 [data-theme="dark"] .card-title,
