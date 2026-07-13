@@ -21,14 +21,10 @@ class DarkModeManager {
     }
 
     setupEventListeners() {
-        // Toggle del switch
+        // Toggle del botón
         if (this.themeToggle) {
-            this.themeToggle.addEventListener('change', () => {
-                if (this.themeToggle.checked) {
-                    this.enableDarkMode();
-                } else {
-                    this.disableDarkMode();
-                }
+            this.themeToggle.addEventListener('click', () => {
+                this.toggleTheme();
             });
         }
 
@@ -46,16 +42,31 @@ class DarkModeManager {
 
     enableDarkMode() {
         this.htmlElement.setAttribute('data-theme', 'dark');
-        if (this.themeToggle) this.themeToggle.checked = true;
+        this.updateToggleButton('dark');
         localStorage.setItem('theme', 'dark');
         this.dispatchThemeChangeEvent('dark');
     }
 
     disableDarkMode() {
         this.htmlElement.removeAttribute('data-theme');
-        if (this.themeToggle) this.themeToggle.checked = false;
+        this.updateToggleButton('light');
         localStorage.setItem('theme', 'light');
         this.dispatchThemeChangeEvent('light');
+    }
+
+    updateToggleButton(theme) {
+        if (!this.themeToggle) return;
+
+        const isDark = theme === 'dark';
+        const icon = this.themeToggle.querySelector('i');
+
+        this.themeToggle.setAttribute('aria-pressed', String(isDark));
+        this.themeToggle.setAttribute('aria-label', isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro');
+        this.themeToggle.title = isDark ? 'Modo claro' : 'Modo oscuro';
+
+        if (icon) {
+            icon.className = isDark ? 'bi bi-sun-fill' : 'bi bi-moon-stars';
+        }
     }
 
     dispatchThemeChangeEvent(theme) {

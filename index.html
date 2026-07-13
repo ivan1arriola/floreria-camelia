@@ -21,64 +21,6 @@
     <link rel="stylesheet" href="/styles/styles.css">
     <link rel="stylesheet" href="/styles/home-refresh.css">
     <style>
-        /* Estilos para la navbar corregida */
-        .navbar-controls {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .theme-toggle-container {
-            display: flex;
-            align-items: center;
-        }
-        
-        /* Toggle de modo oscuro mejorado */
-        .theme-toggle {
-            position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 24px;
-        }
-        
-        .theme-toggle input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        
-        .theme-slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            transition: .4s;
-            border-radius: 24px;
-        }
-        
-        .theme-slider:before {
-            position: absolute;
-            content: "";
-            height: 16px;
-            width: 16px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
-        }
-        
-        input:checked + .theme-slider {
-            background-color: #2196F3;
-        }
-        
-        input:checked + .theme-slider:before {
-            transform: translateX(26px);
-        }
-        
         /* Botones de navegación en el modal */
         .btn-nav {
             position: absolute;
@@ -128,9 +70,6 @@
                 right: 10px;
             }
             
-            .navbar-controls {
-                gap: 8px;
-            }
         }
         
         /* Transición suave para cambio de imágenes */
@@ -151,18 +90,6 @@
                     <img src="/floreriacamelia.png" alt="Florería Camelia" class="navbar-logo">
                     <span class="text-floreria">Florería</span> <span class="text-camelia">Camelia</span>
                 </a>
-                
-                <!-- Controles de la navbar -->
-                <div class="navbar-controls">
-                    <!-- Toggle de Modo Oscuro -->
-                    <div class="theme-toggle-container">
-                        <label class="theme-toggle" for="themeToggle" aria-label="Cambiar modo oscuro/claro">
-                            <input type="checkbox" id="themeToggle" aria-checked="false">
-                            <span class="theme-slider"></span>
-                        </label>
-                    </div>
-                </div>
-
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegación">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -187,6 +114,9 @@
                             <a class="nav-link" href="#contacto">Contacto</a>
                         </li>
                     </ul>
+                    <button type="button" id="themeToggle" class="theme-toggle-button" aria-label="Cambiar a modo oscuro" aria-pressed="false" title="Cambiar modo">
+                        <i class="bi bi-moon-stars" aria-hidden="true"></i>
+                    </button>
                 </div>
             </div>
         </nav>
