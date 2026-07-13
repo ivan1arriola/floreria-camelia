@@ -125,15 +125,6 @@ h1, h2, h3, h4, h5 {
     transform: translateY(0);
 }
 
-/* Animación suave para cambios de idioma */
-[data-i18n] {
-    transition: opacity 0.3s ease;
-}
-
-.language-changing [data-i18n] {
-    opacity: 0.7;
-}
-
 /* Secciones con animaciones */
 .section-title {
     position: relative;

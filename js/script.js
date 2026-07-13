@@ -1,6 +1,37 @@
 // JavaScript para Florería Camelia
 document.addEventListener('DOMContentLoaded', function() {
     // Variables globales para gestión de imágenes
+    const sitePhotoFiles = [
+        'camelia-01.jpg',
+        'camelia-02.jpg',
+        'camelia-03.jpg',
+        'camelia-04.jpg',
+        'camelia-05.jpg',
+        'camelia-06.jpg',
+        'camelia-07.jpg',
+        'camelia-08.jpg',
+        'camelia-09.jpg',
+        'camelia-10.jpg',
+        'camelia-11.jpg',
+        'camelia-12.jpg',
+        'camelia-13.jpg',
+        'camelia-14.jpg',
+        'camelia-15.jpg',
+        'camelia-16.jpg',
+        'camelia-17.jpg',
+        'camelia-18.jpg',
+        'camelia-19.jpg',
+        'camelia-20.jpg',
+        'camelia-21.jpg',
+        'camelia-22.jpg',
+        'camelia-23.jpg',
+        'camelia-24.jpg',
+        'camelia-25.jpg'
+    ];
+    const heroPhotoFiles = [
+        'camelia-06.jpg',
+        ...sitePhotoFiles.filter((file) => file !== 'camelia-06.jpg')
+    ];
     let imagenesList = [];
     let currentImageIndex = 0;
     let touchStartX = 0;
@@ -45,28 +76,88 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    const imagenesLocales = [
-        { numero: 20, formato: 'jpg' },
-        { numero: 19, formato: 'jpg' },
-        { numero: 18, formato: 'jpg' },
-        { numero: 17, formato: 'jpg' },
-        { numero: 16, formato: 'jpeg' },
-        { numero: 15, formato: 'jpeg' },
-        { numero: 14, formato: 'jpg' },
-        { numero: 13, formato: 'jpg' },
-        { numero: 12, formato: 'jpg' },
-        { numero: 11, formato: 'jpg' },
-        { numero: 10, formato: 'jpg' },
-        { numero: 9, formato: 'jpg' }
-    ];
+    const imagenesLocales = sitePhotoFiles.slice(0, 12).map((file, index) => ({
+        src: `/img/${file}`,
+        alt: `Trabajo ${index + 1} - Florería Camelia`
+    }));
+
+    initializeHeroBackgrounds();
+    initializeHeroAudio();
 
     function generarImagenes() {
         renderGalleryImages(imagenesLocales);
         console.log('Imágenes locales cargadas como respaldo:', imagenesLocales.length);
     }
 
+    function initializeHeroBackgrounds() {
+        const hero = document.querySelector('.hero-section');
+
+        if (!hero || !heroPhotoFiles.length) return;
+
+        const imageUrls = heroPhotoFiles.map((file) => `/img/${file}`);
+        const layers = [document.createElement('div'), document.createElement('div')];
+        let activeLayerIndex = 0;
+        let imageIndex = 0;
+
+        layers.forEach((layer) => {
+            layer.className = 'hero-bg-slide';
+            layer.setAttribute('aria-hidden', 'true');
+            hero.prepend(layer);
+        });
+
+        layers[0].style.backgroundImage = `url('${imageUrls[0]}')`;
+        layers[0].classList.add('is-active');
+
+        imageUrls.slice(1, 5).forEach((url) => {
+            const image = new Image();
+            image.src = url;
+        });
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        window.setInterval(function() {
+            imageIndex = (imageIndex + 1) % imageUrls.length;
+
+            const nextLayerIndex = activeLayerIndex === 0 ? 1 : 0;
+            layers[nextLayerIndex].style.backgroundImage = `url('${imageUrls[imageIndex]}')`;
+            layers[nextLayerIndex].classList.add('is-active');
+            layers[activeLayerIndex].classList.remove('is-active');
+            activeLayerIndex = nextLayerIndex;
+        }, 6500);
+    }
+
+    function initializeHeroAudio() {
+        const audio = document.getElementById('heroAudio');
+        const toggle = document.getElementById('heroMusicToggle');
+
+        if (!audio || !toggle) return;
+
+        toggle.addEventListener('click', async function() {
+            if (audio.paused) {
+                try {
+                    await audio.play();
+                    toggle.classList.add('is-playing');
+                    toggle.setAttribute('aria-label', 'Pausar música ambiental');
+                    toggle.title = 'Pausar música';
+                } catch (error) {
+                    toggle.classList.remove('is-playing');
+                }
+                return;
+            }
+
+            audio.pause();
+            toggle.classList.remove('is-playing');
+            toggle.setAttribute('aria-label', 'Reproducir música ambiental');
+            toggle.title = 'Música ambiental';
+        });
+
+        audio.addEventListener('pause', function() {
+            toggle.classList.remove('is-playing');
+        });
+    }
+
     function renderGalleryImages(imagenes) {
-        const galleryImages = Array.isArray(imagenes) ? imagenes.filter(Boolean).slice(0, 12) : [];
+        const galleryImages = Array.isArray(imagenes) ? imagenes.filter(Boolean).slice(0, 24) : [];
         const galeriaGrid = document.getElementById('galeriaGrid');
 
         if (galeriaGrid) galeriaGrid.innerHTML = '';
@@ -121,14 +212,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if (imagen.display_url) return imagen.display_url;
         if (imagen.thumbnail_url) return imagen.thumbnail_url;
         if (imagen.media_url) return imagen.media_url;
-        if (imagen.numero && imagen.formato) return `/img/${imagen.numero}.${imagen.formato}`;
         return '/img/placeholder.jpg';
     }
 
     function getGalleryImageAlt(imagen, index) {
         if (imagen.alt) return imagen.alt;
         if (imagen.caption) return truncateText(imagen.caption, 110);
-        if (imagen.numero) return `Trabajo ${imagen.numero} - Florería Camelia`;
         return `Trabajo ${index + 1} - Florería Camelia`;
     }
 
@@ -494,8 +583,7 @@ function initializeForm() {
             servicio: formData.get('servicio'),
             mensaje: formData.get('mensaje'),
             source: 'Florería Camelia Website',
-            // Agregar información del idioma actual
-            idioma: window.translationManager ? window.translationManager.currentLang : 'es'
+            idioma: 'es-UY'
         };
 
         // Enviar datos al webhook de Google
@@ -555,7 +643,7 @@ function initializeForm() {
             // Validar formato básico de teléfono
             const telefonoRegex = /^[\d\s+\-()]{8,20}$/;
             if (this.value && !telefonoRegex.test(this.value)) {
-                this.setCustomValidity(getTranslatedMessage('telefono_invalido'));
+                this.setCustomValidity(getValidationMessage('telefono_invalido'));
             } else {
                 this.setCustomValidity('');
             }
@@ -569,7 +657,7 @@ function initializeForm() {
             if (this.value) {
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailRegex.test(this.value)) {
-                    this.setCustomValidity(getTranslatedMessage('email_invalido'));
+                    this.setCustomValidity(getValidationMessage('email_invalido'));
                 } else {
                     this.setCustomValidity('');
                 }
@@ -579,8 +667,6 @@ function initializeForm() {
         });
     }
 
-    // Configurar observador para cambios de idioma
-    setupLanguageObserver();
 }
 
 // Función para enviar consulta al webhook
@@ -601,57 +687,12 @@ async function enviarConsulta(data) {
     }
 }
 
-// Función para obtener mensajes traducidos
-function getTranslatedMessage(key) {
-    if (window.translationManager && window.translationManager.translations) {
-        const currentLang = window.translationManager.currentLang || 'es';
-        return window.translationManager.translations[currentLang][key] || key;
-    }
-    
-    // Mensajes por defecto en español
+// Función para obtener mensajes de validación
+function getValidationMessage(key) {
     const defaultMessages = {
         'telefono_invalido': 'Por favor ingresa un número de teléfono válido',
         'email_invalido': 'Por favor ingresa un email válido'
     };
     
     return defaultMessages[key] || key;
-}
-
-// Observador para cambios de idioma
-function setupLanguageObserver() {
-    if (!window.translationManager) return;
-
-    // Observar cambios en el body para detectar cambios de idioma
-    const observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-                if (mutation.target.classList.contains('language-changing')) {
-                    // El idioma está cambiando, podemos hacer algo si es necesario
-                }
-            }
-        });
-    });
-
-    observer.observe(document.body, {
-        attributes: true,
-        attributeFilter: ['class']
-    });
-}
-
-// Detección automática de idioma del navegador
-function detectBrowserLanguage() {
-    const browserLang = navigator.language || navigator.userLanguage;
-    return browserLang.startsWith('en') ? 'en' : 'es';
-}
-
-// Detección por geolocalización (opcional)
-async function detectLanguageByGeoIP() {
-    try {
-        const response = await fetch('https://ipapi.co/json/');
-        const data = await response.json();
-        return data.country_code === 'US' ? 'en' : 'es';
-    } catch (error) {
-        console.log('No se pudo detectar idioma por geolocalización, usando idioma del navegador');
-        return detectBrowserLanguage();
-    }
 }

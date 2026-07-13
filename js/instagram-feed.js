@@ -47,7 +47,6 @@ async function initializeInstagramFeed() {
         if (panel) panel.classList.remove('d-none');
         showInstagramStatus(
             statusElement,
-            'instagram_no_disponible',
             'El feed de Instagram no está disponible por ahora. Puedes ver nuestras publicaciones desde el perfil.',
             'warning'
         );
@@ -107,29 +106,19 @@ function createInstagramPostCard(post) {
     `;
 }
 
-function showInstagramStatus(element, translationKey, fallbackText, type) {
-    const translatedText = getInstagramTranslation(translationKey, fallbackText);
+function showInstagramStatus(element, fallbackText, type) {
     element.className = `instagram-status instagram-status-${type}`;
-    element.innerHTML = `<i class="bi bi-info-circle me-2" aria-hidden="true"></i><span>${escapeHtml(translatedText)}</span>`;
-}
-
-function getInstagramTranslation(key, fallbackText) {
-    if (window.translationManager && typeof window.translationManager.translate === 'function') {
-        return window.translationManager.translate(key);
-    }
-
-    return fallbackText;
+    element.innerHTML = `<i class="bi bi-info-circle me-2" aria-hidden="true"></i><span>${escapeHtml(fallbackText)}</span>`;
 }
 
 function formatInstagramDate(timestamp) {
     const date = new Date(timestamp);
-    const lang = document.documentElement.lang || 'es';
 
     if (Number.isNaN(date.getTime())) {
         return '';
     }
 
-    return new Intl.DateTimeFormat(lang, {
+    return new Intl.DateTimeFormat('es-UY', {
         day: 'numeric',
         month: 'short',
         year: 'numeric'

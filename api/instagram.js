@@ -32,7 +32,7 @@ module.exports = async function handler(req, res) {
     const graphVersion = config.graphVersion || DEFAULT_GRAPH_VERSION;
     const graphBaseUrl = config.graphBaseUrl || DEFAULT_GRAPH_BASE_URL;
     const limit = clampLimit(config.mediaLimit || '12');
-    const fetchLimit = Math.min(Math.max(limit * 3, limit), 50);
+    const fetchLimit = Math.min(Math.max(limit * 3, limit), 75);
 
     const endpoint = new URL(`${graphBaseUrl.replace(/\/$/, '')}/${graphVersion}/${userId}/media`);
     endpoint.searchParams.set('fields', DEFAULT_FIELDS);
@@ -104,7 +104,7 @@ function clampLimit(value) {
     const parsedValue = Number.parseInt(value, 10);
 
     if (Number.isNaN(parsedValue)) return 12;
-    return Math.min(Math.max(parsedValue, 1), 12);
+    return Math.min(Math.max(parsedValue, 12), 24);
 }
 
 function hasDisplayableMedia(post) {

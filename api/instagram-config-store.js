@@ -142,7 +142,7 @@ function clampLimit(value) {
     const parsedValue = Number.parseInt(value, 10);
 
     if (Number.isNaN(parsedValue)) return 12;
-    return Math.min(Math.max(parsedValue, 1), 12);
+    return Math.min(Math.max(parsedValue, 12), 24);
 }
 
 function normalizeFeaturedMediaIds(value) {

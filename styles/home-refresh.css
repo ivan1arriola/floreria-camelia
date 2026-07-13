@@ -27,8 +27,7 @@ h5,
 
 .navbar-nav .nav-link,
 .btn,
-.form-label,
-.language-selector .btn {
+.form-label {
     font-family: var(--font-ui);
     font-weight: 800;
 }
@@ -44,10 +43,34 @@ h5,
     display: flex;
     align-items: center;
     padding: clamp(48px, 6vw, 78px) 0 clamp(44px, 6vw, 72px);
-    background:
-        linear-gradient(90deg, rgba(18, 18, 18, 0.86) 0%, rgba(18, 18, 18, 0.72) 50%, rgba(18, 18, 18, 0.55) 100%),
-        url('/img/16.jpeg') center/cover no-repeat;
+    background: #121212;
     overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(90deg, rgba(18, 18, 18, 0.92) 0%, rgba(18, 18, 18, 0.8) 52%, rgba(18, 18, 18, 0.62) 100%);
+    pointer-events: none;
+}
+
+.hero-bg-slide {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-position: center;
+    background-size: cover;
+    opacity: 0;
+    transform: scale(1.04);
+    transition: opacity 1200ms ease, transform 6500ms ease;
+    filter: saturate(0.98) contrast(1.02);
+}
+
+.hero-bg-slide.is-active {
+    opacity: 1;
+    transform: scale(1);
 }
 
 .hero-section .flores-background,
@@ -107,6 +130,26 @@ h5,
 .hero-section .btn-outline-primary:hover,
 .hero-section .btn-outline-primary:focus {
     color: #151515;
+}
+
+.btn-audio-toggle {
+    width: 56px;
+    min-width: 56px;
+    height: 56px;
+    border: 1px solid rgba(255, 255, 255, 0.42);
+    border-radius: 50%;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+}
+
+.btn-audio-toggle:hover,
+.btn-audio-toggle:focus,
+.btn-audio-toggle.is-playing {
+    color: #ffffff;
+    background: rgba(211, 47, 47, 0.82);
+    border-color: rgba(255, 255, 255, 0.58);
 }
 
 .hero-info-list {
@@ -599,8 +642,12 @@ h5,
         font-size: clamp(2.55rem, 12vw, 3.25rem);
     }
 
-    .hero-actions .btn {
+    .hero-actions .btn:not(.btn-audio-toggle) {
         width: 100%;
+    }
+
+    .hero-actions .btn-audio-toggle {
+        flex: 0 0 56px;
     }
 
     .hero-brand-card {
