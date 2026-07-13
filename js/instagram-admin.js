@@ -233,7 +233,7 @@ function getFriendlyError(message) {
     }
 
     if (message === 'Email service is not configured') {
-        return 'Falta configurar RESEND_API_KEY en las variables de entorno de Vercel.';
+        return 'Falta configurar RESEND_API_KEY o EMAIL_DUO_DEVS_RESEND_API_KEY en las variables de entorno de Vercel.';
     }
 
     if (message === 'Unauthorized') {

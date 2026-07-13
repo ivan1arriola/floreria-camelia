@@ -22,7 +22,7 @@ module.exports = async function handler(req, res) {
             });
         }
 
-        if (!process.env.RESEND_API_KEY) {
+        if (!getResendApiKey()) {
             return res.status(503).json({
                 error: 'Email service is not configured'
             });
@@ -40,7 +40,7 @@ module.exports = async function handler(req, res) {
 
 async function sendContactEmail(data, recipients) {
     const payload = {
-        from: process.env.CONTACT_EMAIL_FROM || 'Florería Camelia <onboarding@resend.dev>',
+        from: getContactEmailFrom(),
         to: recipients,
         subject: `Nueva consulta web: ${formatServiceLabel(data.servicio)}`,
         html: buildEmailHtml(data),
@@ -54,7 +54,7 @@ async function sendContactEmail(data, recipients) {
     const response = await fetch(RESEND_API_URL, {
         method: 'POST',
         headers: {
-            'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+            'Authorization': `Bearer ${getResendApiKey()}`,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(payload)
@@ -66,6 +66,22 @@ async function sendContactEmail(data, recipients) {
         error.statusCode = 502;
         throw error;
     }
+}
+
+function getResendApiKey() {
+    return process.env.RESEND_API_KEY || process.env.EMAIL_DUO_DEVS_RESEND_API_KEY || '';
+}
+
+function getContactEmailFrom() {
+    if (process.env.CONTACT_EMAIL_FROM) return process.env.CONTACT_EMAIL_FROM;
+
+    const emailDomain = String(process.env.EMAIL_DUO_DEVS_RESEND_EMAIL_DOMAIN || '').trim();
+
+    if (emailDomain) {
+        return `Florería Camelia <floreriacamelia_consulta@${emailDomain}>`;
+    }
+
+    return 'Florería Camelia <onboarding@resend.dev>';
 }
 
 function normalizeContactRequest(input) {
