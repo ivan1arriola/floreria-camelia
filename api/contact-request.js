@@ -28,7 +28,7 @@ module.exports = async function handler(req, res) {
             });
         }
 
-        await sendContactEmail(data, recipients);
+        await sendContactEmails(data, recipients);
 
         return res.status(200).json({ ok: true });
     } catch (error) {
@@ -38,19 +38,36 @@ module.exports = async function handler(req, res) {
     }
 };
 
-async function sendContactEmail(data, recipients) {
-    const payload = {
+async function sendContactEmails(data, recipients) {
+    await Promise.all([
+        sendEmail(buildInternalEmail(data, recipients)),
+        sendEmail(buildConsultantCopyEmail(data, recipients))
+    ]);
+}
+
+function buildInternalEmail(data, recipients) {
+    return {
         from: getContactEmailFrom(),
         to: recipients,
         subject: `Nueva consulta web: ${formatServiceLabel(data.servicio)}`,
-        html: buildEmailHtml(data),
-        text: buildEmailText(data)
+        html: buildInternalEmailHtml(data),
+        text: buildInternalEmailText(data),
+        reply_to: data.email
     };
+}
 
-    if (data.email) {
-        payload.reply_to = data.email;
-    }
+function buildConsultantCopyEmail(data, recipients) {
+    return {
+        from: getContactEmailFrom(),
+        to: [data.email],
+        subject: 'Recibimos tu consulta en Florería Camelia',
+        html: buildConsultantCopyHtml(data),
+        text: buildConsultantCopyText(data),
+        reply_to: recipients[0]
+    };
+}
 
+async function sendEmail(payload) {
     const response = await fetch(RESEND_API_URL, {
         method: 'POST',
         headers: {
@@ -87,19 +104,20 @@ function getContactEmailFrom() {
 function normalizeContactRequest(input) {
     const data = {
         nombre: String(input.nombre || '').trim(),
-        telefono: String(input.telefono || '').trim(),
+        apellido: String(input.apellido || '').trim(),
         email: normalizeEmailList(input.email || ''),
+        pais: String(input.pais || '').trim(),
         servicio: String(input.servicio || '').trim(),
         mensaje: String(input.mensaje || '').trim()
     };
 
-    if (!data.nombre || !data.telefono || !data.servicio || !data.mensaje) {
+    if (!data.nombre || !data.apellido || !data.email || !data.pais || !data.servicio || !data.mensaje) {
         const error = new Error('Faltan datos obligatorios del formulario');
         error.statusCode = 400;
         throw error;
     }
 
-    if (data.nombre.length > 120 || data.telefono.length > 40 || data.servicio.length > 120 || data.mensaje.length > 2000) {
+    if (data.nombre.length > 80 || data.apellido.length > 80 || data.email.length > 160 || data.pais.length > 80 || data.servicio.length > 120 || data.mensaje.length > 2000) {
         const error = new Error('El formulario contiene campos demasiado largos');
         error.statusCode = 400;
         throw error;
@@ -134,11 +152,12 @@ async function getBody(req) {
     return rawBody ? JSON.parse(rawBody) : {};
 }
 
-function buildEmailHtml(data) {
+function buildInternalEmailHtml(data) {
     const rows = [
         ['Nombre', data.nombre],
-        ['Telefono', data.telefono],
-        ['Email', data.email || 'No indicado'],
+        ['Apellido', data.apellido],
+        ['Email', data.email],
+        ['Pais', data.pais],
         ['Servicio', formatServiceLabel(data.servicio)],
         ['Mensaje', data.mensaje]
     ];
@@ -159,14 +178,57 @@ function buildEmailHtml(data) {
     `;
 }
 
-function buildEmailText(data) {
+function buildInternalEmailText(data) {
     return [
         'Nueva consulta desde la web de Florería Camelia',
         '',
         `Nombre: ${data.nombre}`,
-        `Telefono: ${data.telefono}`,
-        `Email: ${data.email || 'No indicado'}`,
+        `Apellido: ${data.apellido}`,
+        `Email: ${data.email}`,
+        `Pais: ${data.pais}`,
         `Servicio: ${formatServiceLabel(data.servicio)}`,
+        '',
+        'Mensaje:',
+        data.mensaje
+    ].join('\n');
+}
+
+function buildConsultantCopyHtml(data) {
+    const fullName = `${data.nombre} ${data.apellido}`.trim();
+
+    return `
+        <div style="font-family:Arial,sans-serif;line-height:1.5;color:#1f1f1f;max-width:640px">
+            <h1 style="font-size:24px;color:#961432;margin:0 0 16px">Recibimos tu consulta</h1>
+            <p style="margin:0 0 14px">Hola ${escapeHtml(fullName)}, gracias por escribirnos.</p>
+            <p style="margin:0 0 20px">Te responderemos a la brevedad. Esta es una copia de la consulta enviada a Florería Camelia:</p>
+            <table style="border-collapse:collapse;width:100%">
+                <tr>
+                    <th style="border-top:1px solid #e5e5e5;padding:12px;text-align:left;vertical-align:top;width:140px">Servicio</th>
+                    <td style="border-top:1px solid #e5e5e5;padding:12px">${escapeHtml(formatServiceLabel(data.servicio))}</td>
+                </tr>
+                <tr>
+                    <th style="border-top:1px solid #e5e5e5;padding:12px;text-align:left;vertical-align:top;width:140px">Pais</th>
+                    <td style="border-top:1px solid #e5e5e5;padding:12px">${escapeHtml(data.pais)}</td>
+                </tr>
+                <tr>
+                    <th style="border-top:1px solid #e5e5e5;padding:12px;text-align:left;vertical-align:top;width:140px">Mensaje</th>
+                    <td style="border-top:1px solid #e5e5e5;padding:12px;white-space:pre-wrap">${escapeHtml(data.mensaje)}</td>
+                </tr>
+            </table>
+        </div>
+    `;
+}
+
+function buildConsultantCopyText(data) {
+    const fullName = `${data.nombre} ${data.apellido}`.trim();
+
+    return [
+        `Hola ${fullName}, gracias por escribirnos.`,
+        '',
+        'Te responderemos a la brevedad. Esta es una copia de la consulta enviada a Florería Camelia:',
+        '',
+        `Servicio: ${formatServiceLabel(data.servicio)}`,
+        `Pais: ${data.pais}`,
         '',
         'Mensaje:',
         data.mensaje
@@ -184,6 +246,7 @@ function escapeHtml(value) {
 
 function formatServiceLabel(value) {
     const labels = {
+        'consulta': 'Consulta solamente',
         'arreglos-florales': 'Arreglos Florales',
         'obras-funerarias': 'Obras Funerarias',
         'grabados-laser': 'Grabados Laser',

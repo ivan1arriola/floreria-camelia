@@ -606,8 +606,9 @@ function initializeForm() {
         const data = {
             timestamp: new Date().toISOString(),
             nombre: formData.get('nombre'),
-            telefono: formData.get('telefono'),
+            apellido: formData.get('apellido'),
             email: formData.get('email'),
+            pais: formData.get('pais'),
             servicio: formData.get('servicio'),
             mensaje: formData.get('mensaje'),
             source: 'Florería Camelia Website',
@@ -629,8 +630,9 @@ function initializeForm() {
                 formConsulta.reset();
                 formConsulta.classList.remove('was-validated');
                 trackMetaPixelEvent('Lead', {
-                    content_name: 'Consulta web',
-                    content_category: 'Formulario'
+                    content_name: 'Formulario de consulta',
+                    content_category: getServiceLabel(data.servicio),
+                    country: data.pais || 'Uruguay'
                 });
             })
             .catch(error => {
@@ -669,23 +671,6 @@ function initializeForm() {
         });
     });
 
-    // Validación personalizada para teléfono
-    const telefonoInput = document.getElementById('telefono');
-    if (telefonoInput) {
-        telefonoInput.addEventListener('input', function(e) {
-            // Permitir solo números, espacios, +, - y ()
-            this.value = this.value.replace(/[^\d\s+\-()]/g, '');
-            
-            // Validar formato básico de teléfono
-            const telefonoRegex = /^[\d\s+\-()]{8,20}$/;
-            if (this.value && !telefonoRegex.test(this.value)) {
-                this.setCustomValidity(getValidationMessage('telefono_invalido'));
-            } else {
-                this.setCustomValidity('');
-            }
-        });
-    }
-
     // Validación para email
     const emailInput = document.getElementById('email');
     if (emailInput) {
@@ -698,7 +683,7 @@ function initializeForm() {
                     this.setCustomValidity('');
                 }
             } else {
-                this.setCustomValidity('');
+                this.setCustomValidity(getValidationMessage('email_invalido'));
             }
         });
     }
@@ -734,11 +719,22 @@ async function enviarConsulta(data) {
 // Función para obtener mensajes de validación
 function getValidationMessage(key) {
     const defaultMessages = {
-        'telefono_invalido': 'Por favor ingresa un número de teléfono válido',
-        'email_invalido': 'Por favor ingresa un email válido'
+        'email_invalido': 'Por favor ingresá un email válido'
     };
     
     return defaultMessages[key] || key;
+}
+
+function getServiceLabel(value) {
+    const labels = {
+        'consulta': 'Consulta solamente',
+        'arreglos-florales': 'Arreglos Florales',
+        'obras-funerarias': 'Obras Funerarias',
+        'grabados-laser': 'Grabados Laser',
+        'otros': 'Otros'
+    };
+
+    return labels[value] || 'Consulta';
 }
 
 function getContactErrorMessage(message) {

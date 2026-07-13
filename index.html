@@ -328,42 +328,63 @@
                                 <form id="formConsulta" class="needs-validation" novalidate>
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
-                                            <label for="nombre" class="form-label">Nombre completo *</label>
-                                            <input type="text" class="form-control" id="nombre" name="nombre" required placeholder="Ingresa tu nombre completo">
+                                            <label for="nombre" class="form-label">Nombre *</label>
+                                            <input type="text" class="form-control" id="nombre" name="nombre" required placeholder="Ingresá tu nombre">
                                             <div class="invalid-feedback">
-                                                Por favor ingresa tu nombre completo.
+                                                Por favor ingresá tu nombre.
                                             </div>
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label for="telefono" class="form-label">Teléfono *</label>
-                                            <input type="tel" class="form-control" id="telefono" name="telefono" required placeholder="Ingresa tu teléfono">
+                                            <label for="apellido" class="form-label">Apellido *</label>
+                                            <input type="text" class="form-control" id="apellido" name="apellido" required placeholder="Ingresá tu apellido">
                                             <div class="invalid-feedback">
-                                                Por favor ingresa tu teléfono.
+                                                Por favor ingresá tu apellido.
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="email" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="Ingresa tu email">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="email" class="form-label">Email *</label>
+                                            <input type="email" class="form-control" id="email" name="email" required placeholder="Ingresá tu email">
+                                            <div class="invalid-feedback">
+                                                Por favor ingresá un email válido.
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="pais" class="form-label">País *</label>
+                                            <select class="form-select" id="pais" name="pais" required>
+                                                <option value="">Seleccioná tu país</option>
+                                                <option value="Uruguay" selected>Uruguay</option>
+                                                <option value="Argentina">Argentina</option>
+                                                <option value="Brasil">Brasil</option>
+                                                <option value="Chile">Chile</option>
+                                                <option value="Paraguay">Paraguay</option>
+                                                <option value="Otro">Otro</option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Por favor seleccioná tu país.
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="mb-3">
                                         <label for="servicio" class="form-label">Servicio de interés *</label>
                                         <select class="form-select" id="servicio" name="servicio" required>
-                                            <option value="">Selecciona un servicio</option>
+                                            <option value="">Seleccioná un servicio</option>
+                                            <option value="consulta">Consulta solamente</option>
                                             <option value="arreglos-florales">Arreglos Florales</option>
                                             <option value="obras-funerarias">Obras Funerarias</option>
                                             <option value="grabados-laser">Grabados Láser</option>
                                             <option value="otros">Otros</option>
                                         </select>
                                         <div class="invalid-feedback">
-                                            Por favor selecciona un servicio.
+                                            Por favor seleccioná un servicio.
                                         </div>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="mensaje" class="form-label">Mensaje *</label>
-                                        <textarea class="form-control" id="mensaje" name="mensaje" rows="5" required placeholder="Cuéntanos en qué podemos ayudarte..."></textarea>
+                                        <label for="mensaje" class="form-label">Mensaje / Consulta *</label>
+                                        <textarea class="form-control" id="mensaje" name="mensaje" rows="5" required placeholder="Contanos en qué podemos ayudarte..."></textarea>
                                         <div class="invalid-feedback">
-                                            Por favor escribe tu mensaje.
+                                            Por favor escribí tu consulta.
                                         </div>
                                     </div>
                                     <div class="text-center">
@@ -375,7 +396,7 @@
                                 </form>
                                 <div id="mensajeExito" class="alert alert-success mt-3 d-none" role="alert">
                                     <i class="bi bi-check-circle-fill me-2" aria-hidden="true"></i>
-                                    <span>¡Gracias por tu consulta! Te contactaremos a la brevedad.</span>
+                                    <span>¡Gracias por tu consulta! Te enviamos una copia por email y te contactaremos a la brevedad.</span>
                                 </div>
                                 <div id="mensajeError" class="alert alert-danger mt-3 d-none" role="alert">
                                     <i class="bi bi-exclamation-triangle-fill me-2" aria-hidden="true"></i>

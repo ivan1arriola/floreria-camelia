@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (!loginForm || !settingsForm || !statusButton || !logoutButton || !message) return;
 
-    initializeAdminSession(loginForm, settingsForm, message, sessionStatus);
+    initializeAdminSession(loginForm, settingsForm, message, sessionStatus, statusButton);
 
     loginForm.addEventListener('submit', async function(event) {
         event.preventDefault();
@@ -61,17 +61,19 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             settingsForm.accessToken.value = '';
+            fillFormFromStatus(settingsForm, status);
             showAdminMessage(message, `Configuración guardada. ${formatStatus(status)}`, 'success');
         });
     });
 });
 
-async function initializeAdminSession(loginForm, settingsForm, message, sessionStatus) {
+async function initializeAdminSession(loginForm, settingsForm, message, sessionStatus, statusButton) {
     try {
         const session = await requestAdminSession('GET');
 
         if (session.authenticated) {
             setAuthenticatedState(loginForm, settingsForm, message, sessionStatus, session);
+            await loadInstagramStatus(message, statusButton, settingsForm);
             return;
         }
 

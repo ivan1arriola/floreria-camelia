@@ -44,6 +44,7 @@ Notas:
 - Si usas Instagram API con Facebook Login, puedes cambiar `INSTAGRAM_API_BASE_URL` a `https://graph.facebook.com` y definir `INSTAGRAM_USER_ID` con el ID de la cuenta profesional.
 - También puedes configurar el token desde `/admin`. Para que esa pantalla pueda guardar cambios en producción, agrega Vercel Blob Storage al proyecto y define `ADMIN_PASSWORD` en las variables de entorno.
 - El formulario de consulta envía correos desde `/api/contact-request` usando Resend. Configura `RESEND_API_KEY` o `EMAIL_DUO_DEVS_RESEND_API_KEY`, y un remitente verificado en `CONTACT_EMAIL_FROM`. Si no defines `CONTACT_EMAIL_FROM`, la web usa `EMAIL_DUO_DEVS_RESEND_EMAIL_DOMAIN` para armar el remitente.
+- Cada consulta se envía a la lista configurada en `/admin` y también manda una copia automática al email ingresado por el consultante.
 - La lista que recibe consultas se puede configurar desde `/admin` en "Correos que reciben consultas". También puedes definir una lista inicial con `CONTACT_EMAIL_RECIPIENTS`.
 - `/admin` crea una sesión con cookie segura después de ingresar la contraseña. Si marcas "Recordarme", la sesión dura más; si no, queda como sesión efímera del navegador.
 - En desarrollo local con API serverless, usa `vercel dev` o despliega en Vercel para probar `/api/instagram`, `/api/contact-request` y `/admin`.
