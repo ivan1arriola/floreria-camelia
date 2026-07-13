@@ -544,7 +544,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // ===== FORMULARIO DE CONSULTA CON WEBHOOK Y MULTIDIOMA =====
+    // ===== FORMULARIO DE CONSULTA CON WEBHOOK =====
     initializeForm();
 
     console.log('Florería Camelia - Página cargada correctamente con imágenes dinámicas y mejoras de accesibilidad');
@@ -566,7 +566,7 @@ document.addEventListener('touchend', function(e) {
     lastTouchEnd = now;
 }, false);
 
-// ===== SISTEMA DE FORMULARIO Y MULTIDIOMA =====
+// ===== SISTEMA DE FORMULARIO =====
 
 // Configuración del webhook
 const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwTjExuCQVnePWMrmyKmc1rXivzygv7i5Weaf79aVVd6BuDNls2vRbKDAW6qnYVSn5PhA/exec';
@@ -576,11 +576,6 @@ function initializeForm() {
     const formConsulta = document.getElementById('formConsulta');
     const mensajeExito = document.getElementById('mensajeExito');
     const mensajeError = document.getElementById('mensajeError');
-    // Inicializar modo oscuro
-    if (typeof DarkModeManager !== 'undefined') {
-        window.darkModeManager = new DarkModeManager();
-    }
-
     if (!formConsulta) return;
 
     // Validación de Bootstrap

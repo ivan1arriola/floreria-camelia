@@ -21,7 +21,7 @@
 
 .btn-primary {
     background: var(--gradiente-boton);
-    box-shadow: 0 6px 20px rgba(211, 47, 47, 0.4);
+    box-shadow: 0 6px 20px rgba(150, 20, 50, 0.4);
     color: var(--blanco);
 }
 
@@ -38,7 +38,7 @@
 
 .btn-primary:hover, .btn-primary:focus {
     transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 12px 30px rgba(211, 47, 47, 0.6);
+    box-shadow: 0 12px 30px rgba(150, 20, 50, 0.6);
     outline: none;
 }
 
@@ -70,7 +70,7 @@
 .btn-outline-primary:hover, .btn-outline-primary:focus {
     color: var(--blanco);
     transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(211, 47, 47, 0.4);
+    box-shadow: 0 8px 25px rgba(150, 20, 50, 0.4);
     outline: none;
 }
 
@@ -120,7 +120,7 @@
     margin-bottom: 1.5rem;
     display: inline-block;
     transition: var(--transicion);
-    filter: drop-shadow(0 4px 8px rgba(211, 47, 47, 0.2));
+    filter: drop-shadow(0 4px 8px rgba(150, 20, 50, 0.2));
 }
 
 .card:hover .service-icon, .card:focus .service-icon {
@@ -199,7 +199,7 @@
 }
 
 .contact-item:hover, .contact-item:focus {
-    background: linear-gradient(135deg, rgba(211, 47, 47, 0.1) 0%, transparent 100%);
+    background: linear-gradient(135deg, rgba(150, 20, 50, 0.1) 0%, transparent 100%);
     transform: translateX(8px);
     outline: none;
 }
@@ -248,13 +248,13 @@
     color: var(--rojo);
     padding: 8px 16px;
     border-radius: 8px;
-    background: rgba(211, 47, 47, 0.1);
+    background: rgba(150, 20, 50, 0.1);
     transition: var(--transicion);
     cursor: pointer;
 }
 
 .hours-text:hover, .hours-text:focus {
-    background: rgba(211, 47, 47, 0.2);
+    background: rgba(150, 20, 50, 0.2);
     transform: scale(1.1);
     outline: none;
 }
@@ -279,7 +279,7 @@
 
 .form-control:focus, .form-select:focus {
     border-color: var(--rojo);
-    box-shadow: 0 0 0 0.2rem rgba(211, 47, 47, 0.15);
+    box-shadow: 0 0 0 0.2rem rgba(150, 20, 50, 0.15);
     outline: none;
     background: var(--fondo);
     color: var(--texto);
@@ -561,7 +561,7 @@
 
 .text-camelia {
     color: var(--rojo) !important;
-    text-shadow: 0 2px 4px rgba(211, 47, 47, 0.2);
+    text-shadow: 0 2px 4px rgba(150, 20, 50, 0.2);
     margin-left: 8px;
     font-weight: 700;
 }
@@ -652,7 +652,7 @@
 
 .navbar-nav .nav-link:hover, 
 .navbar-nav .nav-link:focus {
-    background-color: rgba(211, 47, 47, 0.05);
+    background-color: rgba(150, 20, 50, 0.05);
     color: var(--rojo) !important;
     transform: translateY(-2px);
     outline: none;
@@ -667,7 +667,7 @@
 /* Estados activos */
 .navbar-nav .nav-link.active {
     color: var(--rojo) !important;
-    background-color: rgba(211, 47, 47, 0.1);
+    background-color: rgba(150, 20, 50, 0.1);
 }
 
 .navbar-nav .nav-link.active::before {
@@ -692,7 +692,7 @@
 
 [data-theme="dark"] .text-camelia {
     color: var(--rojo) !important;
-    text-shadow: 0 2px 4px rgba(211, 47, 47, 0.3);
+    text-shadow: 0 2px 4px rgba(150, 20, 50, 0.3);
 }
 
 [data-theme="dark"] .navbar-nav .nav-link {
@@ -701,7 +701,7 @@
 
 [data-theme="dark"] .navbar-nav .nav-link:hover,
 [data-theme="dark"] .navbar-nav .nav-link:focus {
-    background-color: rgba(211, 47, 47, 0.1);
+    background-color: rgba(150, 20, 50, 0.1);
     color: var(--rojo) !important;
 }
 

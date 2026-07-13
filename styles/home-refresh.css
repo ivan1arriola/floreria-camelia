@@ -158,7 +158,7 @@ h5,
 .btn-audio-toggle:focus,
 .btn-audio-toggle.is-playing {
     color: #ffffff;
-    background: rgba(211, 47, 47, 0.82);
+    background: rgba(150, 20, 50, 0.82);
     border-color: rgba(255, 255, 255, 0.58);
 }
 
@@ -177,7 +177,7 @@ h5,
 }
 
 .hero-info-list i {
-    color: #ef5350;
+    color: #b72a49;
 }
 
 .hero-brand-card {
@@ -210,7 +210,7 @@ h5,
 }
 
 .hero-brand-meta span {
-    color: #ef5350;
+    color: #b72a49;
     font-weight: 800;
     text-transform: uppercase;
 }
@@ -263,7 +263,7 @@ h5,
     min-height: 310px;
     border-radius: 14px;
     background:
-        linear-gradient(180deg, rgba(211, 47, 47, 0.055), transparent 48%),
+        linear-gradient(180deg, rgba(150, 20, 50, 0.055), transparent 48%),
         var(--fondo);
     box-shadow: 0 16px 42px rgba(0, 0, 0, 0.08);
 }
@@ -289,7 +289,7 @@ h5,
     height: 68px;
     margin-bottom: 1.4rem;
     border-radius: 18px;
-    background: rgba(211, 47, 47, 0.1);
+    background: rgba(150, 20, 50, 0.1);
     font-size: 2.55rem;
 }
 
@@ -388,12 +388,12 @@ h5,
 
 [data-theme="dark"] #servicios .card {
     background:
-        linear-gradient(180deg, rgba(211, 47, 47, 0.1), transparent 48%),
+        linear-gradient(180deg, rgba(150, 20, 50, 0.1), transparent 48%),
         #181818;
 }
 
 [data-theme="dark"] #servicios .service-icon {
-    background: rgba(211, 47, 47, 0.16);
+    background: rgba(150, 20, 50, 0.16);
 }
 
 [data-theme="dark"] #servicios .card-title {
@@ -409,7 +409,7 @@ h5,
     padding-top: clamp(64px, 8vw, 100px) !important;
     padding-bottom: clamp(64px, 8vw, 100px) !important;
     background:
-        radial-gradient(circle at 15% 0%, rgba(211, 47, 47, 0.1), transparent 28%),
+        radial-gradient(circle at 15% 0%, rgba(150, 20, 50, 0.1), transparent 28%),
         var(--fondo);
 }
 
@@ -451,7 +451,7 @@ h5,
     height: 44px;
     border-radius: 14px;
     color: var(--rojo);
-    background: rgba(211, 47, 47, 0.1);
+    background: rgba(150, 20, 50, 0.1);
     font-size: 1.25rem;
 }
 
@@ -585,7 +585,7 @@ h5,
 .contact-social-link:focus {
     transform: translateY(-4px);
     color: var(--texto);
-    border-color: rgba(211, 47, 47, 0.35);
+    border-color: rgba(150, 20, 50, 0.35);
     box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
 }
 
@@ -606,7 +606,7 @@ h5,
 
 [data-theme="dark"] #contacto {
     background:
-        radial-gradient(circle at 15% 0%, rgba(211, 47, 47, 0.13), transparent 28%),
+        radial-gradient(circle at 15% 0%, rgba(150, 20, 50, 0.13), transparent 28%),
         #101010;
 }
 
