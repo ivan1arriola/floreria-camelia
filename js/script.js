@@ -140,37 +140,20 @@ document.addEventListener('DOMContentLoaded', function() {
             toggle.title = isPlaying ? 'Pausar música' : 'Música ambiental';
         };
 
-        const tryPlayAudio = async function() {
+        const playAudio = async function() {
             try {
                 await audio.play();
                 setPlayingState(true);
-                return true;
             } catch (error) {
                 setPlayingState(false);
-                return false;
             }
         };
-
-        const playOnFirstInteraction = async function() {
-            const didPlay = await tryPlayAudio();
-            if (didPlay) {
-                window.removeEventListener('pointerdown', playOnFirstInteraction);
-                window.removeEventListener('keydown', playOnFirstInteraction);
-            }
-        };
-
-        tryPlayAudio().then(function(didPlay) {
-            if (!didPlay) {
-                window.addEventListener('pointerdown', playOnFirstInteraction);
-                window.addEventListener('keydown', playOnFirstInteraction);
-            }
-        });
 
         toggle.addEventListener('click', async function(event) {
             event.stopPropagation();
 
             if (audio.paused) {
-                await tryPlayAudio();
+                await playAudio();
                 return;
             }
 
