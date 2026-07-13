@@ -51,8 +51,10 @@ h5,
     content: '';
     position: absolute;
     inset: 0;
-    z-index: 0;
-    background: linear-gradient(90deg, rgba(18, 18, 18, 0.92) 0%, rgba(18, 18, 18, 0.8) 52%, rgba(18, 18, 18, 0.62) 100%);
+    z-index: 1;
+    background:
+        radial-gradient(circle at 23% 42%, rgba(0, 0, 0, 0.62), transparent 38%),
+        linear-gradient(90deg, rgba(8, 8, 8, 0.94) 0%, rgba(8, 8, 8, 0.84) 42%, rgba(8, 8, 8, 0.58) 100%);
     pointer-events: none;
 }
 
@@ -80,15 +82,16 @@ h5,
 
 .hero-container {
     position: relative;
-    z-index: 1;
+    z-index: 2;
 }
 
 .hero-kicker {
     display: inline-flex;
     align-items: center;
-    color: #f6d7d7;
-    font-weight: 700;
+    color: #ffffff;
+    font-weight: 900;
     letter-spacing: 0;
+    text-shadow: 0 3px 18px rgba(0, 0, 0, 0.88);
 }
 
 .hero-title {
@@ -97,14 +100,21 @@ h5,
     font-size: clamp(3.3rem, 7vw, 6.4rem);
     line-height: 0.92;
     letter-spacing: 0;
-    text-shadow: 0 4px 28px rgba(0, 0, 0, 0.45);
+    text-shadow:
+        0 3px 0 rgba(0, 0, 0, 0.22),
+        0 10px 36px rgba(0, 0, 0, 0.95),
+        0 0 2px rgba(0, 0, 0, 0.9);
 }
 
 .hero-description {
     max-width: 700px;
-    color: rgba(255, 255, 255, 0.88);
+    color: #ffffff;
     font-size: clamp(1.08rem, 2.2vw, 1.42rem);
+    font-weight: 900;
     line-height: 1.65;
+    text-shadow:
+        0 2px 12px rgba(0, 0, 0, 0.95),
+        0 0 2px rgba(0, 0, 0, 0.95);
 }
 
 .hero-actions {
@@ -155,8 +165,9 @@ h5,
 .hero-info-list {
     display: grid;
     gap: 12px;
-    color: rgba(255, 255, 255, 0.88);
-    font-weight: 700;
+    color: #ffffff;
+    font-weight: 900;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.95);
 }
 
 .hero-info-list div {
