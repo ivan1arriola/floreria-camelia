@@ -527,7 +527,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // ===== FORMULARIO DE CONSULTA CON WEBHOOK =====
+    // ===== FORMULARIO DE CONSULTA =====
     initializeMetaPixelEvents();
     initializeForm();
 
@@ -552,8 +552,8 @@ document.addEventListener('touchend', function(e) {
 
 // ===== SISTEMA DE FORMULARIO =====
 
-// Configuración del webhook
-const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwTjExuCQVnePWMrmyKmc1rXivzygv7i5Weaf79aVVd6BuDNls2vRbKDAW6qnYVSn5PhA/exec';
+// Configuración del formulario
+const CONTACT_REQUEST_URL = '/api/contact-request';
 
 function trackMetaPixelEvent(eventName, parameters = {}) {
     if (typeof window.fbq !== 'function') return;
@@ -636,6 +636,10 @@ function initializeForm() {
             .catch(error => {
                 console.error('Error al enviar consulta:', error);
                 if (mensajeError) {
+                    const errorText = mensajeError.querySelector('span');
+                    if (errorText) {
+                        errorText.textContent = getContactErrorMessage(error.message);
+                    }
                     mensajeError.classList.remove('d-none');
                     // Scroll suave al mensaje de error
                     mensajeError.scrollIntoView({ 
@@ -701,18 +705,26 @@ function initializeForm() {
 
 }
 
-// Función para enviar consulta al webhook
+// Función para enviar consulta al endpoint de correo
 async function enviarConsulta(data) {
     try {
-        const response = await fetch(WEBHOOK_URL, {
+        const response = await fetch(CONTACT_REQUEST_URL, {
             method: 'POST',
             headers: {
+                'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(data),
-            mode: 'no-cors'
+            body: JSON.stringify(data)
         });
-        return Promise.resolve();
+
+        if (!response.ok) {
+            const payload = await response.json().catch(function() {
+                return {};
+            });
+            throw new Error(payload.error || 'No se pudo enviar la consulta.');
+        }
+
+        return response.json();
     } catch (error) {
         console.error('Error en enviarConsulta:', error);
         return Promise.reject(error);
@@ -727,4 +739,13 @@ function getValidationMessage(key) {
     };
     
     return defaultMessages[key] || key;
+}
+
+function getContactErrorMessage(message) {
+    const errorMessages = {
+        'Contact email recipients are not configured': 'Falta configurar los correos que reciben las consultas. Probá contactarnos por WhatsApp.',
+        'Email service is not configured': 'El envío de consultas no está configurado. Probá contactarnos por WhatsApp.'
+    };
+
+    return errorMessages[message] || 'Ha ocurrido un error al enviar el formulario. Por favor, intenta nuevamente o escribinos por WhatsApp.';
 }

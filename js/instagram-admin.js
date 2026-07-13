@@ -56,7 +56,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 graphBaseUrl: settingsForm.graphBaseUrl.value,
                 mediaLimit: settingsForm.mediaLimit.value,
                 featuredMediaIds: settingsForm.featuredMediaIds.value,
-                highlightStories: settingsForm.highlightStories.value
+                highlightStories: settingsForm.highlightStories.value,
+                contactEmailRecipients: settingsForm.contactEmailRecipients.value
             });
 
             settingsForm.accessToken.value = '';
@@ -173,6 +174,7 @@ function fillFormFromStatus(form, status) {
     if (status.mediaLimit) form.mediaLimit.value = status.mediaLimit;
     form.featuredMediaIds.value = status.featuredMediaIds || '';
     form.highlightStories.value = formatHighlightStories(status.highlightStories);
+    form.contactEmailRecipients.value = status.contactEmailRecipients || '';
 }
 
 function formatStatus(status) {
@@ -183,7 +185,12 @@ function formatStatus(status) {
     }[status.source] || status.source;
 
     const highlightsCount = Array.isArray(status.highlightStories) ? status.highlightStories.length : 0;
-    return `Token: ${status.hasToken ? 'configurado' : 'pendiente'}. Origen: ${sourceLabel}. Publicaciones: ${status.mediaLimit || 12}. Historias destacadas: ${highlightsCount}.`;
+    const contactEmailsCount = String(status.contactEmailRecipients || '')
+        .split('\n')
+        .filter(Boolean)
+        .length;
+
+    return `Token: ${status.hasToken ? 'configurado' : 'pendiente'}. Origen: ${sourceLabel}. Publicaciones: ${status.mediaLimit || 12}. Historias destacadas: ${highlightsCount}. Correos de consulta: ${contactEmailsCount}.`;
 }
 
 function formatHighlightStories(highlights) {
@@ -219,6 +226,14 @@ function getFriendlyError(message) {
 
     if (message === 'Admin password is not configured') {
         return 'Falta configurar ADMIN_PASSWORD en las variables de entorno de Vercel.';
+    }
+
+    if (message === 'Contact email recipients are not configured') {
+        return 'Falta configurar los correos que reciben consultas.';
+    }
+
+    if (message === 'Email service is not configured') {
+        return 'Falta configurar RESEND_API_KEY en las variables de entorno de Vercel.';
     }
 
     if (message === 'Unauthorized') {

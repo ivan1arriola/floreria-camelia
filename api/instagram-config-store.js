@@ -8,7 +8,8 @@ function getEnvConfig() {
         graphBaseUrl: process.env.INSTAGRAM_API_BASE_URL || 'https://graph.instagram.com',
         mediaLimit: process.env.INSTAGRAM_MEDIA_LIMIT || '12',
         featuredMediaIds: process.env.INSTAGRAM_FEATURED_MEDIA_IDS || '',
-        highlightStories: parseHighlightStories(process.env.INSTAGRAM_HIGHLIGHT_STORIES || '')
+        highlightStories: parseHighlightStories(process.env.INSTAGRAM_HIGHLIGHT_STORIES || ''),
+        contactEmailRecipients: normalizeEmailList(process.env.CONTACT_EMAIL_RECIPIENTS || '')
     };
 }
 
@@ -37,6 +38,7 @@ async function getInstagramConfigStatus() {
         mediaLimit: activeConfig.mediaLimit,
         featuredMediaIds: activeConfig.featuredMediaIds,
         highlightStories: activeConfig.highlightStories,
+        contactEmailRecipients: activeConfig.contactEmailRecipients,
         updatedAt: savedConfig.updatedAt || null
     };
 }
@@ -55,12 +57,6 @@ async function saveInstagramConfig(input) {
         ...input,
         accessToken
     });
-
-    if (!config.accessToken) {
-        const error = new Error('Instagram access token is required');
-        error.statusCode = 400;
-        throw error;
-    }
 
     const { put } = await import('@vercel/blob');
     const savedConfig = {
@@ -83,6 +79,7 @@ async function saveInstagramConfig(input) {
         mediaLimit: savedConfig.mediaLimit,
         featuredMediaIds: savedConfig.featuredMediaIds,
         highlightStories: savedConfig.highlightStories,
+        contactEmailRecipients: savedConfig.contactEmailRecipients,
         updatedAt: savedConfig.updatedAt
     };
 }
@@ -116,6 +113,9 @@ function normalizeConfig(input) {
     const highlightStories = parseHighlightStories(
         input.highlightStories && input.highlightStories.length ? input.highlightStories : envConfig.highlightStories
     );
+    const contactEmailRecipients = normalizeEmailList(
+        input.contactEmailRecipients || envConfig.contactEmailRecipients
+    );
 
     return {
         accessToken: String(input.accessToken || '').trim(),
@@ -124,7 +124,8 @@ function normalizeConfig(input) {
         graphBaseUrl,
         mediaLimit: String(mediaLimit),
         featuredMediaIds,
-        highlightStories
+        highlightStories,
+        contactEmailRecipients
     };
 }
 
@@ -158,6 +159,24 @@ function normalizeFeaturedMediaIds(value) {
         .map((item) => item.trim())
         .filter(Boolean)
         .join('\n');
+}
+
+function normalizeEmailList(value) {
+    const values = Array.isArray(value)
+        ? value
+        : String(value || '').split(/[\n,;]+/);
+
+    return values
+        .map((email) => String(email || '').trim().toLowerCase())
+        .filter(Boolean)
+        .filter((email, index, list) => list.indexOf(email) === index)
+        .filter(isValidEmail)
+        .slice(0, 20)
+        .join('\n');
+}
+
+function isValidEmail(value) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
 function parseHighlightStories(value) {
@@ -209,5 +228,6 @@ function normalizeHighlightStory(story) {
 module.exports = {
     getInstagramConfig,
     getInstagramConfigStatus,
-    saveInstagramConfig
+    saveInstagramConfig,
+    normalizeEmailList
 };
