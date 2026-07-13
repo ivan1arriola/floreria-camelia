@@ -221,9 +221,10 @@ h5,
     font-size: 1.35rem;
 }
 
-.hero-section + #servicios {
+.hero-section + .galeria-section {
     position: relative;
     margin-top: 0;
+    padding-top: clamp(56px, 7vw, 86px);
 }
 
 .section-title {
@@ -312,6 +313,31 @@ h5,
 .galeria-item.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+.galeria-item {
+    background: #111111;
+}
+
+.galeria-item img {
+    object-fit: contain;
+    background: #111111;
+}
+
+.galeria-item:hover,
+.galeria-item:focus {
+    transform: translateY(-6px);
+}
+
+.galeria-item:hover img,
+.galeria-item:focus img {
+    transform: none;
+}
+
+.galeria-item::before,
+.galeria-item::after {
+    display: none !important;
+    content: none !important;
 }
 
 [data-theme="dark"] .card,

@@ -132,27 +132,58 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (!audio || !toggle) return;
 
-        toggle.addEventListener('click', async function() {
+        audio.volume = 0.35;
+
+        const setPlayingState = function(isPlaying) {
+            toggle.classList.toggle('is-playing', isPlaying);
+            toggle.setAttribute('aria-label', isPlaying ? 'Pausar música ambiental' : 'Reproducir música ambiental');
+            toggle.title = isPlaying ? 'Pausar música' : 'Música ambiental';
+        };
+
+        const tryPlayAudio = async function() {
+            try {
+                await audio.play();
+                setPlayingState(true);
+                return true;
+            } catch (error) {
+                setPlayingState(false);
+                return false;
+            }
+        };
+
+        const playOnFirstInteraction = async function() {
+            const didPlay = await tryPlayAudio();
+            if (didPlay) {
+                window.removeEventListener('pointerdown', playOnFirstInteraction);
+                window.removeEventListener('keydown', playOnFirstInteraction);
+            }
+        };
+
+        tryPlayAudio().then(function(didPlay) {
+            if (!didPlay) {
+                window.addEventListener('pointerdown', playOnFirstInteraction);
+                window.addEventListener('keydown', playOnFirstInteraction);
+            }
+        });
+
+        toggle.addEventListener('click', async function(event) {
+            event.stopPropagation();
+
             if (audio.paused) {
-                try {
-                    await audio.play();
-                    toggle.classList.add('is-playing');
-                    toggle.setAttribute('aria-label', 'Pausar música ambiental');
-                    toggle.title = 'Pausar música';
-                } catch (error) {
-                    toggle.classList.remove('is-playing');
-                }
+                await tryPlayAudio();
                 return;
             }
 
             audio.pause();
-            toggle.classList.remove('is-playing');
-            toggle.setAttribute('aria-label', 'Reproducir música ambiental');
-            toggle.title = 'Música ambiental';
+            setPlayingState(false);
         });
 
         audio.addEventListener('pause', function() {
-            toggle.classList.remove('is-playing');
+            setPlayingState(false);
+        });
+
+        audio.addEventListener('play', function() {
+            setPlayingState(true);
         });
     }
 

@@ -143,7 +143,7 @@
                             <button type="button" id="heroMusicToggle" class="btn btn-audio-toggle" aria-label="Reproducir música ambiental" title="Música ambiental">
                                 <i class="bi bi-music-note-beamed" aria-hidden="true"></i>
                             </button>
-                            <audio id="heroAudio" src="/Before_The_Bloom.mp3" preload="none" loop></audio>
+                            <audio id="heroAudio" src="/Before_The_Bloom.mp3" preload="auto" autoplay loop></audio>
                         </div>
                         <div class="hero-info-list" aria-label="Información rápida">
                             <div>
@@ -165,6 +165,41 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Galería Section -->
+        <section id="galeria" class="galeria-section" aria-labelledby="galeria-title">
+            <div class="container">
+                <h2 id="galeria-title" class="section-title text-center mb-5">Galería</h2>
+                <p class="text-center lead mb-5">Descubre nuestras últimas creaciones y mantente conectado con nosotros</p>
+
+                <div class="instagram-feed-panel mb-5" aria-live="polite">
+                    <div class="instagram-feed-header">
+                        <div>
+                            <p class="instagram-kicker mb-2">@floreriacameliauy</p>
+                            <h3 class="h4 mb-0">Historias destacadas</h3>
+                        </div>
+                        <a href="https://www.instagram.com/floreriacameliauy/" target="_blank" class="instagram-profile-link" rel="noopener noreferrer">
+                            <i class="bi bi-instagram me-2" aria-hidden="true"></i><span>Ver perfil</span>
+                        </a>
+                    </div>
+                    <div id="instagramStatus" class="instagram-status" role="status">
+                        <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>
+                        <span>Cargando Instagram...</span>
+                    </div>
+                    <div id="instagramFeed" class="instagram-feed-grid" aria-label="Historias destacadas de Instagram"></div>
+                </div>
+
+                <div class="galeria-grid" id="galeriaGrid" role="list" aria-label="Galería de trabajos">
+                    <!-- Las imágenes se generarán dinámicamente aquí -->
+                </div>
+
+                <div class="text-center mt-5">
+                    <a href="https://www.instagram.com/floreriacameliauy/" target="_blank" class="instagram-link" rel="noopener noreferrer">
+                        <i class="bi bi-instagram me-2" aria-hidden="true"></i><span>Seguir en Instagram</span>
+                    </a>
                 </div>
             </div>
         </section>
@@ -257,41 +292,6 @@
                             </div>
                         </article>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Galería Section -->
-        <section id="galeria" class="galeria-section" aria-labelledby="galeria-title">
-            <div class="container">
-                <h2 id="galeria-title" class="section-title text-center mb-5">Galería</h2>
-                <p class="text-center lead mb-5">Descubre nuestras últimas creaciones y mantente conectado con nosotros</p>
-
-                <div class="instagram-feed-panel mb-5" aria-live="polite">
-                    <div class="instagram-feed-header">
-                        <div>
-                            <p class="instagram-kicker mb-2">@floreriacameliauy</p>
-                            <h3 class="h4 mb-0">Historias destacadas</h3>
-                        </div>
-                        <a href="https://www.instagram.com/floreriacameliauy/" target="_blank" class="instagram-profile-link" rel="noopener noreferrer">
-                            <i class="bi bi-instagram me-2" aria-hidden="true"></i><span>Ver perfil</span>
-                        </a>
-                    </div>
-                    <div id="instagramStatus" class="instagram-status" role="status">
-                        <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>
-                        <span>Cargando Instagram...</span>
-                    </div>
-                    <div id="instagramFeed" class="instagram-feed-grid" aria-label="Historias destacadas de Instagram"></div>
-                </div>
-                
-                <div class="galeria-grid" id="galeriaGrid" role="list" aria-label="Galería de trabajos">
-                    <!-- Las imágenes se generarán dinámicamente aquí -->
-                </div>
-                
-                <div class="text-center mt-5">
-                    <a href="https://www.instagram.com/floreriacameliauy/" target="_blank" class="instagram-link" rel="noopener noreferrer">
-                        <i class="bi bi-instagram me-2" aria-hidden="true"></i><span>Seguir en Instagram</span>
-                    </a>
                 </div>
             </div>
         </section>
