@@ -528,6 +528,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ===== FORMULARIO DE CONSULTA CON WEBHOOK =====
+    initializeMetaPixelEvents();
     initializeForm();
 
     console.log('Florería Camelia - Página cargada correctamente con imágenes dinámicas y mejoras de accesibilidad');
@@ -553,6 +554,24 @@ document.addEventListener('touchend', function(e) {
 
 // Configuración del webhook
 const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwTjExuCQVnePWMrmyKmc1rXivzygv7i5Weaf79aVVd6BuDNls2vRbKDAW6qnYVSn5PhA/exec';
+
+function trackMetaPixelEvent(eventName, parameters = {}) {
+    if (typeof window.fbq !== 'function') return;
+    window.fbq('track', eventName, parameters);
+}
+
+function initializeMetaPixelEvents() {
+    const whatsappLinks = document.querySelectorAll('a[href^="https://wa.me/"]');
+
+    whatsappLinks.forEach((link) => {
+        link.addEventListener('click', function() {
+            trackMetaPixelEvent('Contact', {
+                content_name: 'WhatsApp',
+                content_category: 'Contacto'
+            });
+        });
+    });
+}
 
 // Función principal de inicialización del formulario
 function initializeForm() {
@@ -609,6 +628,10 @@ function initializeForm() {
                 }
                 formConsulta.reset();
                 formConsulta.classList.remove('was-validated');
+                trackMetaPixelEvent('Lead', {
+                    content_name: 'Consulta web',
+                    content_category: 'Formulario'
+                });
             })
             .catch(error => {
                 console.error('Error al enviar consulta:', error);
